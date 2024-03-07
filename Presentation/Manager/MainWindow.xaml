@@ -17,23 +17,22 @@
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="99." />
+                        <ColumnDefinition Width="11.322"/>
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="85" />
                         <ColumnDefinition Width="90" />
                         <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="30" />
+
+
                         <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="60"/>
+
+
+                        <RowDefinition Height="100"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -43,39 +42,38 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="20"/>
+
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="3" Grid.Column="1" Content="Cursist voornaam" Foreground="White"/>
-                    <TextBox x:Name="voornaam" Grid.Row="4" Grid.Column="1" Margin="5" Background="#CCCCCC" />
-                    <Label Grid.Row="5" Grid.Column="1" Content="Cursist achternaam" Foreground="White"/>
-                    <TextBox x:Name="achternaam" Grid.Row="6" Grid.Column="1" Margin="5" Background="#CCCCCC" />
-                    <Label Grid.Row="7" Grid.Column="1" Content="Cursist geslacht" Foreground="White"/>
-                    <TextBox x:Name="geslacht" Grid.Row="8" Grid.Column="1" Margin="5" Background="#CCCCCC" />
-                    <Button x:Name="inschrijven_cursist" Grid.Row="11" Grid.Column="1" Margin="5" 
-                        Height="20" Content="Cursist Inschrijven" Click="inschrijven_cursist_Click"  Foreground="White"/>
+                    <Label Grid.Row="3" Grid.Column="1" Content="Cursist voornaam" Foreground="White" Grid.ColumnSpan="2" Margin="0,0,0,28" Grid.RowSpan="2"/>
+                    <TextBox x:Name="voornaam" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Background="#CCCCCC" Grid.ColumnSpan="2" />
+                    <Label Grid.Row="5" Grid.Column="1" Content="Cursist achternaam" Foreground="White" Grid.ColumnSpan="2" Margin="0,0,0,28" Grid.RowSpan="2"/>
+                    <TextBox x:Name="achternaam" Grid.Row="6" Grid.Column="1" Margin="5,5,5,5" Background="#CCCCCC" Grid.ColumnSpan="2" />
+                    <Label Grid.Row="7" Grid.Column="1" Content="Cursist geslacht" Foreground="White" Grid.ColumnSpan="2" Margin="0,0,0,40" Grid.RowSpan="2"/>
+                    <TextBox x:Name="geslacht" Grid.Row="8" Grid.Column="1" Margin="5,5,5,5" Background="#CCCCCC" Grid.ColumnSpan="2" />
+                    <Button x:Name="inschrijven_cursist" Grid.Row="11" Grid.Column="1" Margin="5,5,5,5" 
+                        Height="20" Content="Cursist Inschrijven" Click="inschrijven_cursist_Click" Grid.ColumnSpan="2"  />
 
-                    <Label Grid.Row="3" Grid.Column="4" Content="Cursisten Lijst" Foreground="White" />
-                   
-                    <ListView Grid.Row="4" Grid.Column="4" Grid.RowSpan="7" Margin="5" Name="CursistenList"
+                    <Label Grid.Row="3" Grid.Column="4" Content="Cursisten Lijst" Foreground="White" Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="2" />
+
+                    <ListView Grid.Row="4" Grid.Column="5" Grid.RowSpan="5" Margin="5,5,5,5" Name="CursistenList"
                               Grid.ColumnSpan="2" Background="#CCCCCC">
 
                     </ListView>
-                    <Button x:Name="Cursisten_lijst" Grid.Row="11" Grid.Column="5" Margin="5" 
-                        Height="20" Content="Lijst Updaten" Click="Cursisten_lijst_Click"  Foreground="White" />
+                    <Button x:Name="Cursisten_lijst" Grid.Row="11" Grid.Column="6" Margin="5,5,5,5" 
+                        Height="20" Content="Lijst Updaten" Click="Cursisten_lijst_Click"   />
 
-                    <Label Grid.Row="3" Grid.Column="7" Content="Aanwezigheden table" Foreground="White"/>
-                    <Label Grid.Row="4" Grid.Column="7" Content="Cursisten" Foreground="White"/>
-                  
+                    <Label Grid.Row="3" Grid.Column="7" Content="Aanwezigheden table" Foreground="White" Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="2"/>
+                    <Label Grid.Row="4" Grid.Column="7" Content="Cursisten" Foreground="White" Grid.ColumnSpan="2" Margin="20,0,0,26" Grid.RowSpan="2"/>
 
-                    <ListView Grid.Row="5" Grid.Column="7" Grid.RowSpan="7" Margin="5" Name="AanwezighedenList" Background="#CCCCCC">
+
+                    <ListView Grid.Row="5" Grid.Column="8" Grid.RowSpan="7" Margin="5,5,5,5" Name="AanwezighedenList" Background="#CCCCCC">
                         <ListView.View>
                             <GridView>
-                               
+
                                 <GridViewColumn Header="Select" Width="50">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -88,8 +86,7 @@
                         </ListView.View>
                     </ListView>
 
-                    <Image Source="C:\Users\faroo\OneDrive\Pictures\muay thai.jpg" Grid.Column="8" Grid.Row="1" Grid.RowSpan="2"
-                        Grid.ColumnSpan="5" Margin="9,0,4,0" />
+                    <Image Source="C:\Users\faroo\OneDrive\Pictures\muay thai.jpg" Grid.Column="9" Grid.Row="1" Grid.RowSpan="3" Margin="9,0,4,26" />
 
                 </Grid>
             </TabItem>

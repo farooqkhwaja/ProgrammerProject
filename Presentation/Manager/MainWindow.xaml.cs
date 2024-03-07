@@ -14,11 +14,13 @@ namespace Presentation
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Presentation : Window
     {
-        public MainWindow()
+        public Presentation() => InitializeComponent();
+
+        private void InitializeComponent()
         {
-            InitializeComponent();
+            throw new NotImplementedException();
         }
 
         private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
