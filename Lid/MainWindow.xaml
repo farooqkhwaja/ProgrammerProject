@@ -1,0 +1,69 @@
+﻿<Window x:Class="Lid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lid"
+        mc:Ignorable="d"
+        Title="Salsa Dansschool" Height="500" Width="600">
+    <Grid>
+        <TabControl >
+            <TabItem Header="Home">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\faroo\OneDrive\Pictures\67828e156f4f7e9aa72fb3030f0c7493.jpg" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="20"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                      
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+
+                    <Label  Content="Cursisten Lijst" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White"/>
+
+                    <ListView  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                               Grid.RowSpan="4" Background="#CCCCCC"/>
+                    <Button x:Name="GenereePartner" Content="Genereer Partner"
+                            Grid.Row="9"  Grid.Column="1" Grid.ColumnSpan="2" Margin="3" Click="GenereePartner_Click" />
+                    <Label Content="Partner Naam" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" Foreground="White" />
+                    <ListView Grid.Column="1" Grid.Row="11"  Grid.ColumnSpan="2" Background="#CCCCCC"/>
+
+                    <Label Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Content="Figuren" Foreground="White" />
+                    <ListView Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="#CCCCCC" />
+                    <Button x:Name="BewaarFiguren" Grid.Row="9" Grid.Column="6" Margin="3" Content="Bewaar" Click="BewaarFiguren_Click"/>
+                    <Button x:Name="VerzendEmail" Grid.Column="9" Grid.Row="9" Margin="3" Content="Verzend" Click="VerzendEmail_Click"/>
+                    <ListView Grid.Column="8" Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="#CCCCCC"/>
+                    <Label Grid.Row="4" Grid.Column="8" Grid.ColumnSpan="2" Content="Email Lijst" Foreground="White"/>
+                    <Image Source="C:\Users\faroo\OneDrive\Pictures\muay thai.jpg" Grid.Column="9" Grid.Row="1" Grid.RowSpan="2"
+                           Grid.ColumnSpan="3" Margin="0,0,-5,0"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
