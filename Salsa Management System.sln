@@ -5,13 +5,13 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{449D9714-DA7D-4AB6-B446-982B3A67CCF1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{92626286-11C7-44DF-9B42-8F8D8A6EC5D9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{92626286-11C7-44DF-9B42-8F8D8A6EC5D9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wpf", "Wpf", "{E399156B-5278-491C-8A4F-F4043C85DB78}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{E399156B-5278-491C-8A4F-F4043C85DB78}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{5CAF6698-B5B3-439D-9CEB-1313315B973A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure\Infrastructure.csproj", "{A7CCF734-E896-4D95-BBD5-9316B30C2408}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Infrastructure\Logic\Logic.csproj", "{A7CCF734-E896-4D95-BBD5-9316B30C2408}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1AFEBBAB-6F61-42C0-90E7-79EC0AD06DEE}"
 EndProject
