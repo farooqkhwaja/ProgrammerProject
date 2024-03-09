@@ -6,66 +6,69 @@
         xmlns:local="clr-namespace:Presentation"
         xmlns:userControls="clr-namespace:Presentation.UserControls"
         mc:Ignorable="d"
-        Title="UserWindow" Height="450" Width="800">
+        Title="UserWindow" Height="450" Width="600">
     <Grid>
-        <userControls:Login />
-        <!-- <TabControl > -->
-        <!--     <TabItem Header="Home"> -->
-        <!--         <Grid> -->
-        <!--             <Grid.Background> -->
-        <!--                 <ImageBrush ImageSource="" Stretch="UniformToFill"/> -->
-        <!--             </Grid.Background> -->
-        <!--             <Grid.ColumnDefinitions> -->
-        <!--                 <ColumnDefinition Width="20"/> -->
-        <!--                 <ColumnDefinition Width="60"/> -->
-        <!--                 <ColumnDefinition Width="60"/> -->
-        <!--                 <ColumnDefinition Width="40"/> -->
-        <!--                 <ColumnDefinition Width="60"/> -->
-        <!--                 <ColumnDefinition Width="60"/> -->
-        <!--                 <ColumnDefinition Width="60"/> -->
-        <!--                 <ColumnDefinition Width="60"/> -->
-        <!--                 <ColumnDefinition Width="60"/> -->
-        <!--                 <ColumnDefinition Width="60"/> -->
-        <!--                 <ColumnDefinition Width="30"/> -->
-        <!--                 <ColumnDefinition Width="20"/> -->
-        <!-- -->
-        <!--             </Grid.ColumnDefinitions> -->
-        <!--             <Grid.RowDefinitions> -->
-        <!--                 <RowDefinition Height="20"/> -->
-        <!--                 <RowDefinition Height="50"/> -->
-        <!--                 <RowDefinition Height="30"/> -->
-        <!--                 <RowDefinition Height="10"/> -->
-        <!--                 <RowDefinition Height="30"/> -->
-        <!--                 <RowDefinition Height="50"/> -->
-        <!--                 <RowDefinition Height="50"/> -->
-        <!--                 <RowDefinition Height="50"/> -->
-        <!-- -->
-        <!--                 <RowDefinition Height="10"/> -->
-        <!--                 <RowDefinition Height="30"/> -->
-        <!--                 <RowDefinition Height="30"/> -->
-        <!--                 <RowDefinition Height="30"/> -->
-        <!--                 <RowDefinition Height="20"/> -->
-        <!--             </Grid.RowDefinitions> -->
-        <!-- -->
-        <!--             <Label  Content="Cursisten Lijst" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White"/> -->
-        <!-- -->
-        <!--             <ListView  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" -->
-        <!--                        Grid.RowSpan="4" Background="#CCCCCC"/> -->
-        <!--             <Button x:Name="GenereePartner" Content="Genereer Partner" -->
-        <!--                     Grid.Row="9"  Grid.Column="1" Grid.ColumnSpan="2" Margin="3"  /> -->
-        <!--             <Label Content="Partner Naam" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" Foreground="White" /> -->
-        <!--             <ListView Grid.Column="1" Grid.Row="11"  Grid.ColumnSpan="2" Background="#CCCCCC"/> -->
-        <!-- -->
-        <!--             <Label Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Content="Figuren" Foreground="White" /> -->
-        <!--             <ListView Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="#CCCCCC" /> -->
-        <!--             <Button x:Name="BewaarFiguren" Grid.Row="9" Grid.Column="6" Margin="3" Content="Bewaar" /> -->
-        <!--             <Button x:Name="VerzendEmail" Grid.Column="9" Grid.Row="9" Margin="3" Content="Verzend" /> -->
-        <!--             <ListView Grid.Column="8" Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="#CCCCCC"/> -->
-        <!--             <Label Grid.Row="4" Grid.Column="8" Grid.ColumnSpan="2" Content="Email Lijst" Foreground="White"/> -->
-        <!--             <Image Source="C:\Users\faroo\OneDrive\Pictures\muay thai.jpg" Grid.Column="9" Grid.Row="1" Grid.RowSpan="2" -->
-        <!--                    Grid.ColumnSpan="3" Margin="0,0,-5,0"/> -->
-        <!--         </Grid> -->
-        <!--     </TabItem> -->
-        <!-- </TabControl> -->
+        <userControls:Login Visibility="Visible" />
+
+        <TabControl Name="Userwindow" Visibility="Hidden">
+            <TabItem Header="home">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="cursisten lijst" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
+
+                    <ListView Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                              Grid.RowSpan="4" Background="#cccccc"/>
+
+                    <Button x:Name="genereepartner" Content="genereer partner"
+                            Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Margin="3" />
+
+                    <Label Content="partner naam" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" />
+
+                    <ListView Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" Background="#cccccc"/>
+
+                    <Label Content="figuren" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" />
+
+                    <ListView Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="#cccccc" />
+
+                    <Button x:Name="bewaarfiguren" Grid.Row="9" Grid.Column="6" Margin="3" Content="bewaar" />
+
+                    <Button x:Name="verzendemail" Grid.Column="9" Grid.Row="9" Margin="3" Content="verzend" />
+
+                    <ListView Grid.Column="8" Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="#cccccc"/>
+
+                    <Label Grid.Row="4" Grid.Column="8" Grid.ColumnSpan="2" Content="email lijst" Foreground="White"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

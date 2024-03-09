@@ -16,7 +16,7 @@ public partial class Login : UserControl
     
     private void TxtUserName_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if(string.IsNullOrEmpty(txtUserName.Text) && string.IsNullOrEmpty(txtPassword.Password))
+        if(string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
             btnLogin.IsEnabled = false;
         }
@@ -28,7 +28,7 @@ public partial class Login : UserControl
 
     private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrEmpty(txtUserName.Text) && string.IsNullOrEmpty(txtPassword.Password))
+        if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
             btnLogin.IsEnabled = false;
         }
@@ -47,9 +47,19 @@ public partial class Login : UserControl
 
         _username = txtUserName.Text;
         _password = txtPassword.Password;
-        
-        //hide user control
-        //show UserWindow
-    }
 
+        private void LoadLoginControl()
+        {
+            LoginControl loginControl = new LoginControl();
+            loginControl.LoginClicked += LoginControl_LoginClicked;
+            mainContent.Content = loginControl;
+        }
+
+        private void LoginControl_LoginClicked(object sender, EventArgs e)
+        {
+            
+            MessageBox.Show("Login successful!");
+            mainContent.Content = new MainApplicationPage();
+        }
+    }
 }

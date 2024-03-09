@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Presentation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="Salsa Dance school" Height="450" Width="600" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="469*"/>
@@ -14,9 +14,6 @@
         <TabControl Grid.ColumnSpan="2"  >
             <TabItem Header="Home" >
                 <Grid>
-                    <Grid.Background>
-                        <ImageBrush ImageSource="" Stretch="UniformToFill"/>
-                    </Grid.Background>
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20" />
@@ -36,6 +33,10 @@
 
 
                         <RowDefinition Height="100"/>
+
+               
+
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -45,35 +46,34 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="auto"/>
-
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="30"/>
 
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="3" Grid.Column="1" Content="Cursist voornaam" Foreground="White" Grid.ColumnSpan="2" Margin="0,0,0,28" Grid.RowSpan="2"/>
-                    <TextBox x:Name="voornaam" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Background="#CCCCCC" Grid.ColumnSpan="2" />
-                    <Label Grid.Row="5" Grid.Column="1" Content="Cursist achternaam" Foreground="White" Grid.ColumnSpan="2" Margin="0,0,0,28" Grid.RowSpan="2"/>
-                    <TextBox x:Name="achternaam" Grid.Row="6" Grid.Column="1" Margin="5,5,5,5" Background="#CCCCCC" Grid.ColumnSpan="2" />
-                    <Label Grid.Row="7" Grid.Column="1" Content="Cursist geslacht" Foreground="White" Grid.ColumnSpan="2" Margin="0,0,0,40" Grid.RowSpan="2"/>
-                    <TextBox x:Name="geslacht" Grid.Row="8" Grid.Column="1" Margin="5,5,5,5" Background="#CCCCCC" Grid.ColumnSpan="2" />
+                    <Label Grid.Row="3" Grid.Column="1" Content="Cursist voornaam"  Grid.ColumnSpan="2" Margin="0,0,0,28" Grid.RowSpan="3"/>
+                    <TextBox x:Name="voornaam" Grid.Row="5" Grid.Column="1" Margin="5"  Height="25" Background="#CCCCCC" Grid.ColumnSpan="2" />
+                    <Label Grid.Row="6" Grid.Column="1" Content="Cursist achternaam"  Grid.ColumnSpan="2" Margin="0,0,0,28" Grid.RowSpan="2"/>
+                    <TextBox x:Name="achternaam" Grid.Row="7" Grid.Column="1" Margin="5"  Height="25" Background="#CCCCCC" Grid.ColumnSpan="2" />
+                    <Label Grid.Row="7" Grid.Column="1" Content="Cursist geslacht"  Grid.ColumnSpan="2" Margin="0,41,0,40" Grid.RowSpan="3"/>
+                    <TextBox x:Name="geslacht" Grid.Row="9" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC" Grid.ColumnSpan="2" />
                     <Button x:Name="inschrijven_cursist" Grid.Row="11" Grid.Column="1" Margin="5,5,5,5" 
-                        Height="20" Content="Cursist Inschrijven" Grid.ColumnSpan="2"  />
+                        Height="20" Content="Cursist Inschrijven" Grid.ColumnSpan="2" Grid.RowSpan="2"  />
 
-                    <Label Grid.Row="3" Grid.Column="4" Content="Cursisten Lijst" Foreground="White" Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="2" />
+                    <Label Grid.Row="3" Grid.Column="4" Content="Cursisten Lijst"  Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="3" />
 
-                    <ListView Grid.Row="4" Grid.Column="5" Grid.RowSpan="5" Margin="5,5,5,5" Name="CursistenList"
+                    <ListView Grid.Row="5" Grid.Column="5" Grid.RowSpan="5" Margin="10" Name="CursistenList"
                               Grid.ColumnSpan="2" Background="#CCCCCC">
 
                     </ListView>
                     <Button x:Name="Cursisten_lijst" Grid.Row="11" Grid.Column="6" Margin="5,5,5,5" 
-                        Height="20" Content="Lijst Updaten" />
+                        Height="20" Content="Lijst Updaten" Grid.RowSpan="2" />
 
-                    <Label Grid.Row="3" Grid.Column="7" Content="Aanwezigheden table" Foreground="White" Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="2"/>
-                    <Label Grid.Row="4" Grid.Column="7" Content="Cursisten" Foreground="White" Grid.ColumnSpan="2" Margin="20,0,0,26" Grid.RowSpan="2"/>
+                    <Label Grid.Row="3" Grid.Column="7" Content="Aanwezigheden table"  Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="3"/>
+                    <Label Grid.Row="4" Grid.Column="7" Content="Cursisten"  Grid.ColumnSpan="2" Margin="20,10,0,8" Grid.RowSpan="2"/>
 
 
-                    <ListView Grid.Row="5" Grid.Column="8" Grid.RowSpan="7" Margin="5,5,5,5" Name="AanwezighedenList" Background="#CCCCCC">
+                    <ListView Grid.Row="6" Grid.Column="8" Grid.RowSpan="7" Margin="5,5,5,5" Name="AanwezighedenList" Background="#CCCCCC">
                         <ListView.View>
                             <GridView>
 
@@ -89,15 +89,12 @@
                         </ListView.View>
                     </ListView>
 
-                    <Image Source="" Grid.Column="9" Grid.Row="1" Grid.RowSpan="3" Margin="9,0,4,26" />
 
                 </Grid>
             </TabItem>
             <TabItem Header="Dansfilms/Evenementen">
                 <Grid>
-                    <Grid.Background>
-                        <ImageBrush ImageSource="" Stretch="UniformToFill"/>
-                    </Grid.Background>
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"/>
                         <ColumnDefinition Width="100"/>
@@ -128,8 +125,8 @@
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
 
-                    <Label Foreground="White" Grid.Row="2" Grid.Column="1" Content="Dansfilm links" />
-                    <Label Foreground="White" Grid.Row="2" Grid.Column="5" Content="Evenementen" />
+                    <Label Grid.Row="2" Grid.Column="1" Content="Dansfilm links" />
+                    <Label  Grid.Row="2" Grid.Column="5" Content="Evenementen" />
                     <ListView  Background="#CCCCCC" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="6" Margin="0,0,-51,0"/>
                     <ListView Background="#CCCCCC" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" Grid.RowSpan="6" Margin="0,0,10,0"/>
 
@@ -138,7 +135,7 @@
                     <Button x:Name="AddEvent" Content="ADD" Grid.Row="6" Grid.Column="7" Margin="5" />
                     <Button x:Name="UpdateEvent" Content="UPDATE" Grid.Row="7" Grid.Column="7" Margin="5" />
                     <Button x:Name="DeleteEvent" Content="DELETE" Grid.Row="8" Grid.Column="7" Margin="5" />
-                    <Image Source="" Grid.Column="8" Grid.Row="1" Grid.RowSpan="2"/>
+
 
                 </Grid>
             </TabItem>
