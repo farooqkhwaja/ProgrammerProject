@@ -6,10 +6,8 @@
         xmlns:local="clr-namespace:Presentation"
         xmlns:userControls="clr-namespace:Presentation.UserControls"
         mc:Ignorable="d"
-        Title="UserWindow" Height="450" Width="600">
+        Title="Salsa Dance school [User UI]" Height="450" Width="600">
     <Grid>
-        <userControls:Login x:Name="LoginControl" Visibility="Visible" />
-
         <TabControl Name="TabControl" Visibility="Hidden">
             <TabItem Header="home">
                 <Grid>
