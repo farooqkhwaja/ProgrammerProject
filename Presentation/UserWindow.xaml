@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Title="UserWindow" Height="450" Width="600">
     <Grid>
-        <userControls:Login Visibility="Visible" />
+        <userControls:Login x:Name="LoginControl" Visibility="Visible" />
 
-        <TabControl Name="Userwindow" Visibility="Hidden">
+        <TabControl Name="TabControl" Visibility="Hidden">
             <TabItem Header="home">
                 <Grid>
                     <Grid.ColumnDefinitions>

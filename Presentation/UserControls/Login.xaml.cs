@@ -47,19 +47,5 @@ public partial class Login : UserControl
 
         _username = txtUserName.Text;
         _password = txtPassword.Password;
-
-        private void LoadLoginControl()
-        {
-            LoginControl loginControl = new LoginControl();
-            loginControl.LoginClicked += LoginControl_LoginClicked;
-            mainContent.Content = loginControl;
-        }
-
-        private void LoginControl_LoginClicked(object sender, EventArgs e)
-        {
-            
-            MessageBox.Show("Login successful!");
-            mainContent.Content = new MainApplicationPage();
-        }
     }
 }
