@@ -6,14 +6,10 @@
         xmlns:local="clr-namespace:Presentation"
         xmlns:userControls="clr-namespace:Presentation.UserControls"
         mc:Ignorable="d"
-        Title="Salsa Dance school [Manager UI]" Height="450" Width="600" >
+        Title="Salsa Dance school [Manager UI]" Height="450" Width="600" Closed="Window_Closed" >
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="469*"/>
-            <ColumnDefinition Width="331*"/>
-        </Grid.ColumnDefinitions>
-        
-        <TabControl Grid.ColumnSpan="2" Visibility="Hidden" >
+
+        <TabControl Grid.ColumnSpan="2" Visibility="Visible" >
             <TabItem Header="Home" >
                 <Grid>
         
@@ -64,7 +60,7 @@
         
                     <Label Grid.Row="3" Grid.Column="4" Content="Cursisten Lijst"  Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="3" />
         
-                    <ListView Grid.Row="5" Grid.Column="5" Grid.RowSpan="5" Margin="10" Name="CursistenList"
+                    <ListView Grid.Row="5" Grid.Column="5" Grid.RowSpan="5" Margin="10" Name="CursistenList"  DataContextChanged="CursistenList_DataContextChanged"
                               Grid.ColumnSpan="2" Background="#CCCCCC">
         
                     </ListView>
@@ -121,8 +117,7 @@
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
-        
-        
+     
         
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
@@ -132,11 +127,11 @@
                     <ListView  Background="#CCCCCC" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="6" Margin="0,0,-51,0"/>
                     <ListView Background="#CCCCCC" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" Grid.RowSpan="6" Margin="0,0,10,0"/>
         
-                    <Button x:Name="addDanceMove" Content="ADD" Grid.Row="7" Grid.Column="3" Margin="5" />
-                    <Button x:Name="DeleteDanceMove" Content="DELETE" Grid.Row="8" Grid.Column="3" Margin="5" />
-                    <Button x:Name="AddEvent" Content="ADD" Grid.Row="6" Grid.Column="7" Margin="5" />
-                    <Button x:Name="UpdateEvent" Content="UPDATE" Grid.Row="7" Grid.Column="7" Margin="5" />
-                    <Button x:Name="DeleteEvent" Content="DELETE" Grid.Row="8" Grid.Column="7" Margin="5" />
+                    <Button x:Name="addDanceMove" Content="ADD" Grid.Row="7" Grid.Column="3" Margin="5" Click="addDanceMove_Click" />
+                    <Button x:Name="DeleteDanceMove" Content="DELETE" Grid.Row="8" Grid.Column="3" Margin="5" Click="DeleteDanceMove_Click" />
+                    <Button x:Name="AddEvent" Content="ADD" Grid.Row="6" Grid.Column="7" Margin="5" Click="AddEvent_Click" />
+                    <Button x:Name="UpdateEvent" Content="UPDATE" Grid.Row="7" Grid.Column="7" Margin="5" Click="UpdateEvent_Click" />
+                    <Button x:Name="DeleteEvent" Content="DELETE" Grid.Row="8" Grid.Column="7" Margin="5" Click="DeleteEvent_Click" />
         
         
                 </Grid>

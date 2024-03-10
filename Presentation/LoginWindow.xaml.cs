@@ -50,11 +50,14 @@ public partial class LoginWindow : Window
         _username = txtUserName.Text;
         _password = txtPassword.Password;
 
-        //CurrentUserState.LoggedIn = true;
+        CurrentUserState.LoggedIn = true;
 
         this.Visibility = Visibility.Collapsed;
         
         _managerWindow = new ManagerWindow();
         _managerWindow.Show();
+         
+        
+        
     }
 }
