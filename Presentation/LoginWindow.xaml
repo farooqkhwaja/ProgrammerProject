@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Presentation"
         xmlns:userControls="clr-namespace:Presentation.UserControls"
         mc:Ignorable="d"
-        Title="Login" Height="150" Width="300">
+        Title="Login" Height="150" Width="300" Closed="Window_Closed">
     <Grid>
         <Grid>
             <StackPanel Margin="8">

@@ -41,16 +41,9 @@ public partial class ManagerWindow : Window
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        LoginWindow loginWindow = new LoginWindow();
-        ManagerWindow managerWindow = new ManagerWindow();
-
-        if(Window_Closed != null)
-        {
-            managerWindow.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            loginWindow.Visibility = Visibility.Visible;
-        }
+        LoginWindow loginWindow = new LoginWindow();     
+        loginWindow.Show();
+         
+       
     }
 }

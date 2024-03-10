@@ -8,4 +8,10 @@ public partial class UserWindow : Window
     {
         InitializeComponent();
     }
+
+    private void Window_Closed(object sender, EventArgs e)
+    {
+        LoginWindow loginWindow = new LoginWindow();
+        loginWindow.Show();
+    }
 }

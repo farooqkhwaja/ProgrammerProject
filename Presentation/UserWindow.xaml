@@ -2,13 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:Presentation"
-        xmlns:userControls="clr-namespace:Presentation.UserControls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"      
         mc:Ignorable="d"
-        Title="Salsa Dance school [User UI]" Height="450" Width="600">
+        Title="Salsa Dance school [User UI]" Height="450" Width="600" Closed="Window_Closed">
     <Grid>
-        <TabControl Name="TabControl" Visibility="Hidden">
+        <TabControl Name="TabControl" Visibility="Visible">
             <TabItem Header="home">
                 <Grid>
                     <Grid.ColumnDefinitions>

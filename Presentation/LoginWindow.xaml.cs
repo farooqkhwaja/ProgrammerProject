@@ -54,10 +54,19 @@ public partial class LoginWindow : Window
 
         this.Visibility = Visibility.Collapsed;
         
-        _managerWindow = new ManagerWindow();
-        _managerWindow.Show();
+        /*_managerWindow = new ManagerWindow();
+        _managerWindow.Show();*/
+
+        UserWindow userWindow = new UserWindow();
+        userWindow.Show();
          
         
         
+    }
+
+    private void Window_Closed(object sender, EventArgs e)
+    {
+        LoginWindow loginWindow = new LoginWindow();
+        loginWindow.Close();
     }
 }
