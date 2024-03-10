@@ -1,0 +1,72 @@
+<Window x:Class="Presentation.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Presentation"
+        xmlns:userControls="clr-namespace:Presentation.UserControls"
+        mc:Ignorable="d"
+        Title="Salsa Dance school [User UI]" Height="450" Width="600">
+    <Grid>
+        <TabControl Name="TabControl" Visibility="Hidden">
+            <TabItem Header="home">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="cursisten lijst" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
+
+                    <ListView Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                              Grid.RowSpan="4" Background="#cccccc"/>
+
+                    <Button x:Name="genereepartner" Content="genereer partner"
+                            Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Margin="3" />
+
+                    <Label Content="partner naam" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" />
+
+                    <ListView Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" Background="#cccccc"/>
+
+                    <Label Content="figuren" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" />
+
+                    <ListView Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="#cccccc" />
+
+                    <Button x:Name="bewaarfiguren" Grid.Row="9" Grid.Column="6" Margin="3" Content="bewaar" />
+
+                    <Button x:Name="verzendemail" Grid.Column="9" Grid.Row="9" Margin="3" Content="verzend" />
+
+                    <ListView Grid.Column="8" Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="#cccccc"/>
+
+                    <Label Grid.Row="4" Grid.Column="8" Grid.ColumnSpan="2" Content="email lijst" Foreground="White"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
