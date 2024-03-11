@@ -51,16 +51,23 @@ public partial class LoginWindow : Window
         _password = txtPassword.Password;
 
         CurrentUserState.LoggedIn = true;
-
         this.Visibility = Visibility.Collapsed;
         
-        /*_managerWindow = new ManagerWindow();
-        _managerWindow.Show();*/
+        if(IsManager.Ismanager(txtUserName.Text, txtPassword.Password))
+        {
+            ManagerWindow managerwindow = new ManagerWindow();
+            _managerWindow.Show();
 
-        UserWindow userWindow = new UserWindow();
-        userWindow.Show();
-         
-        
+        }
+        else if(IsUser.Isuser(txtUserName.Text,txtPassword.Password))
+        {
+            UserWindow userWindow = new UserWindow();
+            userWindow.Show();
+        }
+        else
+        {
+            Console.WriteLine("The user does not exist.");
+        }      
         
     }
 
