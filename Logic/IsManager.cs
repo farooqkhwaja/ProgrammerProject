@@ -18,15 +18,17 @@ public class IsManager
         this._password = password;
         managers.Add(this);
     }
-    public static IsManager FindManager(string username, string password)
+    public static IsManager? FindManager(string username, string password)
     {
         foreach( var manager in managers) 
         {
             if(manager._username == username && manager._password == password)
             {
+                CurrentUserState.LoggedIn = true;
                 return manager;
             }                                 
         }
+       
         return null;
     }
 }

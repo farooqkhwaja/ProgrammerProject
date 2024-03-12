@@ -18,15 +18,17 @@ public class IsUser
         this._password = password;
         users.Add(this);
     }
-    public static IsUser FindUser(string username, string password) 
+    public static IsUser? FindUser(string username, string password) 
     {
         foreach (IsUser user in users)
         {
             if(user._username == username && user._password == password)
             {
+                CurrentUserState.LoggedIn = true;
                 return user;
             }
         }
+        
         return null;
     }
    

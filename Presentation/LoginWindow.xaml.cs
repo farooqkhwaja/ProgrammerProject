@@ -51,30 +51,37 @@ public partial class LoginWindow : Window
         _username = txtUserName.Text;
         _password = txtPassword.Password;
 
-        CurrentUserState.LoggedIn = true;
+        bool loggedin = CurrentUserState.LoggedIn = true;
 
-        
-
-        IsUser foundUser = IsUser.FindUser(_username,_password);
-        IsManager foundManager = IsManager.FindManager(_username,_password);
-
-        if(foundManager != null)
+        if (loggedin)
         {
-           
-            _managerWindow.Show();
-           
-        }
-        else if(foundUser != null)
-        {
-            
-            _userWindow = new UserWindow();
-            _userWindow.Show();
+            IsUser? foundUser = IsUser.FindUser(_username, _password);
+            IsManager? foundManager = IsManager.FindManager(_username, _password);
+
+            if (foundManager != null)
+            {
+                _managerWindow = new ManagerWindow();
+                _managerWindow.Show();
+
+            }
+            else if (foundUser != null)
+            {
+
+                _userWindow = new UserWindow();
+                _userWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("The user does not exist.");
+            }
         }
         else
         {
-            Console.WriteLine("The user does not exist.");
+            MessageBox.Show("The user is not logged in!");
         }
-        
+      
+       
+       
 
         /* if(IsManager.Ismanager(txtUserName.Text, txtPassword.Password))
          {
@@ -87,8 +94,6 @@ public partial class LoginWindow : Window
              UserWindow userWindow = new UserWindow();
              userWindow.Show();
          }*/
-
-
     }
 
     private void Window_Closed(object sender, EventArgs e)
