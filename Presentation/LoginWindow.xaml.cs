@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using DataAccess;
 using Logic;
 
 namespace Presentation;
@@ -43,57 +44,36 @@ public partial class LoginWindow : Window
 
     private void BtnLogin_Click(object sender, RoutedEventArgs e)
     {
-        if(string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
-        {
-            MessageBox.Show("Username or/and password can not be empty.");
-        }
-
         _username = txtUserName.Text;
         _password = txtPassword.Password;
 
         bool loggedin = CurrentUserState.LoggedIn = true;
 
-        if (loggedin)
+        if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
-            IsUser? foundUser = IsUser.FindUser(_username, _password);
-            IsManager? foundManager = IsManager.FindManager(_username, _password);
+            MessageBox.Show("Username or/and password can not be empty.");
+        }
 
-            if (foundManager != null)
+
+        DummyDatabse ddb = new DummyDatabse();
+        var allUsers = ddb.GetAllUsers();
+
+        foreach (var user in allUsers)
+        {
+            if (user.Username == _username && user.Password == _password && user.IsManager == true)
             {
                 _managerWindow = new ManagerWindow();
                 _managerWindow.Show();
-
-            }
-            else if (foundUser != null)
-            {
-
-                _userWindow = new UserWindow();
-                _userWindow.Show();
             }
             else
             {
-                MessageBox.Show("The user does not exist.");
+                _userWindow = new UserWindow();
+                _userWindow.Show();
             }
-        }
-        else
-        {
-            MessageBox.Show("The user is not logged in!");
-        }
-      
-       
-       
+        }        
+        MessageBox.Show("The user is not logged in!");     
 
-        /* if(IsManager.Ismanager(txtUserName.Text, txtPassword.Password))
-         {
-             ManagerWindow managerwindow = new ManagerWindow();
-             _managerWindow.Show();
-
-         }
-         else if(IsUser.Isuser(txtUserName.Text,txtPassword.Password))
-         {
-             UserWindow userWindow = new UserWindow();
-             userWindow.Show();
-         }*/
+                
     }
 
     private void Window_Closed(object sender, EventArgs e)

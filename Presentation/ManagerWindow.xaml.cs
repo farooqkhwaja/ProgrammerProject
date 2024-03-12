@@ -12,7 +12,7 @@ public partial class ManagerWindow : Window
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
     {             
-        DansFilmLinks links = new DansFilmLinks(1,"setenta","www.youtube.salsapapi/setenta for beginners");      
+        
     }
 
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
