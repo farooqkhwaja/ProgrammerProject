@@ -7,6 +7,7 @@ namespace Presentation;
 public partial class LoginWindow : Window
 {
     private ManagerWindow _managerWindow;
+    private UserWindow _userWindow;
     
     private string _username;
     private string _password;
@@ -51,29 +52,48 @@ public partial class LoginWindow : Window
         _password = txtPassword.Password;
 
         CurrentUserState.LoggedIn = true;
-        this.Visibility = Visibility.Collapsed;
-        
-        if(IsManager.Ismanager(txtUserName.Text, txtPassword.Password))
-        {
-            ManagerWindow managerwindow = new ManagerWindow();
-            _managerWindow.Show();
 
-        }
-        else if(IsUser.Isuser(txtUserName.Text,txtPassword.Password))
+        
+
+        IsUser foundUser = IsUser.FindUser(_username,_password);
+        IsManager foundManager = IsManager.FindManager(_username,_password);
+
+        if(foundManager != null)
         {
-            UserWindow userWindow = new UserWindow();
-            userWindow.Show();
+           
+            _managerWindow.Show();
+           
+        }
+        else if(foundUser != null)
+        {
+            
+            _userWindow = new UserWindow();
+            _userWindow.Show();
         }
         else
         {
             Console.WriteLine("The user does not exist.");
-        }      
+        }
         
+
+        /* if(IsManager.Ismanager(txtUserName.Text, txtPassword.Password))
+         {
+             ManagerWindow managerwindow = new ManagerWindow();
+             _managerWindow.Show();
+
+         }
+         else if(IsUser.Isuser(txtUserName.Text,txtPassword.Password))
+         {
+             UserWindow userWindow = new UserWindow();
+             userWindow.Show();
+         }*/
+
+
     }
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        LoginWindow loginWindow = new LoginWindow();
-        loginWindow.Close();
+        _managerWindow = new ManagerWindow();
+        _managerWindow.Show();
     }
 }

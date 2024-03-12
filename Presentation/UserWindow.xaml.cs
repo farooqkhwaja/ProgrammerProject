@@ -14,4 +14,19 @@ public partial class UserWindow : Window
         LoginWindow loginWindow = new LoginWindow();
         loginWindow.Show();
     }
+
+    private void genereepartner_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void bewaarfiguren_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void verzendemail_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
