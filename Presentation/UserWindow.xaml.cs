@@ -17,7 +17,7 @@ public partial class UserWindow : Window
 
     private void genereepartner_Click(object sender, RoutedEventArgs e)
     {
-
+        //hello
     }
 
     private void bewaarfiguren_Click(object sender, RoutedEventArgs e)
