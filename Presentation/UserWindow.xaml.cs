@@ -4,9 +4,11 @@ namespace Presentation;
 
 public partial class UserWindow : Window
 {
-    public UserWindow()
+    LoginWindow log;
+    public UserWindow(LoginWindow log)
     {
         InitializeComponent();
+        this.log = log;
     }
 
     private void Window_Closed(object sender, EventArgs e)

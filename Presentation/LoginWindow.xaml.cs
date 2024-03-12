@@ -44,6 +44,7 @@ public partial class LoginWindow : Window
 
     private void BtnLogin_Click(object sender, RoutedEventArgs e)
     {
+         
         _username = txtUserName.Text;
         _password = txtPassword.Password;
 
@@ -55,30 +56,30 @@ public partial class LoginWindow : Window
         }
 
 
-        DummyDatabse ddb = new DummyDatabse();
+        DummyDatabase ddb = new DummyDatabase();
         var allUsers = ddb.GetAllUsers();
+
+        _managerWindow = new ManagerWindow(this);
+        _userWindow = new UserWindow(this);
 
         foreach (var user in allUsers)
         {
             if (user.Username == _username && user.Password == _password && user.IsManager == true)
-            {
-                _managerWindow = new ManagerWindow();
+            {               
                 _managerWindow.Show();
             }
-            else
-            {
-                _userWindow = new UserWindow();
+            else if (user.Username == _username && user.Password == _password && user.IsManager == false)
+            {          
                 _userWindow.Show();
             }
-        }        
-        MessageBox.Show("The user is not logged in!");     
+           
+        }
 
-                
+        this.Close();
     }
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        _managerWindow = new ManagerWindow();
-        _managerWindow.Show();
+
     }
 }

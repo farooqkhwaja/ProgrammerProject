@@ -43,7 +43,7 @@ public partial class Login : UserControl
 
     private void BtnLogin_Click(object sender, RoutedEventArgs e)
     {
-        if(string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
+       /* if(string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
             MessageBox.Show("Username or/and password can not be empty.");
         }
@@ -56,6 +56,6 @@ public partial class Login : UserControl
         Visibility = Visibility.Collapsed;
         
         _managerWindow = new ManagerWindow();
-        _managerWindow.Show();
+        _managerWindow.Show();*/
     }
 }

@@ -5,9 +5,12 @@ namespace Presentation;
 
 public partial class ManagerWindow : Window
 {
-    public ManagerWindow()
+    LoginWindow gg;
+
+    public ManagerWindow(LoginWindow currentLoginWindow)
     {
         InitializeComponent();
+        this.gg = currentLoginWindow;
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
@@ -42,8 +45,7 @@ public partial class ManagerWindow : Window
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        LoginWindow loginWindow = new LoginWindow();     
-        loginWindow.Show();               
+        
     }
     private void Cursisten_lijst_updaten_Click(object sender, RoutedEventArgs e)
     {

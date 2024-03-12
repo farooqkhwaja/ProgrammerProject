@@ -2,7 +2,7 @@
 
 namespace DataAccess
 {
-    public class DummyDatabse
+    public class DummyDatabase
     {
         public List<User> GetAllUsers()
         {
