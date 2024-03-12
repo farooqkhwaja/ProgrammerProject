@@ -1,4 +1,5 @@
 using System.Windows;
+using Logic;
 
 namespace Presentation;
 
@@ -10,8 +11,8 @@ public partial class ManagerWindow : Window
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
-    {
-
+    {             
+        
     }
 
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
@@ -41,16 +42,16 @@ public partial class ManagerWindow : Window
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        LoginWindow loginWindow = new LoginWindow();
-        ManagerWindow managerWindow = new ManagerWindow();
+        LoginWindow loginWindow = new LoginWindow();     
+        loginWindow.Show();               
+    }
+    private void Cursisten_lijst_updaten_Click(object sender, RoutedEventArgs e)
+    {
 
-        if(Window_Closed != null)
-        {
-            managerWindow.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            loginWindow.Visibility = Visibility.Visible;
-        }
+    }
+
+    private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 }

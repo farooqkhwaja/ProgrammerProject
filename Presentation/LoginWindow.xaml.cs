@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using DataAccess;
 using Logic;
 
 namespace Presentation;
@@ -7,6 +8,7 @@ namespace Presentation;
 public partial class LoginWindow : Window
 {
     private ManagerWindow _managerWindow;
+    private UserWindow _userWindow;
     
     private string _username;
     private string _password;
@@ -42,22 +44,41 @@ public partial class LoginWindow : Window
 
     private void BtnLogin_Click(object sender, RoutedEventArgs e)
     {
-        if(string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
+        _username = txtUserName.Text;
+        _password = txtPassword.Password;
+
+        bool loggedin = CurrentUserState.LoggedIn = true;
+
+        if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
             MessageBox.Show("Username or/and password can not be empty.");
         }
 
-        _username = txtUserName.Text;
-        _password = txtPassword.Password;
 
-        CurrentUserState.LoggedIn = true;
+        DummyDatabse ddb = new DummyDatabse();
+        var allUsers = ddb.GetAllUsers();
 
-        this.Visibility = Visibility.Collapsed;
-        
+        foreach (var user in allUsers)
+        {
+            if (user.Username == _username && user.Password == _password && user.IsManager == true)
+            {
+                _managerWindow = new ManagerWindow();
+                _managerWindow.Show();
+            }
+            else
+            {
+                _userWindow = new UserWindow();
+                _userWindow.Show();
+            }
+        }        
+        MessageBox.Show("The user is not logged in!");     
+
+                
+    }
+
+    private void Window_Closed(object sender, EventArgs e)
+    {
         _managerWindow = new ManagerWindow();
         _managerWindow.Show();
-         
-        
-        
     }
 }

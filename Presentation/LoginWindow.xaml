@@ -10,16 +10,23 @@
     <Grid>
         <Grid>
             <StackPanel Margin="8">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
                     <Label Name="lblUserName" Width="80">Username: </Label>
-                    <TextBox Name="txtUserName" VerticalAlignment="Center" Width="100" TextChanged="TxtUserName_TextChanged"></TextBox>
+                    <TextBox Name="txtUserName" VerticalAlignment="Center" Width="100" 
+                             TextChanged="TxtUserName_TextChanged"></TextBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
                     <Label Name="lblPassword" Width="80">Password: </Label>
-                    <PasswordBox Name="txtPassword" VerticalAlignment="Center" Width="100" PasswordChanged="TxtPassword_PasswordChanged"></PasswordBox>
+                    <PasswordBox Name="txtPassword" VerticalAlignment="Center" Width="100"
+                                 PasswordChanged="TxtPassword_PasswordChanged"></PasswordBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,4">
-                    <Button Name="btnLogin" IsEnabled="False" VerticalAlignment="Center" Width="180" Height="24" IsDefault="True" Click="BtnLogin_Click">Login</Button>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" 
+                            HorizontalAlignment="Center" Margin="0,4">
+                    <Button Name="btnLogin" IsEnabled="False" VerticalAlignment="Center"
+                            Width="180" Height="24"
+                            IsDefault="True" Click="BtnLogin_Click">Login</Button>
                 </StackPanel>
             </StackPanel>
         </Grid>
