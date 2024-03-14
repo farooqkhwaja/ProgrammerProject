@@ -7,8 +7,8 @@ namespace Presentation;
 
 public partial class LoginWindow : Window
 {
-    private ManagerWindow _managerWindow;
-    private UserWindow _userWindow;
+    private ManagerWindow _managerWindow { get; set; }
+    private UserWindow _userWindow { get; set; }
     
     private string _username;
     private string _password;
@@ -16,6 +16,7 @@ public partial class LoginWindow : Window
     public LoginWindow()
     {
         InitializeComponent();
+        
     }
     
     private void TxtUserName_TextChanged(object sender, TextChangedEventArgs e)
@@ -62,12 +63,12 @@ public partial class LoginWindow : Window
         {
             if (user.Username == _username && user.Password == _password && user.IsManager == true)
             {
-                _managerWindow = new ManagerWindow();
+                _managerWindow = new ManagerWindow(this);
                 _managerWindow.Show();
             }
             else
             {
-                _userWindow = new UserWindow();
+                _userWindow = new UserWindow(this);
                 _userWindow.Show();
             }
         }        
@@ -78,7 +79,6 @@ public partial class LoginWindow : Window
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        _managerWindow = new ManagerWindow();
-        _managerWindow.Show();
+        
     }
 }

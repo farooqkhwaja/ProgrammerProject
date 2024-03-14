@@ -4,15 +4,16 @@ namespace Presentation;
 
 public partial class UserWindow : Window
 {
-    public UserWindow()
+    public LoginWindow loginWindow { get; set; }
+    public UserWindow(LoginWindow loginWindow)
     {
         InitializeComponent();
+        loginWindow = loginWindow;
     }
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        LoginWindow loginWindow = new LoginWindow();
-        loginWindow.Show();
+        
     }
 
     private void genereepartner_Click(object sender, RoutedEventArgs e)
