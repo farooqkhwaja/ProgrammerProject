@@ -1,14 +1,15 @@
 using System.Windows;
 using System.Windows.Controls;
 using DataAccess;
+using DataAccess.Models;
 using Logic;
 
 namespace Presentation;
 
 public partial class LoginWindow : Window
 {
-    private ManagerWindow _managerWindow { get; set; }
-    private UserWindow _userWindow { get; set; }
+    private ManagerWindow _managerWindow;
+    private UserWindow _userWindow;
     
     private string _username;
     private string _password;
@@ -48,35 +49,43 @@ public partial class LoginWindow : Window
         _username = txtUserName.Text;
         _password = txtPassword.Password;
 
-        bool loggedin = CurrentUserState.LoggedIn = true;
 
         if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
             MessageBox.Show("Username or/and password can not be empty.");
         }
+        
 
-
-        DummyDatabse ddb = new DummyDatabse();
+        DummyDatabase ddb = new DummyDatabase();
         var allUsers = ddb.GetAllUsers();
 
-        foreach (var user in allUsers)
+        bool found = false;
+        foreach (var users in allUsers)
         {
-            if (user.Username == _username && user.Password == _password && user.IsManager == true)
+            
+            if (users.Username == _username && users.Password == _password && users.IsManager == true)
             {
+                
+                found = true;
                 _managerWindow = new ManagerWindow(this);
                 _managerWindow.Show();
+                break;
             }
-            else
+
+            if (users.Username == _username && users.Password == _password && users.IsManager == false)
             {
+                found = true;
                 _userWindow = new UserWindow(this);
                 _userWindow.Show();
-            }
-        }        
-        MessageBox.Show("The user is not logged in!");     
+                break;
+            }                  
+        }
 
-                
+        if (found is false)
+        {
+            MessageBox.Show("Username or/and password Incorrect");
+        }
     }
-
     private void Window_Closed(object sender, EventArgs e)
     {
         
