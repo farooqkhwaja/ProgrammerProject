@@ -27,13 +27,16 @@ public partial class ManagerWindow : Window
     {
         
         User user = new User();
-
+        
         user.FirstName = voornaam.Text;
         user.LastName = achternaam.Text;
         user.Sex = geslacht.Text;
 
-    
-        CursistenList.Items.Add(user.FirstName +" "+ user.LastName );
+        if (!CursistenList.Items.Contains(user.FirstName + " " + user.LastName))
+        {
+            CursistenList.Items.Add(user.FirstName + " " + user.LastName);
+        }
+       
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
