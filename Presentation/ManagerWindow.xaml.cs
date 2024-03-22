@@ -1,7 +1,5 @@
 using System.Windows;
-using System.Windows.Controls;
-using DataAccess;
-using DataAccess.Models;
+using Logic.Dto;
 using Logic;
 
 namespace Presentation;
@@ -26,7 +24,7 @@ public partial class ManagerWindow : Window
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
     {
         
-        User user = new User();
+        UserDto user = new UserDto();
         
         user.FirstName = voornaam.Text;
         user.LastName = achternaam.Text;
