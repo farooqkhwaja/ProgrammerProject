@@ -1,7 +1,5 @@
 using System.Windows;
 using System.Windows.Controls;
-using DataAccess;
-using DataAccess.Models;
 using Logic;
 
 namespace Presentation;
@@ -56,8 +54,8 @@ public partial class LoginWindow : Window
         }
         
 
-        DummyDatabase ddb = new DummyDatabase();
-        var allUsers = ddb.GetAllUsers();
+        DataAccessServices dataAccessServices = new DataAccessServices();
+        var allUsers = dataAccessServices.GetUserdata();
 
         bool found = false;
         foreach (var users in allUsers)

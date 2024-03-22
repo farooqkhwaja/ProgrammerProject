@@ -10,5 +10,5 @@ public class User
     public  string Password { get; set; }
     public bool IsManager { get; set; } = true;
     public string Email { get; set; }
-    
+    public ICollection<Managers> managers { get; set; }
 }
