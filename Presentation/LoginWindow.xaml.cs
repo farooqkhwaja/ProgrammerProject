@@ -1,5 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
+using DataAccess.Models;
+using DataAccess;
 using Logic;
 
 namespace Presentation;
@@ -9,9 +11,7 @@ public partial class LoginWindow : Window
     private ManagerWindow _managerWindow;
     private UserWindow _userWindow;
     
-    private string _username;
-    private string _password;
-    
+ 
     public LoginWindow()
     {
         InitializeComponent();
@@ -43,46 +43,34 @@ public partial class LoginWindow : Window
     }
 
     private void BtnLogin_Click(object sender, RoutedEventArgs e)
-    {
-        _username = txtUserName.Text;
-        _password = txtPassword.Password;
-
+    { 
 
         if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
-            MessageBox.Show("Username or/and password can not be empty.");
+            MessageBox.Show("Username or/and password can not be empty. =====");
+        }
+
+        UserAccess access = new UserAccess();
+        var user = access.GetUserByUsernamePassword(txtUserName.Text, txtPassword.Password);
+
+            
+        if (user != null  &&  user.IsManager == true)
+        {   
+            _managerWindow = new ManagerWindow(this);
+            _managerWindow.Show();
+        }
+
+        if (user != null && user.IsManager == false)
+        {
+            _userWindow = new UserWindow(this);
+            _userWindow.Show();
         }
         
-
-        DataAccessServices dataAccessServices = new DataAccessServices();
-        var allUsers = dataAccessServices.GetUserdata();
-
-        bool found = false;
-        foreach (var users in allUsers)
+        if(user == null)
         {
-            
-            if (users.Username == _username && users.Password == _password && users.IsManager == true)
-            {
-                
-                found = true;
-                _managerWindow = new ManagerWindow(this);
-                _managerWindow.Show();
-                break;
-            }
-
-            if (users.Username == _username && users.Password == _password && users.IsManager == false)
-            {
-                found = true;
-                _userWindow = new UserWindow(this);
-                _userWindow.Show();
-                break;
-            }                  
+            MessageBox.Show("Username or / and password Incorrect");
         }
 
-        if (found is false)
-        {
-            MessageBox.Show("Username or/and password Incorrect");
-        }
     }
     private void Window_Closed(object sender, EventArgs e)
     {

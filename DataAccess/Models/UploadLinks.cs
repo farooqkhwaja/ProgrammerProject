@@ -8,7 +8,7 @@ namespace DataAccess.Models
 {
     public class UploadLinks
     {
-        public int Id { get; set; }
+        public int Id { get; set; } = null
         public string Link { get; set; }    
         public ICollection<Managers> managers { get; set; }
     }

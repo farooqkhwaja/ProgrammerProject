@@ -61,14 +61,14 @@ public partial class ManagerWindow : Window
         }
     }
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
-    {
-        UploadLinks selectedLink = (UploadLinks)DansFilmLinksList.SelectedItem;
+    {       
+        UploadLinks DeleteId = (UploadLinks)DansFilmLinksList.SelectedItem;
 
-        if (selectedLink != null)
+        if (DeleteId != null)
         {
             UploadLinksAccess uploadLinksAccess = new UploadLinksAccess();
 
-            uploadLinksAccess.DeleteLink(selectedLink);
+            uploadLinksAccess.DeleteLink(DeleteId);
         }
         else
         {

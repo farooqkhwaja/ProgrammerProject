@@ -10,11 +10,11 @@ namespace Logic
 {
     public class DataAccessServices
     {
-        public List<User> GetUserdata()
+       /* public List<User> GetUserdata()
         {
-            UserAccess db = new UserAccess();
+           *//* UserAccess db = new UserAccess();
             List<User> users = db.GetAllUsers();
-            return users;
-        }
+            return users;*//*
+        }*/
     }
 }
