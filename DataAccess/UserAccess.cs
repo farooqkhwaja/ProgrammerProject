@@ -8,45 +8,6 @@ namespace DataAccess
     {
         static List<User> users = new List<User>();
         const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
-        public List<User> GetAllUsers()
-        {
-            const string queryString = "SELECT * FROM Users";
-            
-
-            using(SqlConnection con = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(queryString, con);
-
-                try
-                {
-                    con.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        //convert reader to User
-                        User user = new User();
-
-                        user.Id = Convert.ToInt32(reader["Id"]);
-                        user.Username = reader["Username"].ToString();
-                        user.Password = reader["Password"].ToString();
-                        user.FirstName = reader["FirstName"].ToString();
-                        user.Email = reader["Email"].ToString();
-                        user.Sex = reader["Sex"].ToString();
-                        user.LastName = reader["LastName"].ToString();
-
-                        users.Add(user);
-                    }
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-
-                }
-            }
-            return users;
-        }
-
 
         public bool CreateUser(User user)
         {
