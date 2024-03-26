@@ -1,12 +1,17 @@
-﻿using DataAccess;
-using DataAccess.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UploadEventAccess;
 
-namespace Test
+namespace ConsoleApp2
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+
             /*UserAccess dataAccsess = new UserAccess();
             User user1 = new User();
             
@@ -31,7 +36,6 @@ namespace Test
             event1.Fk_Locations = 1;
 
             dataaccess.CreateEvent(event1);
-
         }
     }
 }
