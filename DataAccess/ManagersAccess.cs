@@ -9,5 +9,6 @@ namespace DataAccess
 {
     public class ManagersAccess
     {
+         
     }
 }

@@ -35,13 +35,42 @@ namespace DataAccess
             }
             return uploadLink;
         }
+        public List<UploadLinks> GetLinks()
+        {
+            List<UploadLinks> uploadLinks = new List<UploadLinks>();
+            string queryString = $"SELECT * FROM UploadLinks";
 
-        public UploadLinks ReadLink(int Id)
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(queryString, con);
+                try
+                {
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        UploadLinks uploadlink = new UploadLinks();
+                        uploadlink.Id = Convert.ToInt32(reader["Id"].ToString());
+                        uploadlink.Link = reader["Link"].ToString();
+
+                        uploadLinks.Add(uploadlink);
+                    }
+                    con.Close();    
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            } 
+            return uploadLinks;
+        }
+        public UploadLinks GetLink(int Id)
         {
             string queryString = $"SELECT * FROM UploadLinks WHERE Id = {Id}";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
+                UploadLinks uploadLinks = null;
                 SqlCommand cmd = new SqlCommand(queryString, con);
                 try
                 {
@@ -51,19 +80,18 @@ namespace DataAccess
 
                     while (reader.Read())
                     {
-                        UploadLinks uploadLinks = new UploadLinks();
-
+                       
+                        uploadLinks = new UploadLinks();
                         uploadLinks.Id = Convert.ToInt32(reader["Id"].ToString());
                         uploadLinks.Link = reader["Link"].ToString();
-
-                        uploadlinks.Add(uploadLinks);
+                       
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                return ReadLink(Id);
+                return uploadLinks;
             }
         }
         public void UpdateLinks(UploadLinks uploadlink)

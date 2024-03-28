@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using DataAccess.Models;
 using DataAccess;
 using Logic;
+using BC = BCrypt.Net.BCrypt;
 
 namespace Presentation;
 
@@ -43,11 +44,13 @@ public partial class LoginWindow : Window
     }
 
     private void BtnLogin_Click(object sender, RoutedEventArgs e)
-    { 
+    {
+        //password encryption added
+        //string Password = BC.HashPassword(txtPassword.Password);
 
         if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
-            MessageBox.Show("Username or/and password can not be empty. =====");
+            MessageBox.Show("Username or/and password can not be empty!");
         }
 
         UserAccess access = new UserAccess();
@@ -68,12 +71,9 @@ public partial class LoginWindow : Window
         
         if(user == null)
         {
-            MessageBox.Show("Username or / and password Incorrect");
+            MessageBox.Show("Username or / and password Incorrect!");
         }
 
     }
-    private void Window_Closed(object sender, EventArgs e)
-    {
-        
-    }
+
 }

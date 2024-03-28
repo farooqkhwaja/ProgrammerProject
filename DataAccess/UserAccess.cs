@@ -1,6 +1,7 @@
 ﻿using DataAccess.Models;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DataAccess
 {
@@ -25,8 +26,7 @@ namespace DataAccess
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        user = new User();
-                        user.Username = reader["Username"].ToString();
+                        user = new User() { Username = reader["Username"].ToString() };
                         user.Password = reader["Password"].ToString();
                         user.FirstName = reader["FirstName"].ToString();
                         user.Email = reader["Email"].ToString();
@@ -45,8 +45,8 @@ namespace DataAccess
         }
         public bool CreateUser(User user)
         {
-            string query =string.Format("INSERT INTO Users(Username, Password,FirstName,LastName, Sex, Email) VALUES ('{0}',{1},'{2}','{3}','{4}','{5}')"
-                ,user.Username,user.Password,user.FirstName, user.LastName,user.Sex, user.Email);
+            string query =string.Format("INSERT INTO [User](Username, Password,FirstName,LastName, Sex, Email,IsManager) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
+                ,user.Username,user.Password,user.FirstName, user.LastName,user.Sex, user.Email, user.IsManager);
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -67,11 +67,35 @@ namespace DataAccess
             }
             return true;
         }
-
-        public User ReadUser(int userId)
+        public bool GetUserByUsername(string username)
         {
-            User user = new User();
-            string query = $"Select * FROM Users WHERE Id = {userId}";
+            string query = $"SELECT * FROM [User] Where Username = '{username}'";
+            using(SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query ,con);
+
+                try
+                {
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while(reader.Read())
+                    {
+                        return true;
+                    }
+                    con.Close();    
+                }
+                catch(Exception ex)
+                {
+                    //log exception
+                    throw;
+                }
+            }
+            return false;
+        }
+        public User GetUser(int userId)
+        {
+            User user = null;
+            string query = $"SELECT * FROM Users WHERE Id = {userId}";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, con);
@@ -83,7 +107,7 @@ namespace DataAccess
                    
                     while (reader.Read())
                     {
-                        user.Username = reader["Username"].ToString();
+                        user = new User() { Username = reader["Username"].ToString() };
                         user.Password = reader["Password"].ToString();
                         user.FirstName = reader["FirstName"].ToString();
                         user.Email = reader["Email"].ToString();
