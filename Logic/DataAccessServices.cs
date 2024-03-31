@@ -10,11 +10,34 @@ namespace Logic
 {
     public class DataAccessServices
     {
-        public List<User> GetUserdata()
+        public string RegisterUser(string voornaam, string achternaam, string geslacht )
         {
-            UserAccess db = new UserAccess();
-            List<User> users = db.GetAllUsers();
-            return users;
-        }
+            UserAccess userAccess = new UserAccess();
+            var userExists = userAccess.GetUserByUsername(voornaam + "-" + achternaam);
+
+            if(userExists is true)
+            {
+                return  "User already exists.";
+            }
+
+            var newUser = new User()
+            {
+                Username = voornaam,
+                IsManager = false,
+                FirstName = voornaam,
+                LastName = achternaam,
+                Sex = geslacht,
+                Password = voornaam + "-" + achternaam
+            };
+            
+            var result = userAccess.CreateUser(newUser);
+            if(result is true)
+            {
+                return "User created";
+            }
+
+            return "Unable to create user";
+        }    
     }
+
 }

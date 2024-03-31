@@ -10,16 +10,16 @@ namespace DataAccess
     {
         static List<UploadEvents> eventen = new List<UploadEvents>();
 
-        const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
+        static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
         public bool CreateEvent(UploadEvents events)
         {
-            string queryString = string.Format("INSERT INTO UploadEvents(Name,Date,Fk_Location) VALUES('{0}','{1}','{2}' )", events.Name, events.Date, events.Fk_Locations);
+            string queryString = string.Format("INSERT INTO UploadEvents(Name,Date) VALUES('{0}','{1}' )", events.Name, events.Date);
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(queryString, con);
-
+                
                 try
                 {
                     con.Open();
@@ -67,7 +67,7 @@ namespace DataAccess
             }
             return ReadEvents(Id);
         }
-        public void UpdateUser (UploadEvents uploadEvents)
+        public void UpdateEvent (UploadEvents uploadEvents)
         {
             string queryString = $"UPDATE UploadEvents SET NAME = '{uploadEvents.Name}', Date = '{uploadEvents.Date} WHERE Id = '{uploadEvents.Id}'";
 

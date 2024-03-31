@@ -4,6 +4,7 @@ using Logic;
 using DataAccess.Models;
 using DataAccess;
 using System.Windows.Media.TextFormatting;
+using System.Collections.ObjectModel;
 
 namespace Presentation;
 
@@ -19,6 +20,8 @@ public partial class ManagerWindow : Window
         _loginWindow.Visibility = Visibility.Collapsed;
 
         _saveAttendance = new SaveAttendance();
+        UploadLinksAccess uploadLinks = new UploadLinksAccess();
+        DansFilmLinksList.ItemsSource = uploadLinks.GetLinks();
     }
 
     private void Window_Closed(object sender, EventArgs e)
@@ -28,24 +31,15 @@ public partial class ManagerWindow : Window
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
     {
-        
-        UserDto user = new UserDto();
-        
-        user.FirstName = voornaam.Text;
-        user.LastName = achternaam.Text;
-        user.Sex = geslacht.Text;
-
-        if (!CursistenList.Items.Contains(user.FirstName + " " + user.LastName))
-        {
-            CursistenList.Items.Add(user.FirstName + " " + user.LastName);
-        }
-       
+        DataAccessServices dataaccessservices = new DataAccessServices();   
+        var msgResult = dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text);
+        MessageBox.Show(msgResult);
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
     {
 
-        string link = DansLinksToevoegenBox.Text;
+        string link = DansLinksToevoegenBox.Text.ToString();
         DansFilmLinksList.ItemsSource = link;
 
         if (!string.IsNullOrWhiteSpace(link))
@@ -61,14 +55,15 @@ public partial class ManagerWindow : Window
         }
     }
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
-    {
-        UploadLinks selectedLink = (UploadLinks)DansFilmLinksList.SelectedItem;
+    {   
+        //UploadLinksAccess uploadlinksaccess = new UploadLinksAccess();
 
-        if (selectedLink != null)
+        UploadLinksAccess link = (UploadLinksAccess)DansFilmLinksList.SelectedItem;
+        
+        if (link != null)
         {
             UploadLinksAccess uploadLinksAccess = new UploadLinksAccess();
-
-            uploadLinksAccess.DeleteLink(selectedLink);
+            uploadLinksAccess.DeleteLink(1);
         }
         else
         {
