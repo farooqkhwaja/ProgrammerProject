@@ -14,57 +14,64 @@
         
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="99." />
-                        <ColumnDefinition Width="11.322"/>
+                        <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="20" />
-                        <ColumnDefinition Width="85" />
-                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition Width="110" />
+                        <ColumnDefinition Width="70" />
                         <ColumnDefinition Width="20" />
                         <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="25"/>
                         <RowDefinition Height="30"/>
-        
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+    
                     </Grid.RowDefinitions>
         
-                    <Label Grid.Row="3" Grid.Column="1" Content="Cursist voornaam"  Grid.ColumnSpan="2" Margin="0,0,0,28" Grid.RowSpan="3"/>
-                    <TextBox x:Name="txtFirstname" Grid.Row="5" Grid.Column="1" Margin="5"  Height="25" Background="#CCCCCC" Grid.ColumnSpan="2" FontSize="16" FontFamily="Arial Narrow"/>
-                    <Label Grid.Row="6" Grid.Column="1" Content="Cursist achternaam"  Grid.ColumnSpan="2" Margin="0,0,0,28" Grid.RowSpan="2"/>
-                    <TextBox x:Name="txtLastname" Grid.Row="7" Grid.Column="1" Margin="5"  Height="25" Background="#CCCCCC" Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" />
-                    <Label Grid.Row="7" Grid.Column="1" Content="Cursist geslacht"  Grid.ColumnSpan="2" Margin="0,41,0,40" Grid.RowSpan="3"/>
-                    <TextBox x:Name="txtsex" Grid.Row="9" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC" Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow"/>
-                    <Button x:Name="inschrijven_cursist" Grid.Row="11" Grid.Column="1" Margin="5,5,5,5"
-                        Height="20" Content="Cursist Inschrijven" Click="inschrijven_cursist_Click" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="0"/>
+                    <Label Grid.Row="1" Grid.Column="1" Content="Cursist voornaam"  Grid.ColumnSpan="2" Margin="0,0,0,28" 
+                           Grid.RowSpan="3"/>
+                    <TextBox x:Name="txtFirstname" Grid.Row="2" Grid.Column="1" Margin="5"  Height="25" Background="#CCCCCC"
+                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100"/>
+                    <Label Grid.Row="3" Grid.Column="1" Content="Cursist achternaam" Grid.ColumnSpan="2" Margin="0,0,0,28" 
+                           Grid.RowSpan="2"/>
+                    <TextBox x:Name="txtLastname" Grid.Row="4" Grid.Column="1" Margin="5"  Height="25" Background="#CCCCCC"
+                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100" />
+                    <Label Grid.Row="5" Grid.Column="1" Content="Cursist geslacht"  />
+                    <TextBox x:Name="txtsex" Grid.Row="6" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
+                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100"/>
+                    <Label Grid.Row="7" Grid.Column="1" Content="Username"  />
+                    <TextBox x:Name="Username" Grid.Row="8" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
+                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100"/>
+                    <Label Grid.Row="9" Grid.Column="1" Content="Password"  />
+                    <TextBox x:Name="password" Grid.Row="10" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
+                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100"/>
+                    <Button x:Name="inschrijven_cursist" Grid.Row="10" Grid.Column="4" 
+                        Height="20" Content="Cursist Inschrijven" Click="inschrijven_cursist_Click" Margin="5" 
+                            BorderThickness="0"/>
         
-                    <Label Grid.Row="3" Grid.Column="4" Content="Cursisten Lijst"  Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="3" />
-        
-                    <ListBox Grid.Row="5" Grid.Column="5" Grid.RowSpan="5" Margin="10" x:Name="CursistenList"  
+                    <Label Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"  Content="Cursisten Lijst"     />
+
+                    <ListBox Grid.Row="2" Grid.Column="4" Grid.RowSpan="7" Margin="10" x:Name="CursistenList"  
                               Grid.ColumnSpan="2" Background="#CCCCCC">
-        
                     </ListBox>
-                    <Button x:Name="Cursisten_lijst_updaten" Grid.Row="11" Grid.Column="6" Margin="5,5,5,5"
-                        Height="20" Content="Lijst Updaten" Grid.RowSpan="2" Click="Cursisten_lijst_updaten_Click" BorderThickness="0"/>
+                   
         
-                    <Label Grid.Row="3" Grid.Column="7" Content="Aanwezigheden table"  Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="3"/>
-                    <Label Grid.Row="4" Grid.Column="7" Content="Cursisten"  Grid.ColumnSpan="2" Margin="20,10,0,8" Grid.RowSpan="2"/>
+                    <Label Grid.Row="1" Grid.Column="7" Content="Aanwezigheden table"  Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="3"/>
+                    <Label Grid.Row="2" Grid.Column="7" Content="Cursisten"  Grid.ColumnSpan="2" Margin="20,10,0,8" Grid.RowSpan="2"/>
 
 
-                    <ListView Grid.Row="6" Grid.Column="8" Grid.RowSpan="7" Margin="5,5,5,5" x:Name="AanwezighedenList" Background="#CCCCCC">
+                    <ListView Grid.Row="4" Grid.Column="7" Grid.RowSpan="7" Margin="5,5,5,5" x:Name="AanwezighedenList" Background="#CCCCCC">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Select" Width="50">
