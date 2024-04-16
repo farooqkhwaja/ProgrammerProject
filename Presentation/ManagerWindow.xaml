@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:Presentation"
         mc:Ignorable="d"
         Title="Salsa Dance school [Manager UI]" Height="450" Width="600" Closed="Window_Closed" >
     <Grid>
@@ -42,20 +41,20 @@
                     <Label Grid.Row="1" Grid.Column="1" Content="Cursist voornaam"  Grid.ColumnSpan="2" Margin="0,0,0,28" 
                            Grid.RowSpan="3"/>
                     <TextBox x:Name="txtFirstname" Grid.Row="2" Grid.Column="1" Margin="5"  Height="25" Background="#CCCCCC"
-                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100"/>
+                             Grid.ColumnSpan="2" FontSize="16"  MaxWidth="100"/>
                     <Label Grid.Row="3" Grid.Column="1" Content="Cursist achternaam" Grid.ColumnSpan="2" Margin="0,0,0,28" 
                            Grid.RowSpan="2"/>
                     <TextBox x:Name="txtLastname" Grid.Row="4" Grid.Column="1" Margin="5"  Height="25" Background="#CCCCCC"
-                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100" />
+                             Grid.ColumnSpan="2" FontSize="16"  MaxWidth="100" />
                     <Label Grid.Row="5" Grid.Column="1" Content="Cursist geslacht"  />
                     <TextBox x:Name="txtsex" Grid.Row="6" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
-                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100"/>
+                             Grid.ColumnSpan="2" FontSize="16"  MaxWidth="100"/>
                     <Label Grid.Row="7" Grid.Column="1" Content="Username"  />
                     <TextBox x:Name="Username" Grid.Row="8" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
-                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100"/>
+                             Grid.ColumnSpan="2" FontSize="16"  MaxWidth="100"/>
                     <Label Grid.Row="9" Grid.Column="1" Content="Password"  />
                     <TextBox x:Name="password" Grid.Row="10" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
-                             Grid.ColumnSpan="2" FontSize="18" FontFamily="Arial Narrow" MaxWidth="100"/>
+                             Grid.ColumnSpan="2" FontSize="16" MaxWidth="100"/>
                     <Button x:Name="inschrijven_cursist" Grid.Row="10" Grid.Column="4" 
                         Height="20" Content="Cursist Inschrijven" Click="inschrijven_cursist_Click" Margin="5" 
                             BorderThickness="0"/>
@@ -122,9 +121,9 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
-                                    <TextBlock Text="{Binding Id}" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Id}" />
                                     <TextBlock Text=": "/>
-                                    <TextBlock Text="{Binding Link}" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Link}" />
                                     
 
                                 </WrapPanel>
@@ -132,8 +131,8 @@
                         </ListView.ItemTemplate>
                     </ListView>
                     <ListView x:Name="EvenementenLinks" Background="#CCCCCC" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" Grid.RowSpan="6" Margin="0,0,10,0"/>
-                    <TextBox Name="DansLinksToevoegenBox" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Margin="3" FontSize="16" FontFamily="Arial Narrow" />
-                    <TextBox Name="EvenementenToevoegenBox" Grid.Row="10" Grid.Column="5" Grid.ColumnSpan="2" Margin="3" FontSize="16" FontFamily="Arial Narrow" />
+                    <TextBox Name="DansLinksToevoegenBox" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Margin="3" FontSize="16"  />
+                    <TextBox Name="EvenementenToevoegenBox" Grid.Row="10" Grid.Column="5" Grid.ColumnSpan="2" Margin="3" FontSize="16" />
                     <Button x:Name="AddDanceLinks" Content="ADD" Grid.Row="6" Grid.Column="3" Margin="5"  Click="addDanceMove_Click" BorderThickness="0"/>
                     <Button x:Name="UpdateDanceLinks" Content="UPDATE" Grid.Row="7" Grid.Column="3" Margin="5"  Click="UpdateDanceLinks_Click" BorderThickness="0"/>
                     <Button x:Name="DeleteDanceMove" Content="DELETE" Grid.Row="8" Grid.Column="3" Margin="5" Click="DeleteDanceMove_Click" BorderThickness="0"/>

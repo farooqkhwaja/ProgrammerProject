@@ -22,6 +22,9 @@ public partial class ManagerWindow : Window
         _saveAttendance = new SaveAttendance();
         UploadLinksAccess uploadLinks = new UploadLinksAccess();
         DansFilmLinksList.ItemsSource = uploadLinks.GetLinks();
+        UserAccess userAccess = new UserAccess();
+        CursistenList.ItemsSource = userAccess.GetUsers();
+        
     }
 
     private void Window_Closed(object sender, EventArgs e)
@@ -31,16 +34,18 @@ public partial class ManagerWindow : Window
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
     {
+       
         DataAccessServices dataaccessservices = new DataAccessServices();   
         var msgResult = dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text);
+      
+        UserAccess userAccess = new UserAccess();
+        CursistenList.ItemsSource = userAccess.GetUsers();
         MessageBox.Show(msgResult);
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
     {
-
         string link = DansLinksToevoegenBox.Text.ToString();
-        DansFilmLinksList.ItemsSource = link;
 
         if (!string.IsNullOrWhiteSpace(link))
         {
@@ -49,21 +54,28 @@ public partial class ManagerWindow : Window
                 Link = link
             };
 
-            UploadLinksAccess uploadLinksAccess = new UploadLinksAccess();
-
-            uploadLinksAccess.CreateLink(newLink);
+            UploadLinksAccess uploadLinks = new UploadLinksAccess();
+           
+            uploadLinks.CreateLink(newLink);
+            DansFilmLinksList.ItemsSource = uploadLinks.GetLinks();
+        }
+        else
+        {          
+            MessageBox.Show("Dance moves did not get added");
         }
     }
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
     {   
-        //UploadLinksAccess uploadlinksaccess = new UploadLinksAccess();
 
-        UploadLinksAccess link = (UploadLinksAccess)DansFilmLinksList.SelectedItem;
+        UploadLinks link = (UploadLinks)DansFilmLinksList.SelectedItem;
         
         if (link != null)
         {
             UploadLinksAccess uploadLinksAccess = new UploadLinksAccess();
-            uploadLinksAccess.DeleteLink(1);
+            uploadLinksAccess.DeleteLink(link.Id);
+
+            UploadLinksAccess uploadLinks = new UploadLinksAccess();
+            DansFilmLinksList.ItemsSource = uploadLinks.GetLinks();
         }
         else
         {
