@@ -7,10 +7,41 @@ namespace DataAccess
 {
     public class UserAccess
     {
+
         static List<User> users = new List<User>();
-        const string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
+     
+       
+        const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
+        public List<User> GetUsers()
+        {
+            var users = new List<User>();
+            string queryString = "SELECT Id, FirstName FROM [User]";
+            using(SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(queryString, conn);
 
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        User user = new User();
+                        user.Id = Convert.ToInt32(reader["Id"]);
+                        user.FirstName = reader["FirstName"].ToString();
+                       
+                        users.Add(user);
+                    }
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                return users;
+            }
+        }
         public User? GetUserByUsernamePassword(string username, string password)
         {
             User user = null; 
@@ -94,8 +125,9 @@ namespace DataAccess
         }
         public User GetUser(int userId)
         {
+          
             User user = null;
-            string query = $"SELECT * FROM Users WHERE Id = {userId}";
+            string query = $"SELECT * FROM User WHERE Id = {userId}";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, con);
@@ -114,7 +146,6 @@ namespace DataAccess
                         user.Sex = reader["Sex"].ToString();
                         user.LastName = reader["LastName"].ToString();
 
-                        users.Add(user);
                     }
                     reader.Close();
                 }
