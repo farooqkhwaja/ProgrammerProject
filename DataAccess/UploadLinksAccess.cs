@@ -119,9 +119,9 @@ namespace DataAccess
                 }
             }
         }
-        public void DeleteLink(int DeleteId)
+        public void DeleteLink(int linkId)
         {
-            string queryString = $"DELETE FROM UploadLinks WHERE Id = {DeleteId}";
+            string queryString = $"DELETE FROM UploadLinks WHERE Id = {linkId}";
 
             using(SqlConnection con = new SqlConnection(connectionString))
             {
@@ -138,6 +138,7 @@ namespace DataAccess
                     Console.WriteLine(ex.Message);
                 }
             }
+        
         }
 
     }

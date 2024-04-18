@@ -8,21 +8,28 @@ using System.Collections.ObjectModel;
 namespace Presentation;
 
 public partial class ManagerWindow : Window
-{
-    static public List<UploadLinks> Linklist = new List<UploadLinks>();
-    private LoginWindow _loginWindow;
+{   
+    private readonly UploadLinksAccess _uploadlinksaccess;
+    private readonly UploadLinks _uploadlinks;
+    private readonly UserAccess _useraccess;
+    private readonly DataAccessServices _dataaccessservices;
+    private readonly LoginWindow _loginWindow;
     private readonly SaveAttendance _saveAttendance;
-    private RegisterStudents _registerStudents;
+    private readonly RegisterStudents _registerStudents;
     public ManagerWindow(LoginWindow loginWindow)
     {
         InitializeComponent();
         _loginWindow = loginWindow;
         _loginWindow.Visibility = Visibility.Collapsed;
-
         _saveAttendance = new SaveAttendance();
-        UploadLinksAccess uploadLinks = new UploadLinksAccess();
-      
-        DansFilmLinksList.ItemsSource = Linklist;
+        _uploadlinksaccess = new UploadLinksAccess();
+        _uploadlinks = new UploadLinks();
+        _useraccess = new UserAccess();
+        _dataaccessservices = new DataAccessServices();
+
+        DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks(); 
+        CursistenList.ItemsSource = _useraccess.GetUsers();
+       
     }
 
     private void Window_Closed(object sender, EventArgs e)
@@ -31,13 +38,12 @@ public partial class ManagerWindow : Window
     }
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
-    {
-        DataAccessServices dataaccessservices = new DataAccessServices();   
-        var msgResult = dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text);
-
-        CursistenList.Items.Add(txtFirstname.Text); 
-
+    { 
+        var msgResult = _dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text);
         MessageBox.Show(msgResult);
+
+        CursistenList.ItemsSource = _useraccess.GetUsers();
+        CursistenList.Items.Refresh();
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
@@ -51,23 +57,24 @@ public partial class ManagerWindow : Window
                 Link = link
             };
 
-          
-            Linklist.Add(newLink);
+      
+            _uploadlinksaccess.CreateLink(newLink.Link);
 
-            UploadLinksAccess uploadLinksAccess = new UploadLinksAccess();
-            uploadLinksAccess.CreateLink(newLink);
+            DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
+            
         }
     }
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
-    {   
-        //UploadLinksAccess uploadlinksaccess = new UploadLinksAccess();
+    { 
 
-        UploadLinksAccess link = (UploadLinksAccess)DansFilmLinksList.SelectedItem;
-        
-        if (link != null)
+        if (DansFilmLinksList.SelectedItem is UploadLinks)
         {
-            UploadLinksAccess uploadLinksAccess = new UploadLinksAccess();
-            uploadLinksAccess.DeleteLink(1);
+            var selectedItem = DansFilmLinksList.SelectedItem as UploadLinks;
+
+            _uploadlinksaccess.DeleteLink(selectedItem.Id);
+
+            DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
+      
         }
         else
         {

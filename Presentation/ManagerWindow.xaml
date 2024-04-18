@@ -62,9 +62,18 @@
         
                     <Label Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"  Content="Cursisten Lijst"     />
 
-                    <ListBox Grid.Row="2" Grid.Column="4" Grid.RowSpan="7" Margin="10" x:Name="CursistenList"  
+                    <ListView Grid.Row="2" Grid.Column="4" Grid.RowSpan="7" Margin="10" x:Name="CursistenList"  
                               Grid.ColumnSpan="2" Background="#CCCCCC">
-                    </ListBox>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding FirstName}"  />
+                                    <TextBlock Text=" "/>
+                                    <TextBlock Text="{Binding  LastName}"/>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                    
 
 
@@ -123,9 +132,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
-                                    <TextBlock Text="{Binding Id}" FontWeight="Bold" />
-                                    <TextBlock Text=": "/>
-                                    <TextBlock Text="{Binding Link}" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Link}"  />
                                 </WrapPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

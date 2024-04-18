@@ -7,10 +7,43 @@ namespace DataAccess
 {
     public class UserAccess
     {
-        static List<User> users = new List<User>();
         const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
+        public List<User> GetUsers()
+        {
+            List<User> users = new List<User>();
+            User user = null;
+            string query = $"SELECT * FROM [User] ";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
 
+                try
+                {
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        user = new User() { Username = reader["Username"].ToString() };
+                        user.Password = reader["Password"].ToString();
+                        user.FirstName = reader["FirstName"].ToString();
+                        user.Email = reader["Email"].ToString();
+                        user.Sex = reader["Sex"].ToString();
+                        user.LastName = reader["LastName"].ToString();
+
+                        users.Add(user);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+
+                }
+            }
+            return users;
+        }
         public User? GetUserByUsernamePassword(string username, string password)
         {
             User user = null; 
@@ -113,8 +146,6 @@ namespace DataAccess
                         user.Email = reader["Email"].ToString();
                         user.Sex = reader["Sex"].ToString();
                         user.LastName = reader["LastName"].ToString();
-
-                        users.Add(user);
                     }
                     reader.Close();
                 }
