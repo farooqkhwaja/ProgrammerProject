@@ -38,9 +38,6 @@ public partial class ManagerWindow : Window
         CursistenList.Items.Add(txtFirstname.Text); 
 
         MessageBox.Show(msgResult);
-
-
-
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
