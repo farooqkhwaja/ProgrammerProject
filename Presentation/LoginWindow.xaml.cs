@@ -45,9 +45,6 @@ public partial class LoginWindow : Window
 
     private void BtnLogin_Click(object sender, RoutedEventArgs e)
     {
-        //password encryption added
-        //string Password = BC.HashPassword(txtPassword.Password);
-
         if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
             MessageBox.Show("Username or/and password can not be empty!");
