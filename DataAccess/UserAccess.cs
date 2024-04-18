@@ -7,6 +7,9 @@ namespace DataAccess
 {
     public class UserAccess
     {
+
+        static List<User> users = new List<User>();
+     
        
         const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
@@ -42,7 +45,7 @@ namespace DataAccess
         public User? GetUserByUsernamePassword(string username, string password)
         {
             User user = null; 
-            string queryString = $"SELECT * FROM [User] WHERE Username = '{username}' AND Password = '{password}'";
+            string queryString = $"SELECT * FROM [Users] WHERE Username = '{username}' AND Password = '{password}'";
 
             using(SqlConnection con = new SqlConnection(connectionString))
             {
@@ -73,7 +76,7 @@ namespace DataAccess
         }
         public bool CreateUser(User user)
         {
-            string query =string.Format("INSERT INTO [User](Username, Password,FirstName,LastName, Sex, Email,IsManager) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
+            string query =string.Format("INSERT INTO [Users](Username, Password,FirstName,LastName, Sex, Email,IsManager) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
                 ,user.Username,user.Password,user.FirstName, user.LastName,user.Sex, user.Email, user.IsManager);
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -97,7 +100,7 @@ namespace DataAccess
         }
         public bool GetUserByUsername(string username)
         {
-            string query = $"SELECT * FROM [User] Where Username = '{username}'";
+            string query = $"SELECT * FROM [Users] Where Username = '{username}'";
             using(SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(query ,con);
@@ -124,7 +127,7 @@ namespace DataAccess
         {
           
             User user = null;
-            string query = $"SELECT * FROM Users WHERE Id = {userId}";
+            string query = $"SELECT * FROM User WHERE Id = {userId}";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, con);

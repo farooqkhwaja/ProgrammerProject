@@ -1,5 +1,4 @@
 using System.Windows;
-using Logic.Dto;
 using Logic;
 using DataAccess.Models;
 using DataAccess;
@@ -10,6 +9,7 @@ namespace Presentation;
 
 public partial class ManagerWindow : Window
 {
+    static public List<UploadLinks> Linklist = new List<UploadLinks>();
     private LoginWindow _loginWindow;
     private readonly SaveAttendance _saveAttendance;
     private RegisterStudents _registerStudents;
@@ -21,10 +21,10 @@ public partial class ManagerWindow : Window
 
         _saveAttendance = new SaveAttendance();
         UploadLinksAccess uploadLinks = new UploadLinksAccess();
-        DansFilmLinksList.ItemsSource = uploadLinks.GetLinks();
-        UserAccess userAccess = new UserAccess();
-        CursistenList.ItemsSource = userAccess.GetUsers();
-        
+
+      
+        DansFilmLinksList.ItemsSource = Linklist;
+
     }
 
     private void Window_Closed(object sender, EventArgs e)
@@ -36,32 +36,36 @@ public partial class ManagerWindow : Window
     {
        
         DataAccessServices dataaccessservices = new DataAccessServices();   
-        var msgResult = dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text);
-      
-        UserAccess userAccess = new UserAccess();
-        CursistenList.ItemsSource = userAccess.GetUsers();
+        var msgResult = dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text);
+
+
+        CursistenList.Items.Add(txtFirstname.Text); 
+
         MessageBox.Show(msgResult);
+
+
+
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
     {
-        string link = DansLinksToevoegenBox.Text.ToString();
+
+        string link = DansLinksToevoegenBox.Text.Trim();
 
         if (!string.IsNullOrWhiteSpace(link))
         {
             UploadLinks newLink = new UploadLinks
-            {            
+            {
                 Link = link
             };
 
-            UploadLinksAccess uploadLinks = new UploadLinksAccess();
-           
-            uploadLinks.CreateLink(newLink);
-            DansFilmLinksList.ItemsSource = uploadLinks.GetLinks();
-        }
-        else
-        {          
-            MessageBox.Show("Dance moves did not get added");
+
+          
+            Linklist.Add(newLink);
+
+            UploadLinksAccess uploadLinksAccess = new UploadLinksAccess();
+            uploadLinksAccess.CreateLink(newLink);
+
         }
     }
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
@@ -81,7 +85,6 @@ public partial class ManagerWindow : Window
         {
             MessageBox.Show("Please select a link to delete.", "No Link Selected", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
     }
 
     private void AddEvent_Click(object sender, RoutedEventArgs e)
