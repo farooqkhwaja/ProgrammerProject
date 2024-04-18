@@ -66,7 +66,8 @@
                               Grid.ColumnSpan="2" Background="#CCCCCC">
                     </ListBox>
                    
-        
+
+
                     <Label Grid.Row="1" Grid.Column="7" Content="Aanwezigheden table"  Grid.ColumnSpan="2" Margin="20,0,0,28" Grid.RowSpan="3"/>
                     <Label Grid.Row="2" Grid.Column="7" Content="Cursisten"  Grid.ColumnSpan="2" Margin="20,10,0,8" Grid.RowSpan="2"/>
 
@@ -125,8 +126,6 @@
                                     <TextBlock Text="{Binding Id}" FontWeight="Bold" />
                                     <TextBlock Text=": "/>
                                     <TextBlock Text="{Binding Link}" FontWeight="Bold" />
-                                    
-
                                 </WrapPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

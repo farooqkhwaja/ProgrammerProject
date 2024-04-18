@@ -1,5 +1,4 @@
 using System.Windows;
-using Logic.Dto;
 using Logic;
 using DataAccess.Models;
 using DataAccess;
@@ -10,6 +9,7 @@ namespace Presentation;
 
 public partial class ManagerWindow : Window
 {
+    static public List<UploadLinks> Linklist = new List<UploadLinks>();
     private LoginWindow _loginWindow;
     private readonly SaveAttendance _saveAttendance;
     private RegisterStudents _registerStudents;
@@ -21,7 +21,8 @@ public partial class ManagerWindow : Window
 
         _saveAttendance = new SaveAttendance();
         UploadLinksAccess uploadLinks = new UploadLinksAccess();
-        DansFilmLinksList.ItemsSource = uploadLinks.GetLinks();
+      
+        DansFilmLinksList.ItemsSource = Linklist;
     }
 
     private void Window_Closed(object sender, EventArgs e)
@@ -33,24 +34,30 @@ public partial class ManagerWindow : Window
     {
         DataAccessServices dataaccessservices = new DataAccessServices();   
         var msgResult = dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text);
+
+        CursistenList.Items.Add(txtFirstname.Text); 
+
         MessageBox.Show(msgResult);
+
+
+
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
     {
-
-        string link = DansLinksToevoegenBox.Text.ToString();
-        DansFilmLinksList.ItemsSource = link;
+        string link = DansLinksToevoegenBox.Text.Trim();
 
         if (!string.IsNullOrWhiteSpace(link))
         {
             UploadLinks newLink = new UploadLinks
-            {            
+            {
                 Link = link
             };
 
-            UploadLinksAccess uploadLinksAccess = new UploadLinksAccess();
+          
+            Linklist.Add(newLink);
 
+            UploadLinksAccess uploadLinksAccess = new UploadLinksAccess();
             uploadLinksAccess.CreateLink(newLink);
         }
     }
@@ -69,7 +76,6 @@ public partial class ManagerWindow : Window
         {
             MessageBox.Show("Please select a link to delete.", "No Link Selected", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
     }
 
     private void AddEvent_Click(object sender, RoutedEventArgs e)
