@@ -4,7 +4,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Presentation"
-        xmlns:userControls="clr-namespace:Presentation.UserControls"
         mc:Ignorable="d"
         Title="Login" Height="150" Width="300">
     <Grid>
@@ -20,7 +19,7 @@
                             HorizontalAlignment="Center">
                     <Label Name="lblPassword" Width="80">Password: </Label>
                     <PasswordBox Name="txtPassword" VerticalAlignment="Center" Width="100"
-                                 PasswordChanged="TxtPassword_PasswordChanged"></PasswordBox>
+                                 PasswordChanged="TxtPassword_PasswordChanged" ></PasswordBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" 
                             HorizontalAlignment="Center" Margin="0,4">
