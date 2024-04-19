@@ -12,7 +12,7 @@ namespace DataAccess
         public List<User> GetUsers()
         {
             List<User> users = new List<User>();
-            User user = null;
+           User user = null;
             string query = $"SELECT * FROM [User] ";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -25,7 +25,9 @@ namespace DataAccess
 
                     while (reader.Read())
                     {
+                       
                         user = new User() { Username = reader["Username"].ToString() };
+                        user.Id = Convert.ToInt32(reader["Id"]);
                         user.Password = reader["Password"].ToString();
                         user.FirstName = reader["FirstName"].ToString();
                         user.Email = reader["Email"].ToString();
@@ -179,7 +181,7 @@ namespace DataAccess
         }
         public void DeleteUser(int userId)
         {
-            string query = $"DELETE FROM User WHERE Id = {userId}";
+            string query = $"DELETE FROM [User] WHERE Id = {userId}";
 
             using(SqlConnection con = new SqlConnection(connectionString))
             {

@@ -2,8 +2,6 @@ using System.Windows;
 using Logic;
 using DataAccess.Models;
 using DataAccess;
-using System.Windows.Media.TextFormatting;
-using System.Collections.ObjectModel;
 
 namespace Presentation;
 
@@ -16,6 +14,8 @@ public partial class ManagerWindow : Window
     private readonly LoginWindow _loginWindow;
     private readonly SaveAttendance _saveAttendance;
     private readonly RegisterStudents _registerStudents;
+    private readonly UploadEventAccess _uploadEventAccess;
+    private readonly UploadEvents _uploadEvents;
     public ManagerWindow(LoginWindow loginWindow)
     {
         InitializeComponent();
@@ -24,12 +24,15 @@ public partial class ManagerWindow : Window
         _saveAttendance = new SaveAttendance();
         _uploadlinksaccess = new UploadLinksAccess();
         _uploadlinks = new UploadLinks();
+        _uploadEventAccess = new UploadEventAccess();
+        _uploadEvents = new UploadEvents();
         _useraccess = new UserAccess();
         _dataaccessservices = new DataAccessServices();
 
         DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks(); 
         CursistenList.ItemsSource = _useraccess.GetUsers();
-       
+        EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
+
     }
 
     private void Window_Closed(object sender, EventArgs e)
@@ -43,7 +46,16 @@ public partial class ManagerWindow : Window
         MessageBox.Show(msgResult);
 
         CursistenList.ItemsSource = _useraccess.GetUsers();
-        CursistenList.Items.Refresh();
+    
+    }
+    private void delete_cursist_Click(object sender, RoutedEventArgs e)
+    {
+        if(CursistenList.SelectedItem is User)
+        {
+            var selectedItem = CursistenList.SelectedItem as User;
+            _useraccess.DeleteUser(selectedItem.Id);
+            CursistenList.ItemsSource = _useraccess.GetUsers();
+        }
     }
 
     private void addDanceMove_Click(object sender, RoutedEventArgs e)
@@ -56,12 +68,8 @@ public partial class ManagerWindow : Window
             {
                 Link = link
             };
-
       
             _uploadlinksaccess.CreateLink(newLink.Link);
-
-            DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
-            
         }
     }
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
@@ -72,38 +80,55 @@ public partial class ManagerWindow : Window
             var selectedItem = DansFilmLinksList.SelectedItem as UploadLinks;
 
             _uploadlinksaccess.DeleteLink(selectedItem.Id);
-
-            DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
-      
+  
         }
         else
         {
             MessageBox.Show("Please select a link to delete.", "No Link Selected", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
+    private void UpdateDanceLinks_Click(object sender, RoutedEventArgs e)
+    {
+        DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
+    }
 
     private void AddEvent_Click(object sender, RoutedEventArgs e)
     {
-     
+        if(_useraccess != null)
+        {
+            string eventlink = EvenementenToevoegenBox.Text;
+
+            string name = eventlink.Split(' ')[0];
+            string date = eventlink.Split(' ')[1];
+
+            _uploadEvents.Name = name;
+            _uploadEvents.Date = date;
+
+            _uploadEventAccess.CreateEvent(name, date);
+        }  
+        else
+        {
+            MessageBox.Show("Please provide both name and date separated by space.");
+        }
     }
 
     private void UpdateEvent_Click(object sender, RoutedEventArgs e)
     {
-
+        EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
     }
 
     private void DeleteEvent_Click(object sender, RoutedEventArgs e)
     {
+        if(EvenementenLinks.SelectedItem is UploadEvents)
+        {
+            var result = EvenementenLinks.SelectedItem as UploadEvents;
 
+            _uploadEventAccess.DeleteEvents(result.Id);
+        }
+        else
+        {
+            MessageBox.Show("Please select an event to delete.", "No event Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
-    
-    private void Cursisten_lijst_updaten_Click(object sender, RoutedEventArgs e)
-    {
 
-    }
-
-    private void UpdateDanceLinks_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
 }

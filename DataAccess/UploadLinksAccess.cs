@@ -11,7 +11,6 @@ namespace DataAccess
     public class UploadLinksAccess
     {
         static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
-        static List<UploadLinks> uploadlinks = new List<UploadLinks>();
 
         public CreateLinksModel CreateLink(string uploadLink)
         {
