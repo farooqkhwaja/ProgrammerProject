@@ -1,4 +1,5 @@
 ﻿using DataAccess.Models;
+using Microsoft.VisualBasic;
 using System;
 using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
@@ -12,9 +13,9 @@ namespace DataAccess
 
         static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
-        public bool CreateEvent(UploadEvents events)
+        public bool CreateEvent(string events, string date)
         {
-            string queryString = string.Format("INSERT INTO UploadEvents(Name,Date) VALUES('{0}','{1}' )", events.Name, events.Date);
+            string queryString = string.Format("INSERT INTO UploadEvents(Name,Date) VALUES('{0}','{1}' )", events, date);
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -34,7 +35,7 @@ namespace DataAccess
             }
             return true;
         }
-        public UploadEvents ReadEvents(int Id)
+        public UploadEvents GetEvent(int Id)
         {
             string query = $"Select * FROM Users WHERE Id = {Id}";
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -52,8 +53,7 @@ namespace DataAccess
                         events.Id = Convert.ToInt32(reader["Id"].ToString());
 
                         events.Name = reader["Username"].ToString();
-                        events.Date = Convert.ToDateTime(reader["Date"].ToString());
-                        events.Fk_Locations = Convert.ToInt32(reader["Fk_Location"].ToString());
+                        events.Date = reader["Date"].ToString();                 
 
                         eventen.Add(events);
                     }
@@ -65,7 +65,36 @@ namespace DataAccess
 
                 }
             }
-            return ReadEvents(Id);
+            return GetEvent(Id);
+        }
+        public List<UploadEvents> GetEvents()
+        {
+            List<UploadEvents> uploadEvents = new List<UploadEvents>();
+            string query = "SELECT * FROM [UploadEvents]";
+
+            using(SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
+
+                try
+                {
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        UploadEvents uploadevent = new UploadEvents();
+                        uploadevent.Id = Convert.ToInt32(reader["Id"]);
+                        uploadevent.Name = reader["Name"].ToString();
+                        uploadevent.Date = reader["Date"].ToString();
+
+                        uploadEvents.Add(uploadevent);
+                    }
+                }
+                catch(Exception e)
+                {
+                    string message= "Event did not found" + e.Message;
+                }
+            }return uploadEvents;
         }
         public void UpdateEvent (UploadEvents uploadEvents)
         {
@@ -84,7 +113,7 @@ namespace DataAccess
                 catch (Exception ex) { Console.WriteLine(ex.Message);}
             }
         }
-        public void DeleteEvents(UploadEvents Id)
+        public void DeleteEvents(int Id)
         {
             string sqlQuery = $"DELETE FROM UploadEvents WHERE Id = '{Id}'  ";
 

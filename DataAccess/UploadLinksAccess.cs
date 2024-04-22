@@ -10,30 +10,34 @@ namespace DataAccess
 {
     public class UploadLinksAccess
     {
-        static string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
-        static List<UploadLinks> uploadlinks = new List<UploadLinks>();
+        static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
-        public UploadLinks CreateLink(UploadLinks uploadLink)
+        public CreateLinksModel CreateLink(string uploadLink)
         {
-            string queryString = $"INSERT INTO UploadLinks(Id,Link) VALUES {uploadLink.Id},'{uploadLink.Link}'";
+            CreateLinksModel model = new CreateLinksModel();
+            string queryString = $"INSERT INTO UploadLinks(Link) VALUES ('{uploadLink}')";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(queryString, con);
 
+               
                 try
                 {
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    model.succesful = true;
                 }
                 catch
                 (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    model.succesful = false;
+                    model.msg = "Link did not added. " + ex.Message;
+
                 }
             }
-            return uploadLink;
+            return model;
         }
         public List<UploadLinks> GetLinks()
         {
@@ -114,9 +118,9 @@ namespace DataAccess
                 }
             }
         }
-        public void DeleteLink(int DeleteId)
+        public void DeleteLink(int linkId)
         {
-            string queryString = $"DELETE FROM UploadLinks WHERE Id = {DeleteId}";
+            string queryString = $"DELETE FROM UploadLinks WHERE Id = {linkId}";
 
             using(SqlConnection con = new SqlConnection(connectionString))
             {
@@ -133,6 +137,7 @@ namespace DataAccess
                     Console.WriteLine(ex.Message);
                 }
             }
+        
         }
 
     }

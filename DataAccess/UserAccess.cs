@@ -9,44 +9,54 @@ namespace DataAccess
     public class UserAccess
     {
 
-        static List<User> users = new List<User>();
-     
-       
         const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
         public List<User> GetUsers()
         {
-            var users = new List<User>();
-            string queryString = "SELECT Id, FirstName FROM [User]";
-            using(SqlConnection conn = new SqlConnection(connectionString))
+
+            List<User> users = new List<User>();
+            User user = null;
+            string query = $"SELECT * FROM [User] ";
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand(queryString, conn);
+                SqlCommand cmd = new SqlCommand(query, con);
 
                 try
                 {
-                    conn.Open();
+                    con.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
+
                     while (reader.Read())
                     {
-                        User user = new User();
-                        user.Id = Convert.ToInt32(reader["Id"]);
-                        user.FirstName = reader["FirstName"].ToString();
                        
+                        user = new User() { Username = reader["Username"].ToString() };
+                        user.Id = Convert.ToInt32(reader["Id"]);
+                        user.Password = reader["Password"].ToString();
+                        user.FirstName = reader["FirstName"].ToString();
+                        user.Email = reader["Email"].ToString();
+                        user.Sex = reader["Sex"].ToString();
+                        user.LastName = reader["LastName"].ToString();
+
                         users.Add(user);
                     }
-                    conn.Close();
+                    reader.Close();
+
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+
                 }
-                return users;
             }
+            return users;
+
+            }
+
         }
         public User? GetUserByUsernamePassword(string username, string password)
         {
             User user = null; 
-            string queryString = $"SELECT * FROM [Users] WHERE Username = '{username}' AND Password = '{password}'";
+            string queryString = $"SELECT * FROM [User] WHERE Username = '{username}' AND Password = '{password}'";
 
             using(SqlConnection con = new SqlConnection(connectionString))
             {
@@ -77,7 +87,7 @@ namespace DataAccess
         }
         public bool CreateUser(User user)
         {
-            string query =string.Format("INSERT INTO [Users](Username, Password,FirstName,LastName, Sex, Email,IsManager) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
+            string query =string.Format("INSERT INTO [User](Username, Password,FirstName,LastName, Sex, Email,IsManager) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
                 ,user.Username,user.Password,user.FirstName, user.LastName,user.Sex, user.Email, user.IsManager);
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -101,7 +111,7 @@ namespace DataAccess
         }
         public bool GetUserByUsername(string username)
         {
-            string query = $"SELECT * FROM [Users] Where Username = '{username}'";
+            string query = $"SELECT * FROM [User] Where Username = '{username}'";
             using(SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(query ,con);
@@ -160,7 +170,7 @@ namespace DataAccess
         }
         public void UpdateUser(User user)
         {     
-            string query = $"UPDATE Users SET Username = '{user.Username}', Password = '{user.Password}' Where FirstName = '{user.FirstName}'";
+            string query = $"UPDATE User SET Username = '{user.Username}', Password = '{user.Password}' Where FirstName = '{user.FirstName}'";
 
             using(SqlConnection con = new SqlConnection(connectionString))
             {
@@ -180,7 +190,7 @@ namespace DataAccess
         }
         public void DeleteUser(int userId)
         {
-            string query = $"DELETE FROM Users WHERE Id = {userId}";
+            string query = $"DELETE FROM [User] WHERE Id = {userId}";
 
             using(SqlConnection con = new SqlConnection(connectionString))
             {

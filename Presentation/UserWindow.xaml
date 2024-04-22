@@ -42,7 +42,13 @@
                     <Label Content="cursisten lijst" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
 
                     <ListBox x:Name="CursistenLijstenView"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
-                              Grid.RowSpan="4" Background="#cccccc"/>
+                              Grid.RowSpan="4" Background="#cccccc">
+                        <ListView>
+                            <GridView>
+                                <GridViewColumn Header="Cursisten" Width="50" DisplayMemberBinding="{Binding FirstName}"/>
+                            </GridView>
+                        </ListView>
+                    </ListBox>
 
                     <Button x:Name="genereepartner" Content="genereer partner"
                             Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Margin="3" Click="genereepartner_Click" BorderThickness="0" />
