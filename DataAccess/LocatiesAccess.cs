@@ -12,9 +12,9 @@ namespace DataAccess
 {
     public class LocatiesAccess
     {
-        static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
-        static string connectionStrings = " Data Source = FAROOQKHWAJA; Integrated Security = True; Connect Timeout = 30; Encrypt=True;Trust Server Certificate=True;Application Intent = ReadWrite; Multi Subnet Failover=False";
-        static List<Locations> LocationList= new List<Locations>();
+        //static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
+        static string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
+      
 
         public Locations CreateLocation(Locations location)
         {
@@ -41,6 +41,7 @@ namespace DataAccess
 
         public Locations ReadLocations(int Id)
         {
+            List<Locations> LocationList = new List<Locations>();
             string queryString = $"SELECT * FROM Locations WHERE Id = {Id}";
 
             using (SqlConnection con = new SqlConnection(connectionString))

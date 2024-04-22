@@ -41,14 +41,14 @@
 
                     <Label Content="cursisten lijst" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
 
-                    <ListBox x:Name="CursistenLijstenView"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                    <ListView x:Name="CursistenLijstenView"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
                               Grid.RowSpan="4" Background="#cccccc">
-                        <ListView>
+                        <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Cursisten" Width="50" DisplayMemberBinding="{Binding FirstName}"/>
+                                <GridViewColumn Header="Cursisten" Width="113" DisplayMemberBinding="{Binding FirstName}"/>
                             </GridView>
-                        </ListView>
-                    </ListBox>
+                        </ListView.View>
+                    </ListView>
 
                     <Button x:Name="genereepartner" Content="genereer partner"
                             Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Margin="3" Click="genereepartner_Click" BorderThickness="0" />
@@ -59,7 +59,16 @@
 
                     <Label Content="figuren lijst" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" />
 
-                    <ListBox x:Name="FigurenLijst" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="#cccccc" />
+                    <ListView x:Name="FigurenLijst" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="#cccccc" >
+                        <CheckBox Content="Recoge"/>
+                        <CheckBox Content="CheckBox"/>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Dance Figuren" Width="180" DisplayMemberBinding="{Binding FigureName}"/>
+                                
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
 
                     <Button x:Name="bewaarfiguren" Grid.Row="10" Grid.Column="6" Margin="3" Content="bewaar" Click="bewaarfiguren_Click" BorderThickness="0"/>
                     <TextBox x:Name="bewaarfigureninput" Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="3" Margin="3"  FontSize="18"/>
