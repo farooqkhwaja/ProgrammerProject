@@ -49,14 +49,32 @@ public partial class ManagerWindow : Window
     }
     private void delete_cursist_Click(object sender, RoutedEventArgs e)
     {
-        if(CursistenList.SelectedItem is User)
+        if (CursistenList.SelectedItem is User)
         {
             var selectedItem = CursistenList.SelectedItem as User;
             _useraccess.DeleteUser(selectedItem.Id);
             CursistenList.ItemsSource = _useraccess.GetUsers();
         }
+    }
+    private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
+    {
 
+        if (DansFilmLinksList.SelectedItem is UploadLinks)
+        {
+            var selectedItem = DansFilmLinksList.SelectedItem as UploadLinks;
 
+            _uploadlinksaccess.DeleteLink(selectedItem.Id);
+
+        }
+        else
+        {
+            MessageBox.Show("Please select a link to delete.", "No Link Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    }
+    private void UpdateDanceLinks_Click(object sender, RoutedEventArgs e)
+    {
+        DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
+    }
 
     private void AddEvent_Click(object sender, RoutedEventArgs e)
     {
@@ -73,28 +91,7 @@ public partial class ManagerWindow : Window
             _uploadlinksaccess.CreateLink(newLink.Link);
         }
     }
-    private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
-    { 
-
-        if (DansFilmLinksList.SelectedItem is UploadLinks)
-        {
-            var selectedItem = DansFilmLinksList.SelectedItem as UploadLinks;
-
-            _uploadlinksaccess.DeleteLink(selectedItem.Id);
   
-        }
-        else
-        {
-            MessageBox.Show("Please select a link to delete.", "No Link Selected", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-    }
-    private void UpdateDanceLinks_Click(object sender, RoutedEventArgs e)
-    {
-        DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
-    }
-
-
-
     private void CursistenList_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
 
     {
@@ -123,19 +120,7 @@ public partial class ManagerWindow : Window
     }
 
 
-    private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
-
-    {
-        if(EvenementenLinks.SelectedItem is UploadEvents)
-        {
-            var result = EvenementenLinks.SelectedItem as UploadEvents;
-
-            _uploadEventAccess.DeleteEvents(result.Id);
-        }
-        else
-        {
-            MessageBox.Show("Please select an event to delete.", "No event Selected", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-    }
+   
+    
 
 }

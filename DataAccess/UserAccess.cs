@@ -50,7 +50,7 @@ namespace DataAccess
             }
             return users;
 
-            }
+            
 
         }
         public User? GetUserByUsernamePassword(string username, string password)
@@ -210,3 +210,4 @@ namespace DataAccess
         }
     }
 }
+
