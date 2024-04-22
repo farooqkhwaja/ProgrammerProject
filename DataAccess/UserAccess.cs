@@ -7,12 +7,14 @@ namespace DataAccess
 {
     public class UserAccess
     {
+
         const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
         public List<User> GetUsers()
         {
+
             List<User> users = new List<User>();
-           User user = null;
+            User user = null;
             string query = $"SELECT * FROM [User] ";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -37,6 +39,7 @@ namespace DataAccess
                         users.Add(user);
                     }
                     reader.Close();
+
                 }
                 catch (Exception ex)
                 {
@@ -45,6 +48,9 @@ namespace DataAccess
                 }
             }
             return users;
+
+            }
+
         }
         public User? GetUserByUsernamePassword(string username, string password)
         {
@@ -129,6 +135,7 @@ namespace DataAccess
         }
         public User GetUser(int userId)
         {
+          
             User user = null;
             string query = $"SELECT * FROM User WHERE Id = {userId}";
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -148,6 +155,7 @@ namespace DataAccess
                         user.Email = reader["Email"].ToString();
                         user.Sex = reader["Sex"].ToString();
                         user.LastName = reader["LastName"].ToString();
+
                     }
                     reader.Close();
                 }

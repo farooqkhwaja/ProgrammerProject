@@ -54,7 +54,7 @@ namespace DataAccess
                     while (reader.Read())
                     {
                         UploadLinks uploadlink = new UploadLinks();
-                        uploadlink.Id = Convert.ToInt32(reader["Id"].ToString());
+                        uploadlink.Id = Convert.ToInt32(reader["Id"]);
                         uploadlink.Link = reader["Link"].ToString();
 
                         uploadLinks.Add(uploadlink);

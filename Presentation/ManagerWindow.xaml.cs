@@ -1,11 +1,14 @@
 using System.Windows;
 using Logic;
+
 using DataAccess.Models;
 using DataAccess;
+
 
 namespace Presentation;
 
 public partial class ManagerWindow : Window
+
 {   
     private readonly UploadLinksAccess _uploadlinksaccess;
     private readonly UploadLinks _uploadlinks;
@@ -32,13 +35,9 @@ public partial class ManagerWindow : Window
         DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks(); 
         CursistenList.ItemsSource = _useraccess.GetUsers();
         EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
-
     }
 
-    private void Window_Closed(object sender, EventArgs e)
-    {
-        _loginWindow.Visibility = Visibility.Visible;
-    }
+
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
     { 
@@ -56,10 +55,12 @@ public partial class ManagerWindow : Window
             _useraccess.DeleteUser(selectedItem.Id);
             CursistenList.ItemsSource = _useraccess.GetUsers();
         }
-    }
 
-    private void addDanceMove_Click(object sender, RoutedEventArgs e)
+
+
+    private void AddEvent_Click(object sender, RoutedEventArgs e)
     {
+
         string link = DansLinksToevoegenBox.Text.Trim();
 
         if (!string.IsNullOrWhiteSpace(link))
@@ -92,7 +93,10 @@ public partial class ManagerWindow : Window
         DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
     }
 
-    private void AddEvent_Click(object sender, RoutedEventArgs e)
+
+
+    private void CursistenList_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+
     {
         if(_useraccess != null)
         {
@@ -112,12 +116,15 @@ public partial class ManagerWindow : Window
         }
     }
 
+   
     private void UpdateEvent_Click(object sender, RoutedEventArgs e)
     {
         EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
     }
 
-    private void DeleteEvent_Click(object sender, RoutedEventArgs e)
+
+    private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
+
     {
         if(EvenementenLinks.SelectedItem is UploadEvents)
         {
