@@ -1,8 +1,8 @@
 using System.Windows;
 using Logic;
-
 using DataAccess.Models;
 using DataAccess;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace Presentation;
@@ -55,16 +55,31 @@ public partial class ManagerWindow : Window
             _useraccess.DeleteUser(selectedItem.Id);
             CursistenList.ItemsSource = _useraccess.GetUsers();
         }
+        else
+        {
+            MessageBox.Show("Please select a person to delete.", "No person Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    }
+    private void AddDanceLinks_Click(object sender, RoutedEventArgs e)
+    {
+        string link = DansLinksToevoegenBox.Text.Trim();
+
+        if (!string.IsNullOrWhiteSpace(link))
+        {
+            UploadLinks newLink = new UploadLinks
+            {
+                Link = link
+            };
+
+            _uploadlinksaccess.CreateLink(newLink.Link);
+        }
     }
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
     {
-
         if (DansFilmLinksList.SelectedItem is UploadLinks)
         {
             var selectedItem = DansFilmLinksList.SelectedItem as UploadLinks;
-
             _uploadlinksaccess.DeleteLink(selectedItem.Id);
-
         }
         else
         {
@@ -78,42 +93,28 @@ public partial class ManagerWindow : Window
 
     private void AddEvent_Click(object sender, RoutedEventArgs e)
     {
-
-        string link = DansLinksToevoegenBox.Text.Trim();
-
-        if (!string.IsNullOrWhiteSpace(link))
+       
+        if(_uploadEventAccess != null)
         {
-            UploadLinks newLink = new UploadLinks
-            {
-                Link = link
-            };
-      
-            _uploadlinksaccess.CreateLink(newLink.Link);
+            string eventData = EvenementenToevoegenBox.Text;
+            string eventname = eventData.Split(' ')[0];
+            string eventdate = eventData.Split(' ')[1];
+            _uploadEventAccess.CreateEvent(eventname, eventdate);
         }
+       
     }
-  
-    private void CursistenList_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-
+    private void DeleteEvent_Click(object sender, RoutedEventArgs e)
     {
-        if(_useraccess != null)
+        if (_uploadEventAccess != null)
         {
-            string eventlink = EvenementenToevoegenBox.Text;
-
-            string name = eventlink.Split(' ')[0];
-            string date = eventlink.Split(' ')[1];
-
-            _uploadEvents.Name = name;
-            _uploadEvents.Date = date;
-
-            _uploadEventAccess.CreateEvent(name, date);
-        }  
+            var selectedItem = EvenementenLinks.SelectedItem as UploadEvents;
+            _uploadEventAccess.DeleteEvents(selectedItem.Id);
+        }
         else
         {
-            MessageBox.Show("Please provide both name and date separated by space.");
+            MessageBox.Show("Please select a event to delete.", "No event Selected", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
-
-   
     private void UpdateEvent_Click(object sender, RoutedEventArgs e)
     {
         EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();

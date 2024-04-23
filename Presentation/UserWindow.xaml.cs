@@ -4,18 +4,18 @@ namespace Presentation;
 
 public partial class UserWindow : Window
 {
-    LoginWindow log;
-    public UserWindow(LoginWindow log)
+    private readonly LoginWindow _loginWindow;
+    public UserWindow(LoginWindow loginwindow)
     {
         InitializeComponent();
-        this.log = log;
+        _loginWindow = loginwindow;
+
+
+
+
     }
 
-    private void Window_Closed(object sender, EventArgs e)
-    {
-        LoginWindow loginWindow = new LoginWindow();
-        loginWindow.Show();
-    }
+   
 
     private void genereepartner_Click(object sender, RoutedEventArgs e)
     {
@@ -30,5 +30,10 @@ public partial class UserWindow : Window
     private void verzendemail_Click(object sender, RoutedEventArgs e)
     {
 
+    }
+    private void Window_Closed(object sender, EventArgs e)
+    {
+        LoginWindow loginWindow = new LoginWindow();
+        loginWindow.Show();
     }
 }

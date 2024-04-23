@@ -9,7 +9,8 @@ namespace DataAccess
     public class UserAccess
     {
 
-        const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
+        //const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
+        const string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
 
         public List<User> GetUsers()
         {
@@ -69,7 +70,8 @@ namespace DataAccess
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        user = new User() { Username = reader["Username"].ToString() };
+                        user = new User() { 
+                        Username = reader["Username"].ToString() };
                         user.Password = reader["Password"].ToString();
                         user.FirstName = reader["FirstName"].ToString();
                         user.Email = reader["Email"].ToString();
