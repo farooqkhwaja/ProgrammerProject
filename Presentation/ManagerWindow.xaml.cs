@@ -119,8 +119,13 @@ public partial class ManagerWindow : Window
         EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
     }
 
+    private void AddDanceLinks_Click(object sender, RoutedEventArgs e)
+    {
 
-   
-    
+    }
 
+    private void DeleteEvent_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
