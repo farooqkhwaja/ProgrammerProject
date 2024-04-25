@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:Presentation"
         mc:Ignorable="d"
-        Title="Login" Height="150" Width="300">
+        Title="Login" Height="170" Width="300">
     <Grid>
         <Grid>
             <StackPanel Margin="8">
@@ -26,6 +26,10 @@
                     <Button Name="btnLogin" IsEnabled="False" VerticalAlignment="Center"
                             Width="180" Height="24"
                             IsDefault="True" Click="BtnLogin_Click">Login</Button>
+                   
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button x:Name="UserWindow" Content="User" HorizontalAlignment="Center" VerticalAlignment="Center" Click="UserWindow_Click"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

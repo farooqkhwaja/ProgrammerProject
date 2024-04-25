@@ -10,14 +10,14 @@ namespace Presentation;
 public partial class ManagerWindow : Window
 
 {   
-    private readonly UploadLinksAccess _uploadlinksaccess;
+    private readonly UploadLinksRepository _uploadlinksaccess;
     private readonly UploadLinks _uploadlinks;
-    private readonly UserAccess _useraccess;
+    private readonly UserRepository _useraccess;
     private readonly DataAccessServices _dataaccessservices;
     private readonly LoginWindow _loginWindow;
     private readonly SaveAttendance _saveAttendance;
     private readonly RegisterStudents _registerStudents;
-    private readonly UploadEventAccess _uploadEventAccess;
+    private readonly UploadEventRepository _uploadEventAccess;
     private readonly UploadEvents _uploadEvents;
     public ManagerWindow(LoginWindow loginWindow)
     {
@@ -25,11 +25,11 @@ public partial class ManagerWindow : Window
         _loginWindow = loginWindow;
         _loginWindow.Visibility = Visibility.Collapsed;
         _saveAttendance = new SaveAttendance();
-        _uploadlinksaccess = new UploadLinksAccess();
+        _uploadlinksaccess = new UploadLinksRepository();
         _uploadlinks = new UploadLinks();
-        _uploadEventAccess = new UploadEventAccess();
+        _uploadEventAccess = new UploadEventRepository();
         _uploadEvents = new UploadEvents();
-        _useraccess = new UserAccess();
+        _useraccess = new UserRepository();
         _dataaccessservices = new DataAccessServices();
 
         DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks(); 
@@ -120,13 +120,4 @@ public partial class ManagerWindow : Window
         EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
     }
 
-    private void AddDanceLinks_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
-
-    private void DeleteEvent_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
 }

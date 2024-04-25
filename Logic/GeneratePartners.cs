@@ -5,11 +5,21 @@ namespace Logic
 {
     public class GeneratePartners
     {
-       /* public UserAccess GeneratePartner(UserAccess user)
+        private readonly UserRepository _userRepository;
+        public GeneratePartners()
         {
-            Random rndUser = new Random();
-            rndUser.Next(0, rndUser);
-            return user;
-        }*/
+            _userRepository = new UserRepository();
+        }
+
+        public User GetRandomUser()
+        {
+            var users = _userRepository.GetFirstnames();
+
+            Random random = new Random();
+            var randomIndex = random.Next(1, users.Count);
+            User randomUser = users[randomIndex];
+
+            return randomUser;
+        }
     }
 }
