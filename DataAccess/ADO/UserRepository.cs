@@ -1,18 +1,87 @@
-﻿using DataAccess.Models;
+﻿
+using DataAccess.Models;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection.Metadata.Ecma335;
 
 namespace DataAccess
 {
-    public class UserAccess
+    public class UserRepository
     {
-
         const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
+        //const string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
+        public List<User> GetManagers()
+        {
+            List<User> managers = new List<User>();
+       
+            User manager = null;
+            using(SqlConnection conn = new SqlConnection(connectionString))
+            {
 
+                SqlCommand cmd = new SqlCommand("SP_GetManagers", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        manager = new User();
+                        manager.Id = Convert.ToInt32(reader["Id"]);
+                        manager.FirstName = reader["FirstName"].ToString();
+                        manager.Email = reader["Email"].ToString();
+                        manager.Sex = reader["Sex"].ToString();
+                        manager.LastName = reader["LastName"].ToString();
+                        manager.Password = reader["Password"].ToString();
+                        manager.IsManager = Convert.ToBoolean(reader["IsManager"]);
+
+                        managers.Add(manager);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string message = ex.Message;
+                }
+              
+            }
+            return managers;
+        }
+        public List<User> GetFirstnames()
+        {
+            List<User> users = new List<User>();
+            User user = null;
+            string query = $"SELECT FirstName FROM [User] ";
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, con);
+
+                try
+                {
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        user = new User(); 
+                        user.FirstName = reader["FirstName"].ToString();
+                        users.Add(user);
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+          
+            return users;
+         
+        }
         public List<User> GetUsers()
         {
-
             List<User> users = new List<User>();
             User user = null;
             string query = $"SELECT * FROM [User] ";
@@ -48,9 +117,6 @@ namespace DataAccess
                 }
             }
             return users;
-
-            }
-
         }
         public User? GetUserByUsernamePassword(string username, string password)
         {
@@ -67,7 +133,8 @@ namespace DataAccess
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        user = new User() { Username = reader["Username"].ToString() };
+                        user = new User() { 
+                        Username = reader["Username"].ToString() };
                         user.Password = reader["Password"].ToString();
                         user.FirstName = reader["FirstName"].ToString();
                         user.Email = reader["Email"].ToString();
@@ -209,3 +276,4 @@ namespace DataAccess
         }
     }
 }
+

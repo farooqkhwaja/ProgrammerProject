@@ -13,7 +13,7 @@ namespace Logic
         public string RegisterUser(string voornaam, string achternaam, string geslacht )
         {
             
-            UserAccess userAccess = new UserAccess();
+            UserRepository userAccess = new UserRepository();
             var userExists = userAccess.GetUserByUsername(voornaam + "-" + achternaam);
 
             if(userExists is true)

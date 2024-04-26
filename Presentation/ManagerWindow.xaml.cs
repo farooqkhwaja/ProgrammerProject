@@ -1,8 +1,8 @@
 using System.Windows;
 using Logic;
-
 using DataAccess.Models;
 using DataAccess;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace Presentation;
@@ -10,14 +10,14 @@ namespace Presentation;
 public partial class ManagerWindow : Window
 
 {   
-    private readonly UploadLinksAccess _uploadlinksaccess;
+    private readonly UploadLinksRepository _uploadlinksaccess;
     private readonly UploadLinks _uploadlinks;
-    private readonly UserAccess _useraccess;
+    private readonly UserRepository _useraccess;
     private readonly DataAccessServices _dataaccessservices;
     private readonly LoginWindow _loginWindow;
     private readonly SaveAttendance _saveAttendance;
     private readonly RegisterStudents _registerStudents;
-    private readonly UploadEventAccess _uploadEventAccess;
+    private readonly UploadEventRepository _uploadEventAccess;
     private readonly UploadEvents _uploadEvents;
     public ManagerWindow(LoginWindow loginWindow)
     {
@@ -25,11 +25,11 @@ public partial class ManagerWindow : Window
         _loginWindow = loginWindow;
         _loginWindow.Visibility = Visibility.Collapsed;
         _saveAttendance = new SaveAttendance();
-        _uploadlinksaccess = new UploadLinksAccess();
+        _uploadlinksaccess = new UploadLinksRepository();
         _uploadlinks = new UploadLinks();
-        _uploadEventAccess = new UploadEventAccess();
+        _uploadEventAccess = new UploadEventRepository();
         _uploadEvents = new UploadEvents();
-        _useraccess = new UserAccess();
+        _useraccess = new UserRepository();
         _dataaccessservices = new DataAccessServices();
 
         DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks(); 
@@ -49,18 +49,19 @@ public partial class ManagerWindow : Window
     }
     private void delete_cursist_Click(object sender, RoutedEventArgs e)
     {
-        if(CursistenList.SelectedItem is User)
+        if (CursistenList.SelectedItem is User)
         {
             var selectedItem = CursistenList.SelectedItem as User;
             _useraccess.DeleteUser(selectedItem.Id);
             CursistenList.ItemsSource = _useraccess.GetUsers();
         }
-
-
-
-    private void AddEvent_Click(object sender, RoutedEventArgs e)
+        else
+        {
+            MessageBox.Show("Please select a person to delete.", "No person Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    }
+    private void AddDanceLinks_Click(object sender, RoutedEventArgs e)
     {
-
         string link = DansLinksToevoegenBox.Text.Trim();
 
         if (!string.IsNullOrWhiteSpace(link))
@@ -69,19 +70,16 @@ public partial class ManagerWindow : Window
             {
                 Link = link
             };
-      
+
             _uploadlinksaccess.CreateLink(newLink.Link);
         }
     }
     private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
-    { 
-
+    {
         if (DansFilmLinksList.SelectedItem is UploadLinks)
         {
             var selectedItem = DansFilmLinksList.SelectedItem as UploadLinks;
-
             _uploadlinksaccess.DeleteLink(selectedItem.Id);
-  
         }
         else
         {
@@ -93,49 +91,33 @@ public partial class ManagerWindow : Window
         DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
     }
 
-
-
-    private void CursistenList_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-
+    private void AddEvent_Click(object sender, RoutedEventArgs e)
     {
-        if(_useraccess != null)
+       
+        if(_uploadEventAccess != null)
         {
-            string eventlink = EvenementenToevoegenBox.Text;
-
-            string name = eventlink.Split(' ')[0];
-            string date = eventlink.Split(' ')[1];
-
-            _uploadEvents.Name = name;
-            _uploadEvents.Date = date;
-
-            _uploadEventAccess.CreateEvent(name, date);
-        }  
+            string eventData = EvenementenToevoegenBox.Text;
+            string eventname = eventData.Split(' ')[0];
+            string eventdate = eventData.Split(' ')[1];
+            _uploadEventAccess.CreateEvent(eventname, eventdate);
+        }
+       
+    }
+    private void DeleteEvent_Click(object sender, RoutedEventArgs e)
+    {
+        if (_uploadEventAccess != null)
+        {
+            var selectedItem = EvenementenLinks.SelectedItem as UploadEvents;
+            _uploadEventAccess.DeleteEvents(selectedItem.Id);
+        }
         else
         {
-            MessageBox.Show("Please provide both name and date separated by space.");
+            MessageBox.Show("Please select a event to delete.", "No event Selected", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
-
-   
     private void UpdateEvent_Click(object sender, RoutedEventArgs e)
     {
         EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
-    }
-
-
-    private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
-
-    {
-        if(EvenementenLinks.SelectedItem is UploadEvents)
-        {
-            var result = EvenementenLinks.SelectedItem as UploadEvents;
-
-            _uploadEventAccess.DeleteEvents(result.Id);
-        }
-        else
-        {
-            MessageBox.Show("Please select an event to delete.", "No event Selected", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
     }
 
 }

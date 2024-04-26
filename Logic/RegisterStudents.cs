@@ -1,9 +1,5 @@
-﻿using DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccess.ADO;
+using DataAccess.Models;
 
 namespace Logic
 {
@@ -11,6 +7,7 @@ namespace Logic
     {
         public User RegisterStudent(User user)
         {
+            LocatiesRepository locaties = new LocatiesRepository();
             return user;
         }
     }

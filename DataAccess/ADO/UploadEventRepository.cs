@@ -7,15 +7,16 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace DataAccess
 {
-    public class UploadEventAccess
+    public class UploadEventRepository
     {
-        static List<UploadEvents> eventen = new List<UploadEvents>();
 
         static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
-        public bool CreateEvent(string events, string date)
+       // static string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
+
+        public bool CreateEvent(string eventname, string date)
         {
-            string queryString = string.Format("INSERT INTO UploadEvents(Name,Date) VALUES('{0}','{1}' )", events, date);
+            string queryString = string.Format("INSERT INTO UploadEvents(Name,Date) VALUES('{0}','{1}' )", eventname, date);
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -40,6 +41,7 @@ namespace DataAccess
             string query = $"Select * FROM Users WHERE Id = {Id}";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
+                List<UploadEvents> eventen = new List<UploadEvents>();
                 SqlCommand cmd = new SqlCommand(query, con);
 
                 try

@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="Salsa Dance school [Manager UI]" Height="450" Width="600" Closed="Window_Closed" >
+        Title="Salsa Dance school [Manager UI]" Height="450" Width="600"  >
     <Grid>
 
         <TabControl Grid.ColumnSpan="2" Visibility="Visible" >
@@ -151,12 +151,12 @@
                     <TextBox Name="DansLinksToevoegenBox" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Margin="3" FontSize="16" FontFamily="Arial Narrow" />
                     <TextBox Name="EvenementenToevoegenBox" Grid.Row="10" Grid.Column="5" Grid.ColumnSpan="2" Margin="3" FontSize="16" FontFamily="Arial Narrow" />
 
-                    <Button x:Name="AddDanceLinks" Content="ADD" Grid.Row="6" Grid.Column="3" Margin="5"  Click="addDanceMove_Click" BorderThickness="0"/>
+                    <Button x:Name="AddDanceLinks" Content="ADD" Grid.Row="6" Grid.Column="3" Margin="5"  Click="AddDanceLinks_Click" BorderThickness="0"/>
                     <Button x:Name="UpdateDanceLinks" Content="UPDATE" Grid.Row="7" Grid.Column="3" Margin="5"  Click="UpdateDanceLinks_Click" BorderThickness="0"/>
                     <Button x:Name="DeleteDanceMove" Content="DELETE" Grid.Row="8" Grid.Column="3" Margin="5" Click="DeleteDanceMove_Click" BorderThickness="0"/>
                     <Button x:Name="AddEvent" Content="ADD" Grid.Row="6" Grid.Column="7" Margin="5" Click="AddEvent_Click" BorderThickness="0"/>
                     <Button x:Name="UpdateEvent" Content="UPDATE" Grid.Row="7" Grid.Column="7" Margin="5" Click="UpdateEvent_Click" BorderThickness="0"/>
-                    <Button x:Name="DeleteEvent" Content="DELETE" Grid.Row="8" Grid.Column="7" Margin="5" Click="DeleteEvent_Click" BorderThickness="0"/>
+                    <Button x:Name="DeleteEvent" Content="DELETE" Grid.Row="8" Grid.Column="7" Margin="5" Click="DeleteEvent_Click"  BorderThickness="0"/>
         
         
                 </Grid>
