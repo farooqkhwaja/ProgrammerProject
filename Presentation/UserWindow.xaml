@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"      
         mc:Ignorable="d"
-        Title="Salsa Dance school [User UI]" Height="480" Width="600" >
+        Title="Salsa Dance school [User UI]" Height="480" Width="600" Closed="Window_Closed">
     <Grid>
         <TabControl Name="TabControl" Visibility="Visible">
             <TabItem Header="home">
@@ -39,9 +39,9 @@
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="Cursisten lijst" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
+                    <Label Content="cursisten lijst" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
 
-                    <ListView x:Name="CursistenLijst"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                    <ListView x:Name="CursistenLijstenView"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
                               Grid.RowSpan="4" Background="#cccccc">
                         <ListView.View>
                             <GridView>
@@ -55,33 +55,28 @@
 
                     <Label Content="Partner Naam" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" FontSize="14" />
 
-                    <TextBox x:Name="PartnerNaamLijst" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" Background="#cccccc"/>
+                    <ListBox x:Name="PartnerNaamLijst"  Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" Background="#cccccc"/>
 
-                    <Label Content="Figuren lijst" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" />
+                    <Label Content="figuren lijst" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" />
 
                     <ListView x:Name="FigurenLijst" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="#cccccc" >
+                        <CheckBox Content="Recoge"/>
+                        <CheckBox Content="CheckBox"/>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Progress" Width="55">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Dance Figuren" Width="120" DisplayMemberBinding="{Binding FigureName}"/>
+                                <GridViewColumn Header="Dance Figuren" Width="180" DisplayMemberBinding="{Binding FigureName}"/>
                                 
                             </GridView>
                         </ListView.View>
                     </ListView>
 
-                    <Button x:Name="btn_bewaarfiguren" Grid.Row="10" Grid.Column="6" Margin="3" Content="bewaar" Click="bewaarfiguren_Click" BorderThickness="0" IsEnabled="False"/>
-                    <TextBox x:Name="tbx_bewaarfiguren" Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="3" Margin="3"  FontSize="18" TextChanged="tbx_bewaarfiguren_TextChanged"/>
-                    <Button x:Name="btn_VerzendEmail" Grid.Column="9" Grid.Row="9" Margin="3" Content="verzend" Click="verzendemail_Click" BorderThickness="0"/>
+                    <Button x:Name="bewaarfiguren" Grid.Row="10" Grid.Column="6" Margin="3" Content="bewaar" Click="bewaarfiguren_Click" BorderThickness="0"/>
+                    <TextBox x:Name="bewaarfigureninput" Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="3" Margin="3"  FontSize="18"/>
+                    <Button x:Name="VerzendEmail" Grid.Column="9" Grid.Row="9" Margin="3" Content="verzend" Click="verzendemail_Click" BorderThickness="0"/>
 
                     <ListBox x:Name="EmailApiLijst" Grid.Column="8" Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="#cccccc"/>
 
-                    <Label Grid.Row="4" Grid.Column="8" Grid.ColumnSpan="2" Content="Email lijst" />
+                    <Label Grid.Row="4" Grid.Column="8" Grid.ColumnSpan="2" Content="email lijst" />
                 </Grid>
             </TabItem>
         </TabControl>

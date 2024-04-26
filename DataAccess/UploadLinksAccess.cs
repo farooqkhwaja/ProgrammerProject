@@ -8,10 +8,10 @@ using DataAccess.Models;
 
 namespace DataAccess
 {
-    public class UploadLinksRepository
+    public class UploadLinksAccess
     {
-        static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
-        //static string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
+        //static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
+        static string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
         public CreateLinksModel CreateLink(string uploadLink)
         {
             CreateLinksModel model = new CreateLinksModel();

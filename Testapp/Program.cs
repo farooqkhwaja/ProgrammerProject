@@ -13,12 +13,12 @@ namespace Testapp
         }
         static void DoubleUsernameCheck()
         {
-            UserRepository userAcess = new UserRepository();
+            UserAccess userAcess = new UserAccess();
             var existedUser = userAcess.GetUserByUsername("Farooasdq");
         }
         static void LoginTest()
         {
-            UserRepository useraccess = new UserRepository();
+            UserAccess useraccess = new UserAccess();
             var user = useraccess.GetUserByUsernamePassword("FarooqKhoja", "123");
             Console.WriteLine(user.FirstName);
         }

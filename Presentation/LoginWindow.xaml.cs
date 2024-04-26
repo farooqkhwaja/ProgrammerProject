@@ -50,7 +50,7 @@ public partial class LoginWindow : Window
             MessageBox.Show("Username or/and password can not be empty!");
         }
 
-        UserRepository access = new UserRepository();
+        UserAccess access = new UserAccess();
         var user = access.GetUserByUsernamePassword(txtUserName.Text, txtPassword.Password);
 
             
@@ -70,13 +70,7 @@ public partial class LoginWindow : Window
         {
             MessageBox.Show("Username or / and password Incorrect!");
         }
+
     }
 
-    private void UserWindow_Click(object sender, RoutedEventArgs e)
-    {
-        _userWindow = new UserWindow(this);
-        _userWindow.Show();
-        txtUserName.Text = "Bilal";
-        txtPassword.Password = "111";
-    }
 }
