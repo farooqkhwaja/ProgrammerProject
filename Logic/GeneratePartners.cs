@@ -1,5 +1,5 @@
 ﻿using DataAccess.Models;
-using DataAccess;
+using DataAccess.ADO;
 
 namespace Logic
 {

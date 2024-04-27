@@ -1,11 +1,7 @@
-﻿using DataAccess.Models;
-using Microsoft.VisualBasic;
-using System;
-using System.Data.SqlClient;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Data.SqlClient;
+using DataAccess.Models;
 
-
-namespace DataAccess
+namespace DataAccess.ADO
 {
     public class UploadEventAccess
     {
