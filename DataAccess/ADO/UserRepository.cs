@@ -1,10 +1,8 @@
-﻿
-using DataAccess.Models;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Reflection.Metadata.Ecma335;
+using DataAccess.Models;
 
-namespace DataAccess
+namespace DataAccess.ADO
 {
     public class UserRepository
     {

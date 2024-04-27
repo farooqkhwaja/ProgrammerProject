@@ -1,8 +1,7 @@
-﻿using DataAccess.Models;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using DataAccess.Models;
 
-
-namespace DataAccess
+namespace DataAccess.ADO
 {
     public class UploadDanceFiguresRepository
     {

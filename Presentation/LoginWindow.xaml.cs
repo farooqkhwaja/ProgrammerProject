@@ -2,6 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using DataAccess.Models;
 using DataAccess;
+using DataAccess.ADO;
 using Logic;
 using BC = BCrypt.Net.BCrypt;
 
