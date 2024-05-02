@@ -27,7 +27,7 @@
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
-                        <RowDefinition Height="10"/>
+                      
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="50"/>
@@ -39,9 +39,8 @@
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
 
-                    <Label Content="cursisten lijst" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
-
-                    <ListView x:Name="CursistenLijstenView"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                
+                    <ListView x:Name="CursistenLijstenView"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                               Grid.RowSpan="4" Background="#cccccc">
                         <ListView.View>
                             <GridView>
@@ -57,7 +56,7 @@
 
                     <ListBox x:Name="PartnerNaamLijst"  Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" Background="#cccccc"/>
 
-                    <Label Content="figuren lijst" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" />
+             
 
                     <ListView x:Name="FigurenLijst" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="#cccccc" >
                         <CheckBox Content="Recoge"/>
@@ -72,11 +71,7 @@
 
                     <Button x:Name="bewaarfiguren" Grid.Row="10" Grid.Column="6" Margin="3" Content="bewaar" Click="bewaarfiguren_Click" BorderThickness="0"/>
                     <TextBox x:Name="bewaarfigureninput" Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="3" Margin="3"  FontSize="18"/>
-                    <Button x:Name="VerzendEmail" Grid.Column="9" Grid.Row="9" Margin="3" Content="verzend" Click="verzendemail_Click" BorderThickness="0"/>
-
-                    <ListBox x:Name="EmailApiLijst" Grid.Column="8" Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="3" Background="#cccccc"/>
-
-                    <Label Grid.Row="4" Grid.Column="8" Grid.ColumnSpan="2" Content="email lijst" />
+               
                 </Grid>
             </TabItem>
         </TabControl>

@@ -4,5 +4,6 @@
     {
         public int Id { get; set; }
         public string FigureName {  get; set; }
+        public bool Progress { get; set; }  
     }
 }
