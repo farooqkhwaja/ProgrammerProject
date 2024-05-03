@@ -16,25 +16,18 @@ public partial class UserWindow : Window
 
     }
 
-   
-
     private void genereepartner_Click(object sender, RoutedEventArgs e)
     {
 
     }
 
-    private void bewaarfiguren_Click(object sender, RoutedEventArgs e)
+    private void tbx_aansluitenBijEvent_Click(object sender, RoutedEventArgs e)
     {
 
     }
 
-    private void verzendemail_Click(object sender, RoutedEventArgs e)
+    private void btn_SaveProgress_Click(object sender, RoutedEventArgs e)
     {
 
-    }
-    private void Window_Closed(object sender, EventArgs e)
-    {
-        LoginWindow loginWindow = new LoginWindow();
-        loginWindow.Show();
     }
 }

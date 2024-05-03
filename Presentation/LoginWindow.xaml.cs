@@ -51,7 +51,7 @@ public partial class LoginWindow : Window
             MessageBox.Show("Username or/and password can not be empty!");
         }
 
-        UserAccess access = new UserAccess();
+        UserRepository access = new UserRepository();
         var user = access.GetUserByUsernamePassword(txtUserName.Text, txtPassword.Password);
 
             

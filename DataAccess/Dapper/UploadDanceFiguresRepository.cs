@@ -1,7 +1,8 @@
 ﻿
 namespace DataAccess.Dapper
 {
-    internal class LocatiesAccess
+    public class UploadDanceFiguresRepository
     {
+
     }
 }

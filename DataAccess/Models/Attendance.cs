@@ -9,6 +9,8 @@ namespace DataAccess.Models
     public class Attendance
     {
         public int Id { get; set; }
+        public int Fk_user {  get; set; }
+        public User user { get; set; }
         public ICollection<User>users { get; set; }
         public DateTime Datum { get; set; }
     }

@@ -5,34 +5,40 @@ namespace Logic
 {
     public class DataAccessServices
     {
-        public string RegisterUser(string voornaam, string achternaam, string geslacht )
+        public string RegisterUser(string voornaam, string achternaam, string geslacht,string password,string username, string leraar, UploadDanceFigures uploadDanceFigures )
         {
             
-            UserAccess userAccess = new UserAccess();
+            UserRepository userAccess = new UserRepository();
+
             var userExists = userAccess.GetUserByUsername(voornaam + "-" + achternaam);
 
             if(userExists is true)
             {
                 return  "User already exists.";
             }
+            else
+            {
+                var newUser = new User()
+                {
+                    Username = username,
+                    IsManager = false,
+                    FirstName = voornaam,
+                    LastName = achternaam,
+                    Sex = geslacht,
+                    Password = password,
+                    Leraar = leraar,
+                    FK_UploadDanceFigures = uploadDanceFigures.Id,
+                };
 
-            var newUser = new User()
-            {
-                Username = voornaam,
-                IsManager = false,
-                FirstName = voornaam,
-                LastName = achternaam,
-                Sex = geslacht,
-                Password = voornaam + "-" + achternaam
-            };
-            
-            var result = userAccess.CreateUser(newUser);
-            if(result is true)
-            {
-                return "User created";
+                var result = userAccess.CreateUser(newUser);
+                if (result is true)
+                {
+                    return "User created";
+                }
+
+                return "Unable to create user";
             }
-
-            return "Unable to create user";
+           
         }    
     }
 

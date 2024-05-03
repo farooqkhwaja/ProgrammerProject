@@ -1,6 +1,6 @@
 ﻿namespace DataAccess.ADO
 {
-    public class ManagersAccess
+    public class ManagersRepository
     {
          
     }

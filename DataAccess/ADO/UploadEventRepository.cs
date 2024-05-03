@@ -3,7 +3,7 @@ using DataAccess.Models;
 
 namespace DataAccess.ADO
 {
-    public class UploadEventAccess
+    public class UploadEventRepository
     {
         static List<UploadEvents> eventen = new List<UploadEvents>();
 

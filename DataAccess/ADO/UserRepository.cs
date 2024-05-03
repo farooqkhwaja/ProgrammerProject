@@ -4,9 +4,8 @@ using DataAccess.Models;
 
 namespace DataAccess.ADO
 {
-    public class UserAccess
+    public class UserRepository
     {
-
         //const string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
         const string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
 
@@ -88,8 +87,8 @@ namespace DataAccess.ADO
         }
         public bool CreateUser(User user)
         {
-            string query =string.Format("INSERT INTO [User](Username, Password,FirstName,LastName, Sex, Email,IsManager) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
-                ,user.Username,user.Password,user.FirstName, user.LastName,user.Sex, user.Email, user.IsManager);
+            string query =string.Format("INSERT INTO [User](Username, Password,FirstName,LastName, Sex, Email,IsManager, Leraar, FK_UploadDanceFigures) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8})"
+                ,user.Username,user.Password,user.FirstName, user.LastName,user.Sex, user.Email, user.IsManager,user.Leraar, user.FK_UploadDanceFigures);
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {

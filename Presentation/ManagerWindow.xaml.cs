@@ -1,24 +1,23 @@
- using System.Windows;
+using System.Windows;
 using Logic;
 using DataAccess.Models;
 using DataAccess;
 using DataAccess.ADO;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-
 namespace Presentation;
 
 public partial class ManagerWindow : Window
 
 {   
-    private readonly UploadLinksAccess _uploadlinksaccess;
+    private readonly UploadLinksRepository _uploadlinksaccess;
     private readonly UploadLinks _uploadlinks;
-    private readonly UserAccess _useraccess;
+    private readonly UserRepository _useraccess;
     private readonly DataAccessServices _dataaccessservices;
     private readonly LoginWindow _loginWindow;
     private readonly SaveAttendance _saveAttendance;
     private readonly RegisterStudents _registerStudents;
-    private readonly UploadEventAccess _uploadEventAccess;
+    private readonly UploadEventRepository _uploadEventAccess;
     private readonly UploadEvents _uploadEvents;
     public ManagerWindow(LoginWindow loginWindow)
     {
@@ -26,11 +25,11 @@ public partial class ManagerWindow : Window
         _loginWindow = loginWindow;
         _loginWindow.Visibility = Visibility.Collapsed;
         _saveAttendance = new SaveAttendance();
-        _uploadlinksaccess = new UploadLinksAccess();
+        _uploadlinksaccess = new UploadLinksRepository();
         _uploadlinks = new UploadLinks();
-        _uploadEventAccess = new UploadEventAccess();
+        _uploadEventAccess = new UploadEventRepository();
         _uploadEvents = new UploadEvents();
-        _useraccess = new UserAccess();
+        _useraccess = new UserRepository();
         _dataaccessservices = new DataAccessServices();
 
         DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks(); 
@@ -42,7 +41,7 @@ public partial class ManagerWindow : Window
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
     { 
-        var msgResult = _dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text);
+        var msgResult = _dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_leraar.Text, cbx_categorie.Text);
         MessageBox.Show(msgResult);
 
         CursistenList.ItemsSource = _useraccess.GetUsers();
@@ -63,19 +62,23 @@ public partial class ManagerWindow : Window
     }
     private void AddDanceLinks_Click(object sender, RoutedEventArgs e)
     {
-        string link = DansLinksToevoegenBox.Text.Trim();
+        string figureName = tbx_AddDanceName.Text;
+        string linkadres = tbx_AddDanceLink.Text;
+        string gemaaktDoor =  tbx_AddGemaaktDoor.Text;
 
-        if (!string.IsNullOrWhiteSpace(link))
+        if (!string.IsNullOrWhiteSpace(figureName))
         {
             UploadLinks newLink = new UploadLinks
             {
-                Link = link
+                FigureName = figureName,
+                LinkAdres = linkadres,
+                GemaaktDoor = gemaaktDoor
             };
 
-            _uploadlinksaccess.CreateLink(newLink.Link);
+            _uploadlinksaccess.CreateLink(newLink.FigureName,);
         }
     }
-    private void DeleteDanceMove_Click(object sender, RoutedEventArgs e)
+    private void DeleteDanceLink_Click(object sender, RoutedEventArgs e)
     {
         if (DansFilmLinksList.SelectedItem is UploadLinks)
         {
@@ -87,7 +90,7 @@ public partial class ManagerWindow : Window
             MessageBox.Show("Please select a link to delete.", "No Link Selected", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
-    private void UpdateDanceLinks_Click(object sender, RoutedEventArgs e)
+    private void UpdateDanceLink_Click(object sender, RoutedEventArgs e)
     {
         DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
     }
@@ -121,5 +124,18 @@ public partial class ManagerWindow : Window
         EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
     }
 
+    private void btn_ZoekOpNaam_Click(object sender, RoutedEventArgs e)
+    {
 
+    }
+
+    private void btn_SaveAanwezigheid_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void btn_bewaarProgress_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
