@@ -10,7 +10,9 @@ public class User
     public  string Password { get; set; }
     public bool IsManager { get; set; }
     public string Email { get; set; }
-    public ICollection<Managers> managers { get; set; }
-
+    public Attendance attendance { get; set; }
+    public Categorie categorie { get; set; }
+    public ICollection<Managers>managers { get; set; }
+    public string Leraar { get; set; }
    
 }
