@@ -7,10 +7,10 @@ namespace DataAccess.ADO
     {
         //static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
         static string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
-        public CreateLinksModel CreateLink(string uploadLink)
+        public CreateLinksModel CreateLink(UploadLinks uploadLink)
         {
             CreateLinksModel model = new CreateLinksModel();
-            string queryString = $"INSERT INTO UploadLinks(Link) VALUES ('{uploadLink}')";
+            string queryString = $"INSERT INTO UploadLinks(LinkAdres) VALUES ('{uploadLink}')";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -50,7 +50,7 @@ namespace DataAccess.ADO
                     {
                         UploadLinks uploadlink = new UploadLinks();
                         uploadlink.Id = Convert.ToInt32(reader["Id"]);
-                        uploadlink.Link = reader["Link"].ToString();
+                        uploadlink.LinkAdres = reader["LinkAdres"].ToString();
 
                         uploadLinks.Add(uploadlink);
                     }
@@ -82,7 +82,7 @@ namespace DataAccess.ADO
                        
                         uploadLinks = new UploadLinks();
                         uploadLinks.Id = Convert.ToInt32(reader["Id"].ToString());
-                        uploadLinks.Link = reader["Link"].ToString();
+                        uploadLinks.LinkAdres = reader["LinkAdres"].ToString();
                        
                     }
                 }
@@ -95,7 +95,7 @@ namespace DataAccess.ADO
         }
         public void UpdateLinks(UploadLinks uploadlink)
         {
-            string queryString = $"UPDATE UploadLinks SET Link = '{uploadlink.Link}'  WHERE Id = {uploadlink.Id}";
+            string queryString = $"UPDATE UploadLinks SET LinkAdres = '{uploadlink.LinkAdres}'  WHERE Id = {uploadlink.Id}";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {

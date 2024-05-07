@@ -11,9 +11,9 @@ namespace DataAccess.ADO
 
         static string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
 
-        public bool CreateEvent(string eventname, string date)
+        public bool CreateEvent(string eventname, string date, string student, int? Fk_location)
         {
-            string queryString = string.Format("INSERT INTO UploadEvents(Name,Date) VALUES('{0}','{1}' )", eventname, date);
+            string queryString = string.Format("INSERT INTO UploadEvents(Name,Date,StudentAssigned,Fk_Location) VALUES('{0}','{1}','{2}','{3}' )", eventname, date, student, Fk_location);
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -84,6 +84,8 @@ namespace DataAccess.ADO
                         uploadevent.Id = Convert.ToInt32(reader["Id"]);
                         uploadevent.Name = reader["Name"].ToString();
                         uploadevent.Date = reader["Date"].ToString();
+                        uploadevent.StudentAssigned = reader["StudentAssigned"].ToString();
+                        uploadevent.Fk_Locations = Convert.ToInt32(reader["Fk_Location"].ToString());
 
                         uploadEvents.Add(uploadevent);
                     }

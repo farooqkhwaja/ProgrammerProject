@@ -46,12 +46,13 @@ public partial class LoginWindow : Window
 
     private void BtnLogin_Click(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
+       /* if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
         {
             MessageBox.Show("Username or/and password can not be empty!");
-        }
-
-        UserRepository access = new UserRepository();
+        }*/
+        _managerWindow = new ManagerWindow(this);
+        _managerWindow.Show();
+     /*   UserRepository access = new UserRepository();
         var user = access.GetUserByUsernamePassword(txtUserName.Text, txtPassword.Password);
 
             
@@ -70,8 +71,7 @@ public partial class LoginWindow : Window
         if(user == null)
         {
             MessageBox.Show("Username or / and password Incorrect!");
-        }
+        }*/
 
     }
-
 }

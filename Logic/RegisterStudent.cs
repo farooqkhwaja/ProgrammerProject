@@ -3,9 +3,9 @@ using DataAccess.ADO;
 
 namespace Logic
 {
-    public class DataAccessServices
+    public class RegisterStudent
     {
-        public string RegisterUser(string voornaam, string achternaam, string geslacht,string password,string username, string leraar, UploadDanceFigures uploadDanceFigures )
+        public string RegisterUser(string voornaam, string achternaam, string geslacht,string password,string username, string leraar, string CategorieName )
         {
             
             UserRepository userAccess = new UserRepository();
@@ -27,7 +27,7 @@ namespace Logic
                     Sex = geslacht,
                     Password = password,
                     Leraar = leraar,
-                    FK_UploadDanceFigures = uploadDanceFigures.Id,
+                    FK_UploadDanceFigures = Convert.ToInt32(CategorieName),
                 };
 
                 var result = userAccess.CreateUser(newUser);

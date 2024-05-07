@@ -10,14 +10,13 @@ namespace Presentation;
 public partial class ManagerWindow : Window
 
 {   
-    private readonly UploadLinksRepository _uploadlinksaccess;
+    private readonly UploadLinksRepository _uploadlinksRepository;
     private readonly UploadLinks _uploadlinks;
-    private readonly UserRepository _useraccess;
-    private readonly DataAccessServices _dataaccessservices;
+    private readonly UserRepository _userRepository;
+    private readonly RegisterStudent _registerStudent;
     private readonly LoginWindow _loginWindow;
     private readonly SaveAttendance _saveAttendance;
-    private readonly RegisterStudents _registerStudents;
-    private readonly UploadEventRepository _uploadEventAccess;
+    private readonly UploadEventRepository _uploadEventRepository;
     private readonly UploadEvents _uploadEvents;
     public ManagerWindow(LoginWindow loginWindow)
     {
@@ -25,26 +24,26 @@ public partial class ManagerWindow : Window
         _loginWindow = loginWindow;
         _loginWindow.Visibility = Visibility.Collapsed;
         _saveAttendance = new SaveAttendance();
-        _uploadlinksaccess = new UploadLinksRepository();
+        _uploadlinksRepository = new UploadLinksRepository();
         _uploadlinks = new UploadLinks();
-        _uploadEventAccess = new UploadEventRepository();
+        _uploadEventRepository = new UploadEventRepository();
         _uploadEvents = new UploadEvents();
-        _useraccess = new UserRepository();
-        _dataaccessservices = new DataAccessServices();
+        _userRepository = new UserRepository();
+        _registerStudent = new RegisterStudent();
 
-        DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks(); 
-        CursistenList.ItemsSource = _useraccess.GetUsers();
-        EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
+        DansFilmLinksList.ItemsSource = _uploadlinksRepository.GetLinks(); 
+        CursistenList.ItemsSource = _userRepository.GetUsers();
+        EvenementenLinks.ItemsSource = _uploadEventRepository.GetEvents();
     }
 
 
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
     { 
-        var msgResult = _dataaccessservices.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_leraar.Text, cbx_categorie.Text);
+        var msgResult = _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_leraar.Text, cbx_categorie.Text);
         MessageBox.Show(msgResult);
 
-        CursistenList.ItemsSource = _useraccess.GetUsers();
+        CursistenList.ItemsSource = _userRepository.GetUsers();
     
     }
     private void delete_cursist_Click(object sender, RoutedEventArgs e)
@@ -52,15 +51,45 @@ public partial class ManagerWindow : Window
         if (CursistenList.SelectedItem is User)
         {
             var selectedItem = CursistenList.SelectedItem as User;
-            _useraccess.DeleteUser(selectedItem.Id);
-            CursistenList.ItemsSource = _useraccess.GetUsers();
+            _userRepository.DeleteUser(selectedItem.Id);
+            CursistenList.ItemsSource = _userRepository.GetUsers();
         }
         else
         {
             MessageBox.Show("Please select a person to delete.", "No person Selected", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
-    private void AddDanceLinks_Click(object sender, RoutedEventArgs e)
+    private void AddEvent_Click(object sender, RoutedEventArgs e)
+    {
+
+        if (_uploadEventRepository != null)
+        {
+            string eventName = tbx_EvenementenToevoegenBox.Text;
+            string eventDate = tbx_EvenementDatum.Text;
+            string eventStudent = tbx_EvenementStudent.Text;
+            int eventLocatie = Convert.ToInt32(tbx_EvenementLocatie.Text);
+
+            _uploadEventRepository.CreateEvent(eventName, eventDate, eventStudent, eventLocatie);
+        }
+
+    }
+    private void UpdateEvent_Click(object sender, RoutedEventArgs e)
+    {
+        EvenementenLinks.ItemsSource = _uploadEventRepository.GetEvents();
+    }
+    private void DeleteEvent_Click(object sender, RoutedEventArgs e)
+    {
+        if (_uploadEventRepository != null)
+        {
+            var selectedItem = EvenementenLinks.SelectedItem as UploadEvents;
+            _uploadEventRepository.DeleteEvents(selectedItem.Id);
+        }
+        else
+        {
+            MessageBox.Show("Please select a event to delete.", "No event Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+    }
+    private void AddDanceFilmLinks_Click(object sender, RoutedEventArgs e)
     {
         string figureName = tbx_AddDanceName.Text;
         string linkadres = tbx_AddDanceLink.Text;
@@ -75,7 +104,7 @@ public partial class ManagerWindow : Window
                 GemaaktDoor = gemaaktDoor
             };
 
-            _uploadlinksaccess.CreateLink(newLink.FigureName,);
+            _uploadlinksRepository.CreateLink(newLink);
         }
     }
     private void DeleteDanceLink_Click(object sender, RoutedEventArgs e)
@@ -83,7 +112,7 @@ public partial class ManagerWindow : Window
         if (DansFilmLinksList.SelectedItem is UploadLinks)
         {
             var selectedItem = DansFilmLinksList.SelectedItem as UploadLinks;
-            _uploadlinksaccess.DeleteLink(selectedItem.Id);
+            _uploadlinksRepository.DeleteLink(selectedItem.Id);
         }
         else
         {
@@ -92,41 +121,13 @@ public partial class ManagerWindow : Window
     }
     private void UpdateDanceLink_Click(object sender, RoutedEventArgs e)
     {
-        DansFilmLinksList.ItemsSource = _uploadlinksaccess.GetLinks();
-    }
-
-    private void AddEvent_Click(object sender, RoutedEventArgs e)
-    {
-       
-        if(_uploadEventAccess != null)
-        {
-            string eventData = EvenementenToevoegenBox.Text;
-            string eventname = eventData.Split(' ')[0];
-            string eventdate = eventData.Split(' ')[1];
-            _uploadEventAccess.CreateEvent(eventname, eventdate);
-        }
-       
-    }
-    private void DeleteEvent_Click(object sender, RoutedEventArgs e)
-    {
-        if (_uploadEventAccess != null)
-        {
-            var selectedItem = EvenementenLinks.SelectedItem as UploadEvents;
-            _uploadEventAccess.DeleteEvents(selectedItem.Id);
-        }
-        else
-        {
-            MessageBox.Show("Please select a event to delete.", "No event Selected", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-    }
-    private void UpdateEvent_Click(object sender, RoutedEventArgs e)
-    {
-        EvenementenLinks.ItemsSource = _uploadEventAccess.GetEvents();
+        DansFilmLinksList.ItemsSource = _uploadlinksRepository.GetLinks();
     }
 
     private void btn_ZoekOpNaam_Click(object sender, RoutedEventArgs e)
     {
-
+        string firstname = tbx_ZoekOpNaam.Text;
+        _userRepository.GetUserByFirstName(firstname);
     }
 
     private void btn_SaveAanwezigheid_Click(object sender, RoutedEventArgs e)

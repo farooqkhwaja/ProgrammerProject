@@ -1,6 +1,4 @@
-﻿using DataAccess.Models;
-using DataAccess.ADO;
-
+﻿
 namespace Logic
 {
     public class GeneratePartners
