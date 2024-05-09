@@ -8,26 +8,25 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace Presentation;
 
 public partial class ManagerWindow : Window
-
 {   
-    private readonly UploadLinksRepository _uploadlinksRepository;
-    private readonly UploadLinks _uploadlinks;
+    private readonly LinksRepository _uploadlinksRepository;
+    private readonly Links _uploadlinks;
     private readonly UserRepository _userRepository;
     private readonly RegisterStudent _registerStudent;
     private readonly LoginWindow _loginWindow;
     private readonly SaveAttendance _saveAttendance;
-    private readonly UploadEventRepository _uploadEventRepository;
-    private readonly UploadEvents _uploadEvents;
+    private readonly EventRepository _uploadEventRepository;
+    private readonly Events _uploadEvents;
     public ManagerWindow(LoginWindow loginWindow)
     {
         InitializeComponent();
         _loginWindow = loginWindow;
         _loginWindow.Visibility = Visibility.Collapsed;
         _saveAttendance = new SaveAttendance();
-        _uploadlinksRepository = new UploadLinksRepository();
-        _uploadlinks = new UploadLinks();
-        _uploadEventRepository = new UploadEventRepository();
-        _uploadEvents = new UploadEvents();
+        _uploadlinksRepository = new LinksRepository();
+        _uploadlinks = new Links();
+        _uploadEventRepository = new EventRepository();
+        _uploadEvents = new Events();
         _userRepository = new UserRepository();
         _registerStudent = new RegisterStudent();
 
@@ -36,11 +35,9 @@ public partial class ManagerWindow : Window
         EvenementenLinks.ItemsSource = _uploadEventRepository.GetEvents();
     }
 
-
-
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
-    { 
-        var msgResult = _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_leraar.Text);
+    {
+        var msgResult = ""; // _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_leraar.Text,cbx_categorie.Text);
         MessageBox.Show(msgResult);
 
         CursistenList.ItemsSource = _userRepository.GetUsers();
@@ -81,7 +78,7 @@ public partial class ManagerWindow : Window
     {
         if (_uploadEventRepository != null)
         {
-            var selectedItem = EvenementenLinks.SelectedItem as UploadEvents;
+            var selectedItem = EvenementenLinks.SelectedItem as Events;
             _uploadEventRepository.DeleteEvents(selectedItem.Id);
         }
         else
@@ -97,11 +94,11 @@ public partial class ManagerWindow : Window
 
         if (!string.IsNullOrWhiteSpace(figureName))
         {
-            UploadLinks newLink = new UploadLinks
+            Links newLink = new Links
             {
-                FigureName = figureName,
-                LinkAdres = linkadres,
-                GemaaktDoor = gemaaktDoor
+                //FigureName = figureName,
+                //LinkAdres = linkadres,
+                //GemaaktDoor = gemaaktDoor
             };
 
             _uploadlinksRepository.CreateLink(newLink);
@@ -109,9 +106,9 @@ public partial class ManagerWindow : Window
     }
     private void DeleteDanceLink_Click(object sender, RoutedEventArgs e)
     {
-        if (DansFilmLinksList.SelectedItem is UploadLinks)
+        if (DansFilmLinksList.SelectedItem is Links)
         {
-            var selectedItem = DansFilmLinksList.SelectedItem as UploadLinks;
+            var selectedItem = DansFilmLinksList.SelectedItem as Links;
             _uploadlinksRepository.DeleteLink(selectedItem.Id);
         }
         else

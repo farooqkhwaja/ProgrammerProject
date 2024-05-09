@@ -1,13 +1,19 @@
-﻿namespace DataAccess.Models
-{
-    public class Locations
-    {
-        public int Id { get; set; }
-        public string StreetName { get; set; }
-        public string HouseNumber { get; set; }
-        public string PostCode { get; set; }
-        public string Country { get; set; } 
-        public ICollection<UploadEvents> uploadEvents { get; set; }
+﻿using System.ComponentModel.DataAnnotations;
 
-    }
+namespace DataAccess.Models;
+
+public class Locations
+{
+    [Key]
+    public int Id { get; set; }
+    
+    [Required]
+    [MaxLength(50)]
+    public string StreetName { get; set; }
+    
+    [Required]
+    [MaxLength(50)]
+    public string City { get; set; }
+    
 }
+

@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Models
 {
     public class Attendance
     {
+        [Key]
         public int Id { get; set; }
-        public int Fk_user {  get; set; }
-        public User user { get; set; }
-        public ICollection<User>users { get; set; }
-        public DateTime Datum { get; set; }
+        [Required]
+        public DateTime Date { get; set; }
+        public bool Absent { get; set; }
+        [Required]
+        public int UserId { get; set; }
     }
 }

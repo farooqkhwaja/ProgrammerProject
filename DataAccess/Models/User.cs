@@ -1,18 +1,29 @@
-﻿namespace DataAccess.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DataAccess.Models;
 
 public class User
 {
+    [Key]
     public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Sex { get; set; }
+    [Required]
+    [MaxLength(50)]
     public string Username { get; set; }
+    [Required]
+    [MaxLength(50)]
     public  string Password { get; set; }
-    public bool IsManager { get; set; }
+    [Required]
+    [MaxLength(50)]
+    public string FirstName { get; set; }
+    [Required]
+    [MaxLength(50)]
+    public string LastName { get; set; }
+    [Required]
+    [MaxLength(10)]
+    public string Sex { get; set; }
+    [Required]
+    [MaxLength(50)]
     public string Email { get; set; }
-    public string Leraar { get; set; }
-    public Attendance attendance { get; set; }
-    public ICollection<Managers>managers { get; set; }
-    public int FK_UploadDanceFigures {  get; set; }
-    public UploadDanceFigures UploadDanceFigures { get; set; }
+    [Required]
+    public bool IsManager { get; set; }
 }

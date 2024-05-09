@@ -8,10 +8,20 @@ namespace Testapp
     {
         static void Main(string[] args)
         {
-            DoubleUsernameCheck();
+            GG();
+            //DoubleUsernameCheck();
               
 
         }
+
+        private static void GG()
+        {
+            var dapperExample = new DataAccess.Dapper.DanceFiguresRepository();
+            
+            var result = dapperExample.GetDanceFigures();
+
+        }
+
         static void DoubleUsernameCheck()
         {
             UserRepository userAcess = new UserRepository();

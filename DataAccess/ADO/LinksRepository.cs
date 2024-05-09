@@ -3,20 +3,20 @@ using DataAccess.Models;
 
 namespace DataAccess.ADO
 {
-    public class UploadLinksRepository
+    public class LinksRepository
     {
         //static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
         static string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
-        public CreateLinksModel CreateLink(UploadLinks uploadLink)
+        public CreateLinksModel CreateLink(Links uploadLink)
         {
             CreateLinksModel model = new CreateLinksModel();
-            string queryString = $"INSERT INTO UploadLinks(LinkAdres) VALUES ('{uploadLink}')";
+            string queryString = $"INSERT INTO Links(LinkAdres) VALUES ('{uploadLink}')";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(queryString, con);
 
-               
+
                 try
                 {
                     con.Open();
@@ -34,10 +34,10 @@ namespace DataAccess.ADO
             }
             return model;
         }
-        public List<UploadLinks> GetLinks()
+        public List<Links> GetLinks()
         {
-            List<UploadLinks> uploadLinks = new List<UploadLinks>();
-            string queryString = $"SELECT * FROM UploadLinks";
+            List<Links> uploadLinks = new List<Links>();
+            string queryString = $"SELECT * FROM Links";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -48,28 +48,28 @@ namespace DataAccess.ADO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        UploadLinks uploadlink = new UploadLinks();
+                        Links uploadlink = new Links();
                         uploadlink.Id = Convert.ToInt32(reader["Id"]);
-                        uploadlink.LinkAdres = reader["LinkAdres"].ToString();
+                        //uploadlink.LinkAdres = reader["LinkAdres"].ToString();
 
                         uploadLinks.Add(uploadlink);
                     }
-                    con.Close();    
+                    con.Close();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-            } 
+            }
             return uploadLinks;
         }
-        public UploadLinks GetLink(int Id)
+        public Links GetLink(int Id)
         {
-            string queryString = $"SELECT * FROM UploadLinks WHERE Id = {Id}";
+            string queryString = $"SELECT * FROM Links WHERE Id = {Id}";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                UploadLinks uploadLinks = null;
+                Links uploadLinks = null;
                 SqlCommand cmd = new SqlCommand(queryString, con);
                 try
                 {
@@ -79,11 +79,11 @@ namespace DataAccess.ADO
 
                     while (reader.Read())
                     {
-                       
-                        uploadLinks = new UploadLinks();
+
+                        uploadLinks = new Links();
                         uploadLinks.Id = Convert.ToInt32(reader["Id"].ToString());
-                        uploadLinks.LinkAdres = reader["LinkAdres"].ToString();
-                       
+                        //uploadLinks.LinkAdres = reader["LinkAdres"].ToString();
+
                     }
                 }
                 catch (Exception ex)
@@ -93,9 +93,9 @@ namespace DataAccess.ADO
                 return uploadLinks;
             }
         }
-        public void UpdateLinks(UploadLinks uploadlink)
+        public void UpdateLinks(Links uploadlink)
         {
-            string queryString = $"UPDATE UploadLinks SET LinkAdres = '{uploadlink.LinkAdres}'  WHERE Id = {uploadlink.Id}";
+            string queryString = ""; //$"UPDATE Links SET LinkAdres = '{uploadlink.LinkAdres}'  WHERE Id = {uploadlink.Id}";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -115,9 +115,9 @@ namespace DataAccess.ADO
         }
         public void DeleteLink(int linkId)
         {
-            string queryString = $"DELETE FROM UploadLinks WHERE Id = {linkId}";
+            string queryString = $"DELETE FROM Links WHERE Id = {linkId}";
 
-            using(SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(queryString, con);
 
@@ -132,7 +132,7 @@ namespace DataAccess.ADO
                     Console.WriteLine(ex.Message);
                 }
             }
-        
+
         }
 
     }

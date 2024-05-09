@@ -3,13 +3,13 @@ using DataAccess.Models;
 
 namespace DataAccess.ADO
 {
-    public class UploadDanceFiguresRepository
+    public class DanceFiguresRepository
     {
         static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
         public bool AddDance(string figurename)
         {
-            string query = $"INSERT INTO UploadDanceFigures (FigureName) VALUES ('{figurename}') ";
+            string query = $"INSERT INTO DanceFigures (FigureName) VALUES ('{figurename}') ";
 
             using(SqlConnection  con = new SqlConnection(connectionString))
             {
@@ -30,11 +30,11 @@ namespace DataAccess.ADO
             return true;
         
         }
-        public List<UploadDanceFigures> GetFigures()
+        public List<DanceFigures> GetFigures()
         {
-            List<UploadDanceFigures> uploadDances = new List<UploadDanceFigures>();
+            List<DanceFigures> uploadDances = new List<DanceFigures>();
 
-            string query = $"SELECT * FROM [UploadDanceFigures]";
+            string query = $"SELECT * FROM [DanceFigures]";
             using(SqlConnection con = new SqlConnection(connectionString)) 
             {
                 SqlCommand cmd = new SqlCommand(query, con);
@@ -45,7 +45,7 @@ namespace DataAccess.ADO
                     SqlDataReader dataReader = cmd.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        UploadDanceFigures danceFigures = new UploadDanceFigures();
+                        DanceFigures danceFigures = new DanceFigures();
 
                         danceFigures.Id = Convert.ToInt32( dataReader["Id"]);
                         danceFigures.FigureName = dataReader["FigureName"].ToString();

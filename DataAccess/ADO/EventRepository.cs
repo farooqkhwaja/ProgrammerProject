@@ -3,22 +3,22 @@ using DataAccess.Models;
 
 namespace DataAccess.ADO
 {
-    public class UploadEventRepository
+    public class EventRepository
     {
-        static List<UploadEvents> eventen = new List<UploadEvents>();
+        // static List<Events> eventen = new List<Events>();
 
-       // static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
+        // static string connectionString = "Data Source=FAROOQKHWAJA;Initial Catalog=SalsaManagement-db;Integrated Security=True;Encrypt=False";
 
         static string connectionString = "Data Source=DESKTOP-DIPI9BT;Initial Catalog=Salsadb;Integrated Security=True;Encrypt=False";
 
         public bool CreateEvent(string eventname, string date, string student, int? Fk_location)
         {
-            string queryString = string.Format("INSERT INTO UploadEvents(Name,Date,StudentAssigned,Fk_Location) VALUES('{0}','{1}','{2}','{3}' )", eventname, date, student, Fk_location);
+            string queryString = string.Format("INSERT INTO Events(Name,Date,StudentAssigned,Fk_Location) VALUES('{0}','{1}','{2}','{3}' )", eventname, date, student, Fk_location);
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(queryString, con);
-                
+
                 try
                 {
                     con.Open();
@@ -33,7 +33,7 @@ namespace DataAccess.ADO
             }
             return true;
         }
-        public UploadEvents GetEvent(int Id)
+        public Events GetEvent(int Id)
         {
             string query = $"Select * FROM Users WHERE Id = {Id}";
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -46,14 +46,14 @@ namespace DataAccess.ADO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        UploadEvents events = new UploadEvents();
+                        Events events = new Events();
 
                         events.Id = Convert.ToInt32(reader["Id"].ToString());
 
                         events.Name = reader["Username"].ToString();
-                        events.Date = reader["Date"].ToString();                 
+                        events.Date = reader["Date"].ToString();
 
-                        eventen.Add(events);
+                        //eventen.Add(events);
                     }
                     reader.Close();
                 }
@@ -65,12 +65,12 @@ namespace DataAccess.ADO
             }
             return GetEvent(Id);
         }
-        public List<UploadEvents> GetEvents()
+        public List<Events> GetEvents()
         {
-            List<UploadEvents> uploadEvents = new List<UploadEvents>();
-            string query = "SELECT * FROM [UploadEvents]";
+            List<Events> uploadEvents = new List<Events>();
+            string query = "SELECT * FROM [Events]";
 
-            using(SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, con);
 
@@ -80,27 +80,28 @@ namespace DataAccess.ADO
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        UploadEvents uploadevent = new UploadEvents();
+                        Events uploadevent = new Events();
                         uploadevent.Id = Convert.ToInt32(reader["Id"]);
                         uploadevent.Name = reader["Name"].ToString();
-                        uploadevent.Date = reader["Date"].ToString();
-                        uploadevent.StudentAssigned = reader["StudentAssigned"].ToString();
-                        uploadevent.Fk_Locations = Convert.ToInt32(reader["Fk_Location"].ToString());
+                        //uploadevent.Date = reader["Date"].ToString();
+                        //uploadevent.StudentAssigned = reader["StudentAssigned"].ToString();
+                        //uploadevent.Fk_Locations = Convert.ToInt32(reader["Fk_Location"].ToString());
 
                         uploadEvents.Add(uploadevent);
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
-                    string message= "Event did not found" + e.Message;
+                    string message = "Event did not found" + e.Message;
                 }
-            }return uploadEvents;
+            }
+            return uploadEvents;
         }
-        public void UpdateEvent (UploadEvents uploadEvents)
+        public void UpdateEvent(Events uploadEvents)
         {
-            string queryString = $"UPDATE UploadEvents SET NAME = '{uploadEvents.Name}', Date = '{uploadEvents.Date} WHERE Id = '{uploadEvents.Id}'";
+            string queryString = $"UPDATE Events SET NAME = '{uploadEvents.Name}', Date = '{uploadEvents.Date} WHERE Id = '{uploadEvents.Id}'";
 
-            using(SqlConnection con = new SqlConnection (connectionString)) 
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(queryString, con);
 
@@ -110,14 +111,14 @@ namespace DataAccess.ADO
                     cmd.ExecuteNonQuery();
                     con.Close();
                 }
-                catch (Exception ex) { Console.WriteLine(ex.Message);}
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
         }
         public void DeleteEvents(int Id)
         {
-            string sqlQuery = $"DELETE FROM UploadEvents WHERE Id = '{Id}'  ";
+            string sqlQuery = $"DELETE FROM Events WHERE Id = '{Id}'  ";
 
-            using(SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sqlQuery, con);
 
@@ -127,13 +128,13 @@ namespace DataAccess.ADO
                     cmd.ExecuteNonQuery();
                     con.Close();
                 }
-                catch(Exception ex)
-                { 
+                catch (Exception ex)
+                {
                     Console.WriteLine(ex.Message);
                 }
             }
-            
-        }  
+
+        }
     }
 }
 

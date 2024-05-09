@@ -11,7 +11,7 @@ namespace DataAccess.ADO
 
         public Locations CreateLocation(Locations location)
         {
-            string queryString = $"INSERT INTO Locations (Id, StreetName, HouseNumber, PostCode, Country) VALUES {location.Id}, '{location.StreetName}','{location.HouseNumber}','{location.PostCode}','{location.Country}";
+            string queryString = ""; // $"INSERT INTO Locations (Id, StreetName, HouseNumber, PostCode, Country) VALUES {location.Id}, '{location.StreetName}','{location.HouseNumber}','{location.PostCode}','{location.Country}";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -52,9 +52,6 @@ namespace DataAccess.ADO
 
                         location.Id = Convert.ToInt32(reader["Id"].ToString());
                         location.StreetName = reader["StreetName"].ToString();
-                        location.HouseNumber = reader["HouseNumber"].ToString();
-                        location.PostCode = reader["PostCode"].ToString();
-                        location.Country = reader["Country"].ToString();
 
                         LocationList.Add(location);
                     }
@@ -68,7 +65,7 @@ namespace DataAccess.ADO
         }
         public void UpdateLocations(Locations location)
         {
-            string queryString = $"UPDATE Locations SET StreetName = '{location.StreetName}', HouseNumber = '{location.HouseNumber}', PostCode = '{location.PostCode}', Country = '{location.Country}' WHERE Id = {location.Id}";
+            string queryString = ""; // $"UPDATE Locations SET StreetName = '{location.StreetName}', HouseNumber = '{location.HouseNumber}', PostCode = '{location.PostCode}', Country = '{location.Country}' WHERE Id = {location.Id}";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {

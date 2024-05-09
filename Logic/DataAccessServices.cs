@@ -6,11 +6,10 @@ namespace Logic
 {
     public class DataAccessServices
     {
+        private readonly UserRepository _userRepository;
         public string RegisterUser(string voornaam, string achternaam, string geslacht, string password )
         {
-            
-            UserAccess userAccess = new UserAccess();
-            var userExists = userAccess.GetUserByUsername(voornaam + "-" + achternaam);
+            var userExists = _userRepository.GetUserByUsername(voornaam + "-" + achternaam);
 
             if(userExists is true)
             {
@@ -27,7 +26,7 @@ namespace Logic
                 Password = password,
             };
             
-            var result = userAccess.CreateUser(newUser);
+            var result = _userRepository.CreateUser(newUser);
             if(result is true)
             {
                 return "User created";
