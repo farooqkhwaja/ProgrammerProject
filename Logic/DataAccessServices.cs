@@ -1,11 +1,12 @@
 ﻿using DataAccess.Models;
 using DataAccess.ADO;
+using System.ComponentModel;
 
 namespace Logic
 {
     public class DataAccessServices
     {
-        public string RegisterUser(string voornaam, string achternaam, string geslacht )
+        public string RegisterUser(string voornaam, string achternaam, string geslacht, string password )
         {
             
             UserAccess userAccess = new UserAccess();
@@ -23,7 +24,7 @@ namespace Logic
                 FirstName = voornaam,
                 LastName = achternaam,
                 Sex = geslacht,
-                Password = voornaam + "-" + achternaam
+                Password = password,
             };
             
             var result = userAccess.CreateUser(newUser);
