@@ -40,7 +40,7 @@ public partial class ManagerWindow : Window
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
     { 
-        var msgResult = _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_leraar.Text, cbx_categorie.Text);
+        var msgResult = _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_leraar.Text);
         MessageBox.Show(msgResult);
 
         CursistenList.ItemsSource = _userRepository.GetUsers();

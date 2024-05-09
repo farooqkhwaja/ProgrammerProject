@@ -1,13 +1,16 @@
 ﻿
+using DataAccess.ADO;
+
+
 namespace Logic
 {
     public class GeneratePartners
     {
-       /* public UserAccess GeneratePartner(UserAccess user)
+
+        private readonly UserRepository _userrepository;
+        public GeneratePartners()
         {
-            Random rndUser = new Random();
-            rndUser.Next(0, rndUser);
-            return user;
-        }*/
+            _userrepository = new UserRepository();
+        }
     }
 }
