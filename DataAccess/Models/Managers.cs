@@ -9,10 +9,6 @@
         public User user { get; set; }
         public UploadLinks links { get; set; }
         public UploadEvents uploadEvents { get; set; }
-        
-
-
-
 
     }
 }

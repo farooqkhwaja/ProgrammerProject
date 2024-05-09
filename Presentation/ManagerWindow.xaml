@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="Salsa Dance school [Manager UI]" Height="450" Width="600"  >
+        Title="Salsa Dance school [Manager UI]" Height="450" Width="630"  >
     <Grid>
 
         <TabControl Grid.ColumnSpan="2" Visibility="Visible" >
@@ -24,13 +24,13 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="25"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="35"/>
                         <RowDefinition Height="25"/>
                         <RowDefinition Height="35"/>
                         <RowDefinition Height="25"/>
-                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="35"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="35"/>
                         <RowDefinition Height="30"/>
@@ -54,14 +54,14 @@
                         <ComboBoxItem Content="female" FontSize="16"/>
                     </ComboBox>
                     <Label Grid.Row="7" Grid.Column="1" Content="Username"  />
-                    <TextBox x:Name="Username" Grid.Row="8" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
+                    <TextBox x:Name="tbx_Username" Grid.Row="8" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
                              Grid.ColumnSpan="2" FontSize="16" MaxWidth="100"/>
                     <Label Grid.Row="9" Grid.Column="1" Content="Password"  />
-                    <TextBox x:Name="password" Grid.Row="10" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
+                    <TextBox x:Name="tbx_password" Grid.Row="10" Grid.Column="1" Margin="5" Height="25"  Background="#CCCCCC"
                              Grid.ColumnSpan="2" FontSize="16" MaxWidth="100"/>
                     <Label Grid.Row="9" Grid.Column="4" Content="Catergorie"  />
 
-                    <ComboBox  x:Name="categorie" Grid.Row="10" Grid.Column="4" Margin="3" Height="25"  Background="#CCCCCC"
+                    <ComboBox  x:Name="cbx_categorie" Grid.Row="10" Grid.Column="4" Margin="4,5,2,5" Height="25"  Background="#CCCCCC"
                      FontSize="16" MaxWidth="100">
                         <ComboBoxItem Content="Beginner" FontSize="16" />
                         <ComboBoxItem Content="Semi1" FontSize="16"/>
@@ -80,23 +80,20 @@
                         Height="20" Content="Cursist Inschrijven" Click="inschrijven_cursist_Click" Margin="5" 
                             BorderThickness="0"/>
 
-                
+
 
                     <ListView Grid.Row="1" Grid.Column="4" Grid.RowSpan="8" Margin="5" x:Name="CursistenList"  
                               Grid.ColumnSpan="5" Background="#CCCCCC">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
-                                <GridViewColumn Header="Firstname" Width="80" DisplayMemberBinding="{Binding FirstName}" />
-                                <GridViewColumn Header="Lastname" Width="80" DisplayMemberBinding="{Binding LastName}" />
-                                <GridViewColumn Header="Categorie" Width="80" DisplayMemberBinding="{Binding Categorie}" />
-                                <GridViewColumn Header="Geslacht" Width="70" DisplayMemberBinding="{Binding Categorie}" />
-                                <GridViewColumn Header="Leraar" Width="80" DisplayMemberBinding="{Binding Categorie}" />
-                               
+                                <GridViewColumn Header="Firstname" Width="90" DisplayMemberBinding="{Binding FirstName}" />
+                                <GridViewColumn Header="Lastname" Width="90" DisplayMemberBinding="{Binding LastName}" />
+                                <GridViewColumn Header="Geslacht" Width="70" DisplayMemberBinding="{Binding Geslacht}" />
+                                <GridViewColumn Header="Leraar" Width="80" DisplayMemberBinding="{Binding Leraar}" />
+                                <GridViewColumn Header="Categorie" Width="80" DisplayMemberBinding="{Binding CategorieName}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
-
                 </Grid>
             </TabItem>
             <TabItem Header="Evenementen">
@@ -129,14 +126,14 @@
                         </ListView.View>
                     </ListView>
 
-                    <TextBox Name="EvenementenToevoegenBox" Grid.Row="3" Grid.Column="1"  Margin="3" FontSize="16" />
-                    <TextBox Name="EvenementDatum" Grid.Row="3" Grid.Column="2" Margin="3" FontSize="16" />
-                    <TextBox Name="EvenementCategorie" Grid.Row="3" Grid.Column="3"  Margin="3" FontSize="16" />
-                    <TextBox Name="EvenementLocatie" Grid.Row="3" Grid.Column="4" Margin="3" FontSize="16" />
+                    <TextBox Name="tbx_EvenementenToevoegenBox" Grid.Row="3" Grid.Column="1"  Margin="3" FontSize="16" />
+                    <TextBox Name="tbx_EvenementDatum" Grid.Row="3" Grid.Column="2" Margin="3" FontSize="16" />
+                    <TextBox Name="tbx_EvenementLocatie" Grid.Row="3" Grid.Column="3" Margin="3" FontSize="16" />
+                    <TextBox Name="tbx_EvenementStudent" Grid.Row="3" Grid.Column="4"  Margin="3" FontSize="16" />
 
-                    <Button x:Name="AddEvent" Content="ADD" Grid.Row="2" Grid.Column="1" Margin="5" Click="AddEvent_Click" BorderThickness="0"/>
-                    <Button x:Name="UpdateEvent" Content="UPDATE" Grid.Row="2" Grid.Column="2" Margin="5" Click="UpdateEvent_Click" BorderThickness="0"/>
-                    <Button x:Name="DeleteEvent" Content="DELETE" Grid.Row="2" Grid.Column="3" Margin="5" Click="DeleteEvent_Click"  BorderThickness="0"/>
+                    <Button x:Name="btn_AddEvent" Content="ADD" Grid.Row="2" Grid.Column="1" Margin="5" Click="AddEvent_Click" BorderThickness="0"/>
+                    <Button x:Name="btn_UpdateEvent" Content="UPDATE" Grid.Row="2" Grid.Column="2" Margin="5" Click="UpdateEvent_Click" BorderThickness="0"/>
+                    <Button x:Name="btn_DeleteEvent" Content="DELETE" Grid.Row="2" Grid.Column="3" Margin="5" Click="DeleteEvent_Click"  BorderThickness="0"/>
 
                 </Grid>
             </TabItem>
@@ -158,26 +155,26 @@
                         <RowDefinition  Height="35"/>
                         <RowDefinition  Height="20"/>
                     </Grid.RowDefinitions>
+                    
                     <ListView Name="DansFilmLinksList" Grid.Row="1" Grid.Column="1" Background="#CCCCCC" Grid.ColumnSpan="4" Margin="3,3,3,3" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}" />
                                 <GridViewColumn Header="Link" Width="200" DisplayMemberBinding="{Binding Link}" />
-                                <GridViewColumn Header="Categorie" Width="100" DisplayMemberBinding="{Binding categorie}" />
-                                <GridViewColumn Header="Gemaakt door" Width="140" DisplayMemberBinding="{Binding Link}" />
+                                <GridViewColumn Header="Categorie" Width="100" DisplayMemberBinding="{Binding CategorieName}" />
+                                <GridViewColumn Header="Gemaakt door" Width="140" DisplayMemberBinding="{Binding Leraar}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
 
-                    <Button Content="Update" Grid.Row="2" Grid.Column="2" Margin="50,5,30,5" BorderThickness="0"  Click="UpdateDanceLinks_Click"/>
-                    <Button Content="Add" Grid.Row="2"  Width="50" Margin="49,5,50,5" Click="addDanceMove_Click" BorderThickness="0" Grid.ColumnSpan="2"/>
-                    <Button Content="Delete" Grid.Column="3" Grid.Row="2" Margin="49,5,24,5" Click="DeleteDanceMove_Click" BorderThickness="0" />
-                    <TextBox Name="AddDanceName" Grid.Row="3" Margin="3,3,2,3" FontSize="16" Grid.ColumnSpan="2" />
-                    <TextBox Name="AddDanceLink" Grid.Row="3" Grid.Column="2" Margin="4,3,3,3" FontSize="16" />
-                    <TextBox Name="AddCategorie" Grid.Row="3" Grid.Column="3" Margin="3,3,4,3" FontSize="16" />
-                    <TextBox Name="AddGemaaktDoor" Grid.Row="3" Grid.Column="4" Margin="2,3,3,3" FontSize="16" />
-
-
+                    <Button Name="btn_updateDanceFilmLijst" Content="Update" Grid.Row="2" Grid.Column="2" Margin="50,5,30,5" BorderThickness="0"  Click="UpdateDanceLink_Click"/>
+                    <Button Name="btn_addDanceFilmLijst" Content="Add" Grid.Row="2"  Width="50" Margin="49,5,50,5" Click="AddDanceFilmLinks_Click" BorderThickness="0" Grid.ColumnSpan="2"/>
+                    <Button Name="btn_deleteDanceFilmLijst" Content="Delete" Grid.Column="3" Grid.Row="2" Margin="49,5,24,5" Click="DeleteDanceLink_Click" BorderThickness="0" />
+                    
+                    <TextBox Name="tbx_AddDanceName" Grid.Row="3" Margin="3,3,2,3" FontSize="16" Grid.ColumnSpan="2" />
+                    <TextBox Name="tbx_AddDanceLink" Grid.Row="3" Grid.Column="2" Margin="4,3,3,3" FontSize="16" />
+                    <TextBox Name="tbx_AddCategorie" Grid.Row="3" Grid.Column="3" Margin="3,3,4,3" FontSize="16" />
+                    <TextBox Name="tbx_AddGemaaktDoor" Grid.Row="3" Grid.Column="4" Margin="2,3,3,3" FontSize="16" />
 
                 </Grid>
             </TabItem>
@@ -199,32 +196,27 @@
                         <RowDefinition/>
                         <RowDefinition Height="200"/>
                         <RowDefinition Height="15"/>
-                        
-                        
                     </Grid.RowDefinitions>
 
-                    <TextBox Name="ZoekOpNaam" Grid.Row="2" Margin="3" Grid.Column="1" FontSize="16"/>
-                    <DatePicker Name="SelecteerDatum" Grid.Row="2" Grid.Column="2" Margin="3"/>
-                    <Button Name="btn_ZoekOpNaam" Grid.Row="3" Grid.Column="1" Content="Zoek Op Naam" Margin="5" BorderThickness="0" />
-                    <Button Name="btn_SaveAanwezigheid" Grid.Row="2" Grid.Column="3" Content="Save attendance" Margin="5" BorderThickness="0" />
+                    <TextBox Name="tbx_ZoekOpNaam" Grid.Row="2" Margin="3" Grid.Column="1" FontSize="16"/>
+                    <DatePicker Name="tbx_SelecteerDatum" Grid.Row="2" Grid.Column="2" Margin="3"/>
+                    <Button Name="btn_ZoekOpNaam" Grid.Row="3" Grid.Column="1" Content="Zoek Op Voornaam" Margin="5" BorderThickness="0" Click="btn_ZoekOpNaam_Click"/>
+                    <Button Name="btn_SaveAanwezigheid" Grid.Row="2" Grid.Column="3" Content="Save attendance" Margin="5" BorderThickness="0" Click="btn_SaveAanwezigheid_Click" />
 
 
                     <ListView Grid.Row="5" Grid.RowSpan="2" Grid.Column="1" Margin="5" x:Name="aanwezighedenlijst"  
                        Grid.ColumnSpan="3" Background="#CCCCCC">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" Width="25" DisplayMemberBinding="{Binding Id}" />
                                 <GridViewColumn Header="Username" Width="80" DisplayMemberBinding="{Binding Username}" />
                                 <GridViewColumn Header="Firstname" Width="80" DisplayMemberBinding="{Binding FirstName}" />
                                 <GridViewColumn Header="Lastname" Width="80" DisplayMemberBinding="{Binding LastName}" />
                                 <GridViewColumn Header="Geslacht" Width="60" DisplayMemberBinding="{Binding Geslacht}" />
-                                <GridViewColumn Header="Categorie" Width="80" DisplayMemberBinding="{Binding Categorie}" />
-                                <GridViewColumn Header="Datum" Width="140" DisplayMemberBinding="{Binding Datum}" />
-                              
+                                <GridViewColumn Header="Categorie" Width="80" DisplayMemberBinding="{Binding CategorieName}" />
+                                <GridViewColumn Header="Datum" Width="165" DisplayMemberBinding="{Binding Datum}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
-                   
                 </Grid>
             </TabItem>
             <TabItem Header="Figuren aanmaken">
@@ -254,10 +246,10 @@
                         </ListView.View>
                     </ListView>
                     <Label Content="DanceName" Grid.Column="3" Grid.Row="1" Margin="45" RenderTransformOrigin="0.508,-0.282"/>
-                    <Label Content="DanceCategorie" Grid.Column="3" Grid.Row="2" Margin="40"/>
+                    <Label Content="DanceCategorie" Grid.Column="3" Grid.Row="2" Margin="40,40,45,54"/>
                     <TextBox Name="tbx_AddDanceFigureName" Grid.Column="3" Grid.Row="1" Margin="45,80,45,10"/>
-                    <TextBox Name="tbx_AddDanceFigureCategorie" Grid.Column="3" Grid.Row="2" Margin="45,80,45,10"/>
-                    <Button x:Name="bewaarfiguren" Grid.Row="3" Grid.Column="3" Margin="45" Content="Bewaar Progress" BorderThickness="0"/>
+                    <TextBox Name="tbx_AddDanceFigureCategorie" Grid.Column="3" Grid.Row="2" Margin="45,73,45,19"/>
+                    <Button x:Name="btn_bewaarProgress" Grid.Row="3" Grid.Column="3" Margin="45" Content="Bewaar Progress" Click="btn_bewaarProgress_Click" BorderThickness="0"/>
 
 
                 </Grid>
