@@ -24,8 +24,8 @@ namespace Logic
                 {
                     Username = username,
                     IsManager = false,
-                    FirstName = voornaam,
-                    LastName = achternaam,
+                    Firstname = voornaam,
+                    Lastname = achternaam,
                     Sex = geslacht,
                     //Password = password,
                     //Leraar = leraar,

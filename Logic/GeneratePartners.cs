@@ -1,5 +1,4 @@
-﻿
-using DataAccess.ADO;
+﻿using DataAccess.Dapper;
 
 
 namespace Logic

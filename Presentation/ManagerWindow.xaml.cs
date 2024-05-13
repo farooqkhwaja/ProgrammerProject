@@ -2,7 +2,7 @@ using System.Windows;
 using Logic;
 using DataAccess.Models;
 using DataAccess;
-using DataAccess.ADO;
+using DataAccess.Dapper;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Presentation;
@@ -17,17 +17,19 @@ public partial class ManagerWindow : Window
     private readonly SaveAttendance _saveAttendance;
     private readonly EventRepository _uploadEventRepository;
     private readonly Events _uploadEvents;
+    private string _connectionString;
     public ManagerWindow(LoginWindow loginWindow)
     {
         InitializeComponent();
         _loginWindow = loginWindow;
         _loginWindow.Visibility = Visibility.Collapsed;
         _saveAttendance = new SaveAttendance();
-        _uploadlinksRepository = new LinksRepository();
+        _connectionString = new string("Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False");
+        _uploadlinksRepository = new LinksRepository(_connectionString);
         _uploadlinks = new Links();
-        _uploadEventRepository = new EventRepository();
+        _uploadEventRepository = new EventRepository(_connectionString);
         _uploadEvents = new Events();
-        _userRepository = new UserRepository();
+        _userRepository = new UserRepository(_connectionString);
         _registerStudent = new RegisterStudent();
 
         DansFilmLinksList.ItemsSource = _uploadlinksRepository.GetLinks(); 
@@ -79,7 +81,7 @@ public partial class ManagerWindow : Window
         if (_uploadEventRepository != null)
         {
             var selectedItem = EvenementenLinks.SelectedItem as Events;
-            _uploadEventRepository.DeleteEvents(selectedItem.Id);
+            _uploadEventRepository.DeleteEvent(selectedItem.Id);
         }
         else
         {

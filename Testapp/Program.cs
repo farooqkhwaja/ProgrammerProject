@@ -1,5 +1,4 @@
 ﻿using DataAccess;
-using DataAccess.ADO;
 using DataAccess.Models;
 
 namespace Testapp
@@ -8,7 +7,9 @@ namespace Testapp
     {
         static void Main(string[] args)
         {
-            GG();
+        }
+
+           /* GG();
             //DoubleUsernameCheck();
               
 
@@ -32,6 +33,6 @@ namespace Testapp
             UserRepository useraccess = new UserRepository();
             var user = useraccess.GetUserByUsernamePassword("FarooqKhoja", "123");
             Console.WriteLine(user.FirstName);
-        }
+        }*/
     }
 }

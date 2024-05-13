@@ -1,24 +1,32 @@
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
-using DataAccess.ADO;
+using DataAccess.Dapper;
+using DataAccess.Models;
 
 namespace Presentation;
 
 public partial class UserWindow : Window
 {
     private readonly UserRepository _userRepository;
+    private readonly User _user;
     private readonly LoginWindow _loginWindow;
+    private string _connectionString;
     public UserWindow(LoginWindow loginwindow)
     {
         InitializeComponent();
         _loginWindow = loginwindow;
-        _userRepository = new UserRepository();
-
-
-
+        _user = new User();
+        _connectionString = new string("Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False");
+        _userRepository = new UserRepository(_connectionString);
     }
 
     private void GeneratePartner_Click(object sender, RoutedEventArgs e)
     {
+        
+        List<User> RandomUser()
+        {
+            _userRepository.GetUsers();
+        }
         _userRepository.GetUserByFirstName(tbx_PartnerNaam.Text);
 
     }

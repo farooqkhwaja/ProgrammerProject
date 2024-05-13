@@ -14,10 +14,10 @@ public class User
     public  string Password { get; set; }
     [Required]
     [MaxLength(50)]
-    public string FirstName { get; set; }
+    public string Firstname { get; set; }
     [Required]
     [MaxLength(50)]
-    public string LastName { get; set; }
+    public string Lastname { get; set; }
     [Required]
     [MaxLength(10)]
     public string Sex { get; set; }
