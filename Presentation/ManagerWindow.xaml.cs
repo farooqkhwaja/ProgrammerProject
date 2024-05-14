@@ -9,6 +9,8 @@ namespace Presentation;
 
 public partial class ManagerWindow : Window
 {   
+    private readonly DanceCategoryRepository _danceCategoryRepository;
+    private readonly DanceCategory _danceCategory;
     private readonly LinksRepository _uploadlinksRepository;
     private readonly Links _uploadlinks;
     private readonly UserRepository _userRepository;
@@ -31,15 +33,18 @@ public partial class ManagerWindow : Window
         _uploadEvents = new Events();
         _userRepository = new UserRepository(_connectionString);
         _registerStudent = new RegisterStudent();
+        _danceCategoryRepository = new DanceCategoryRepository(_connectionString);
+
 
         DansFilmLinksList.ItemsSource = _uploadlinksRepository.GetLinks(); 
         CursistenList.ItemsSource = _userRepository.GetUsers();
         EvenementenLinks.ItemsSource = _uploadEventRepository.GetEvents();
+        cbx_categorie.ItemsSource = _danceCategoryRepository.GetdanceCategories();
     }
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
     {
-        var msgResult = ""; // _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_leraar.Text,cbx_categorie.Text);
+        var msgResult = _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text);
         MessageBox.Show(msgResult);
 
         CursistenList.ItemsSource = _userRepository.GetUsers();
@@ -122,18 +127,18 @@ public partial class ManagerWindow : Window
     {
         DansFilmLinksList.ItemsSource = _uploadlinksRepository.GetLinks();
     }
-
     private void btn_ZoekOpNaam_Click(object sender, RoutedEventArgs e)
     {
         string firstname = tbx_ZoekOpNaam.Text;
-        _userRepository.GetUserByFirstName(firstname);
-    }
+        var users = _userRepository.GetUserByFirstName(firstname) as IList<User>;
 
+        aanwezighedenlijst.ItemsSource = users;
+
+    }
     private void btn_SaveAanwezigheid_Click(object sender, RoutedEventArgs e)
     {
 
     }
-
     private void btn_bewaarProgress_Click(object sender, RoutedEventArgs e)
     {
 

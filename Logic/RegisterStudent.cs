@@ -1,14 +1,14 @@
 ﻿using DataAccess.Models;
-using DataAccess.ADO;
+using DataAccess.Dapper;
 
 namespace Logic
 {
     public class RegisterStudent
     {
-        public string RegisterUser(string voornaam, string achternaam, string geslacht,string password,string username, string leraar, int categorieId)
+        public string RegisterUser(string voornaam, string achternaam, string geslacht,string password,string username,int categorieId)
         {
             
-            UserRepository userAccess = new UserRepository();
+            var userAccess = new UserRepository();
 
             var userExists = userAccess.GetUserByUsername(voornaam + "-" + achternaam);
 
@@ -18,8 +18,6 @@ namespace Logic
             }
             else
             {
-
-                //var categorieName = category.Id;
                 var newUser = new User()
                 {
                     Username = username,
@@ -27,9 +25,7 @@ namespace Logic
                     Firstname = voornaam,
                     Lastname = achternaam,
                     Sex = geslacht,
-                    //Password = password,
-                    //Leraar = leraar,
-                    //FK_UploadDanceFigures = categorieId,
+                    Password = password,
                 };
 
                 var result = userAccess.CreateUser(newUser);

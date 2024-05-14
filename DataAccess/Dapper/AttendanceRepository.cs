@@ -7,7 +7,7 @@ namespace DataAccess.Dapper
 {
     public class AttendanceRepository
     {
-        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+        private string _connectionString;
         public AttendanceRepository(string connectionString)
         {
             _connectionString = connectionString;

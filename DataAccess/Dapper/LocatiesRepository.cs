@@ -9,7 +9,7 @@ namespace DataAccess.Dapper
 {
     public class LocatiesRepository
     {
-        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+        private string _connectionString;
 
         public LocatiesRepository(string connectionString)
         {

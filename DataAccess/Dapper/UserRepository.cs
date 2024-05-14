@@ -13,6 +13,16 @@ namespace DataAccess.Dapper
         {
             _connectionString = connectionString;
         }
+        public List<User> GetFirstnames()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT FirstName FROM [User]";
+                connection.Open();
+                var users = connection.Query<User>(query).AsList();
+                return users;
+            }
+        }
         public User GetUserByFirstName(string firstname)
         {
             using (var connection = new SqlConnection(_connectionString))

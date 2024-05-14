@@ -63,10 +63,7 @@
 
                     <ComboBox  x:Name="cbx_categorie" Grid.Row="10" Grid.Column="4" Margin="4,5,2,5" Height="25"  Background="#CCCCCC"
                      FontSize="16" MaxWidth="100">
-                        <ComboBoxItem Content="Beginner" FontSize="16" />
-                        <ComboBoxItem Content="Semi1" FontSize="16"/>
-                        <ComboBoxItem Content="Semi2" FontSize="16"/>
-                        <ComboBoxItem Content="Pro" FontSize="16"/>
+                        <ComboBoxItem Name="{Binding CategoryName}"  Margin="4,5,2,5"/>
                     </ComboBox>
                     <Label Grid.Row="9" Grid.Column="5" Content="Leraar" Margin="2"/>
                     <TextBox x:Name="tbx_leraar" Grid.Row="10" Grid.Column="5" Margin="5"  Height="25" Background="#CCCCCC"

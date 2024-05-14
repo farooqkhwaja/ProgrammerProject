@@ -1,5 +1,4 @@
-﻿using DataAccess.ADO;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.Models
 {

@@ -22,10 +22,11 @@ public partial class UserWindow : Window
 
     private void GeneratePartner_Click(object sender, RoutedEventArgs e)
     {
-        
+
         List<User> RandomUser()
         {
-            _userRepository.GetUsers();
+            var result = _userRepository.GetUsers();
+            RandomUser.
         }
         _userRepository.GetUserByFirstName(tbx_PartnerNaam.Text);
 
