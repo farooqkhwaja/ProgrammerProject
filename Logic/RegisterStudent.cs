@@ -5,7 +5,7 @@ namespace Logic
 {
     public class RegisterStudent
     {
-        public string RegisterUser(string voornaam, string achternaam, string geslacht,string password,string username,int categorieId)
+        public string RegisterUser(string voornaam, string achternaam, string geslacht,string password,string username,string email)
         {
             
             var userAccess = new UserRepository();
@@ -26,6 +26,7 @@ namespace Logic
                     Lastname = achternaam,
                     Sex = geslacht,
                     Password = password,
+                    Email = email
                 };
 
                 var result = userAccess.CreateUser(newUser);

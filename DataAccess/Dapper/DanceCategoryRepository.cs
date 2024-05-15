@@ -11,12 +11,8 @@ namespace DataAccess.Dapper
 {
     public class DanceCategoryRepository
     {
-        private string _connectionString;
+        private string _connectionString= "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
-        public DanceCategoryRepository(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
         public List<DanceCategory> GetdanceCategories()
         {
             using(var connection = new SqlConnection(_connectionString))

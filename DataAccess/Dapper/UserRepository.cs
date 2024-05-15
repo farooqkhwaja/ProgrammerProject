@@ -9,10 +9,6 @@ namespace DataAccess.Dapper
     {
         private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
-        public UserRepository(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
         public List<User> GetFirstnames()
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -28,15 +24,18 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE FirstName = @FirstName", new { FirstName = firstname });
+                var result = connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE FirstName = @FirstName", new { FirstName = firstname });
+                return result;
             }
         }
-        public IEnumerable<User> GetUsers()
+        public List<User> GetUsers()
         {
             using (var connection = new SqlConnection(_connectionString))
             {
+                string query = "SELECT * FROM [User]";
                 connection.Open();
-                return connection.Query<User>("SELECT * FROM [User]");
+                var result = connection.Query<User>(query);
+                return result.ToList();
             }
         }
         public User GetUserByUsernamePassword(string username, string password)
@@ -44,7 +43,8 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE Username = @Username AND Password = @Password", new { Username = username, Password = password });
+                var result = connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE Username = @Username AND Password = @Password", new { Username = username, Password = password });
+                return result;
             }
         }
         public bool CreateUser(User user)
@@ -56,7 +56,8 @@ namespace DataAccess.Dapper
             {
                 connection.Open();
                 int rowsAffected = connection.Execute(query, user);
-                return rowsAffected > 0;
+                var result = rowsAffected > 0;
+                return result;
             }
         }
         public bool GetUserByUsername(string username)
@@ -64,7 +65,8 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.QueryFirstOrDefault<bool>("SELECT 1 FROM [User] WHERE Username = @Username", new { Username = username }) != default(bool);
+                var result = connection.QueryFirstOrDefault<bool>("SELECT 1 FROM [User] WHERE Username = @Username", new { Username = username }) != default(bool);
+                return result;
             }
         }
         public User GetUser(int userId)
@@ -72,7 +74,8 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE Id = @Id", new { Id = userId });
+                var result = connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE Id = @Id", new { Id = userId });
+                return result;
             }
         }
         public void UpdateUser(User user)

@@ -39,8 +39,9 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.QueryFirstOrDefault<Locations>(query, new { Id = id });
-            }
+                var result = connection.QueryFirstOrDefault<Locations>(query, new { Id = id });
+                return result;
+                }
         }
 
         public void UpdateLocation(Locations location)

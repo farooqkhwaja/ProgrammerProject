@@ -26,14 +26,13 @@ public partial class ManagerWindow : Window
         _loginWindow = loginWindow;
         _loginWindow.Visibility = Visibility.Collapsed;
         _saveAttendance = new SaveAttendance();
-        _connectionString = new string("Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False");
-        _uploadlinksRepository = new LinksRepository(_connectionString);
+        _uploadlinksRepository = new LinksRepository();
         _uploadlinks = new Links();
-        _uploadEventRepository = new EventRepository(_connectionString);
+        _uploadEventRepository = new EventRepository();
         _uploadEvents = new Events();
-        _userRepository = new UserRepository(_connectionString);
+        _userRepository = new UserRepository();
         _registerStudent = new RegisterStudent();
-        _danceCategoryRepository = new DanceCategoryRepository(_connectionString);
+        _danceCategoryRepository = new DanceCategoryRepository();
 
 
         DansFilmLinksList.ItemsSource = _uploadlinksRepository.GetLinks(); 
@@ -44,7 +43,7 @@ public partial class ManagerWindow : Window
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
     {
-        var msgResult = _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text);
+        var msgResult = _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_email.Text);
         MessageBox.Show(msgResult);
 
         CursistenList.ItemsSource = _userRepository.GetUsers();
@@ -67,15 +66,14 @@ public partial class ManagerWindow : Window
     {
 
         if (_uploadEventRepository != null)
-        {
+        {     
             string eventName = tbx_EvenementenToevoegenBox.Text;
             string eventDate = tbx_EvenementDatum.Text;
-            string eventStudent = tbx_EvenementStudent.Text;
-            int eventLocatie = Convert.ToInt32(tbx_EvenementLocatie.Text);
+            int eventLocatie = Convert.ToInt32(cbx_locatie.Text);
 
-            _uploadEventRepository.CreateEvent(eventName, eventDate, eventStudent, eventLocatie);
+            _uploadEventRepository.CreateEvent(eventName, eventDate, eventLocatie);
+
         }
-
     }
     private void UpdateEvent_Click(object sender, RoutedEventArgs e)
     {
@@ -103,9 +101,8 @@ public partial class ManagerWindow : Window
         {
             Links newLink = new Links
             {
-                //FigureName = figureName,
-                //LinkAdres = linkadres,
-                //GemaaktDoor = gemaaktDoor
+                LinkAdres = linkadres,
+                GemaaktDoor = gemaaktDoor
             };
 
             _uploadlinksRepository.CreateLink(newLink);

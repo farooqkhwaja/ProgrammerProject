@@ -1,5 +1,6 @@
 ﻿using DataAccess.Dapper;
 using DataAccess.Models;
+using System.ComponentModel.Design;
 using System.Reflection.Metadata;
 
 
@@ -19,11 +20,18 @@ namespace Logic
         {
             var users = _userrepository.GetFirstnames();
 
-            var random = new Random(); 
+            if (users.Count() == null) 
+            {
+                return null;
+            }
+            else
+            {
+                var random = new Random();
 
-            var randomIndex = random.Next(1, users.Count());
+                var randomIndex = random.Next(users.Count());
 
-            return users[randomIndex];
+                return users[randomIndex];
+            }
         }
     }
 }

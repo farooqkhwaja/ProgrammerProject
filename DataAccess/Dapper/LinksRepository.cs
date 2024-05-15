@@ -9,12 +9,7 @@ namespace DataAccess.Dapper
 {
     public class LinksRepository
     {
-        private string _connectionString;
-
-        public LinksRepository(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
         public CreateLinksModel CreateLink(Links uploadLink)
         {
@@ -45,7 +40,8 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.Query<Links>(query).ToList();
+                var result = connection.Query<Links>(query).ToList();
+                return result;
             }
         }
 
@@ -56,7 +52,8 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.QueryFirstOrDefault<Links>(query, new { Id = id });
+                var result = connection.QueryFirstOrDefault<Links>(query, new { Id = id });
+                return result;
             }
         }
 

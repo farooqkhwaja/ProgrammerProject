@@ -19,7 +19,8 @@ namespace DataAccess.Dapper
             {
                 var sql = "SELECT * FROM DanceFigures";
                 var danceFigures = connection.QuerySingle<DanceFigures>(sql);
-                return new List<DanceFigures>();
+                var result = new List<DanceFigures>();
+                return result;
             }
         }
         public IEnumerable<DanceFigures> GetFigures()
@@ -27,7 +28,8 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.Query<DanceFigures>("SELECT * FROM DanceFigures");
+                var result = connection.Query<DanceFigures>("SELECT * FROM DanceFigures");
+                return result;
             }
         }
         public void AddDanceFigures(DanceFigures figures)

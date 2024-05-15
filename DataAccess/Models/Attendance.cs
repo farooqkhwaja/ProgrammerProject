@@ -12,5 +12,7 @@ namespace DataAccess.Models
         public bool Absent { get; set; }
         [Required]
         public int UserId { get; set; }
+        public ICollection<UserAttendance> UserAttendances { get; set; }
+
     }
 }

@@ -9,24 +9,19 @@ namespace DataAccess.Dapper
 {
     public class EventRepository
     {
-        private string _connectionString;
+        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
-        public EventRepository(string connectionString)
+        public bool CreateEvent(string eventName, string date, int locationID)     
         {
-            _connectionString = connectionString;
-        }
-
-        public bool CreateEvent(string eventName, string date, string studentAssigned, int? fkLocation)     
-        {
-            string query = "INSERT INTO Events (Name, Date, UserId, LocationId) " +
-                           "VALUES (@Name, @Date, @UserId, @LocationId)";
+            string query = "INSERT INTO Events (Name, Date, DanceCategory, UserId, LocationId) " +
+                           "VALUES (@Name, @Date, @DanceCategory @UserId, @LocationId)";
 
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 try
                 {
-                    connection.Execute(query, new { Name = eventName, Date = date, StudentAssigned = studentAssigned, Fk_Location = fkLocation });
+                    connection.Execute(query, new { Name = eventName, Date = date, UserId = userId, LocationId = locationID });
                 }
                 catch (Exception ex)
                 {
@@ -44,7 +39,8 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.QueryFirstOrDefault<Events>(query, new { Id = id });
+                var result = connection.QueryFirstOrDefault<Events>(query, new { Id = id });
+                return result;
             }
         }
 
@@ -55,7 +51,8 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                return connection.Query<Events>(query).ToList();
+                var result = connection.Query<Events>(query).ToList();
+                return result;
             }
         }
 
