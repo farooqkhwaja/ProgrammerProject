@@ -70,11 +70,11 @@
                      FontSize="16"  MaxWidth="100"/>
                     
                     <Button x:Name="delete_cursist" Grid.Row="9" Grid.Column="6" MaxWidth="100" HorizontalAlignment="Left" 
-                        Height="20" Content="Delete" Margin="5" Click="delete_cursist_Click"
+                        Height="20" Content="Delete" Margin="5" Click="DeleteUser_Click"
                            BorderThickness="0" Width="56"/>
 
                     <Button x:Name="inschrijven_cursist" Grid.Row="10" Grid.Column="6" 
-                        Height="20" Content="Cursist Inschrijven" Click="inschrijven_cursist_Click" Margin="5" 
+                        Height="20" Content="Cursist Inschrijven" Click="SubscribeUser_Click" Margin="5" 
                             BorderThickness="0"/>
 
 
@@ -213,8 +213,8 @@
 
                     <TextBox Name="tbx_ZoekOpNaam" Grid.Row="2" Margin="3" Grid.Column="1" FontSize="16"/>
                     <DatePicker Name="tbx_SelecteerDatum" Grid.Row="2" Grid.Column="2" Margin="3"/>
-                    <Button Name="btn_ZoekOpNaam" Grid.Row="3" Grid.Column="1" Content="Zoek Op Voornaam" Margin="5" BorderThickness="0" Click="btn_ZoekOpNaam_Click"/>
-                    <Button Name="btn_SaveAanwezigheid" Grid.Row="2" Grid.Column="3" Content="Save attendance" Margin="5" BorderThickness="0" Click="btn_SaveAanwezigheid_Click" />
+                    <Button Name="btn_ZoekOpNaam" Grid.Row="3" Grid.Column="1" Content="Zoek Op Voornaam" Margin="5" BorderThickness="0" Click="SearchByName_Click"/>
+                    <Button Name="btn_SaveAanwezigheid" Grid.Row="2" Grid.Column="3" Content="Save attendance" Margin="5" BorderThickness="0" Click="SaveAttendance_Click" />
 
 
                     <ListView Grid.Row="5" Grid.RowSpan="2" Grid.Column="1" Margin="5" x:Name="aanwezighedenlijst"  
@@ -262,7 +262,7 @@
                     <Label Content="DanceCategorie" Grid.Column="3" Grid.Row="2" Margin="40,40,45,54"/>
                     <TextBox Name="tbx_AddDanceFigureName" Grid.Column="3" Grid.Row="1" Margin="45,80,45,10"/>
                     <TextBox Name="tbx_AddDanceFigureCategorie" Grid.Column="3" Grid.Row="2" Margin="45,73,45,19"/>
-                    <Button x:Name="btn_bewaarProgress" Grid.Row="3" Grid.Column="3" Margin="45" Content="Bewaar Progress" Click="btn_bewaarProgress_Click" BorderThickness="0"/>
+                    <Button x:Name="btn_bewaarProgress" Grid.Row="3" Grid.Column="3" Margin="45" Content="Bewaar Progress" Click="SaveProgress_Click" BorderThickness="0"/>
 
 
                 </Grid>

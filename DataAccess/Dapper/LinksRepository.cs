@@ -1,82 +1,75 @@
 ﻿using Dapper;
 using DataAccess.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 
-namespace DataAccess.Dapper
+namespace DataAccess.Dapper;
+
+public class LinksRepository
 {
-    public class LinksRepository
+    public int CreateLink(Links uploadLink)
     {
-        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+        int affectedRows = 0;
+        
+        string query = "INSERT INTO Links (Url, CreatedBy) VALUES (@Url, @CreatedBy)";
 
-        public CreateLinksModel CreateLink(Links uploadLink)
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
-            CreateLinksModel model = new CreateLinksModel();
-            string query = "INSERT INTO Links (Url, CreatedBy) VALUES (@Url, @CreatedBy)";
-
-            using (var connection = new SqlConnection(_connectionString))
+            connection.Open();
+            try
             {
-                connection.Open();
-                try
-                {
-                    connection.Execute(query, uploadLink);
-                    model.succesful = true;
-                }
-                catch (Exception ex)
-                {
-                    model.succesful = false;
-                    model.msg = "Link did not added. " + ex.Message;
-                }
+                affectedRows = connection.Execute(query, uploadLink);
             }
-            return model;
-        }
-
-        public List<Links> GetLinks()
-        {
-            string query = "SELECT * FROM Links";
-
-            using (var connection = new SqlConnection(_connectionString))
+            catch (Exception ex)
             {
-                connection.Open();
-                var result = connection.Query<Links>(query).ToList();
-                return result;
+                throw;
             }
         }
+        return affectedRows;
+    }
 
-        public Links GetLink(int id)
+    public List<Links> GetLinks()
+    {
+        string query = "SELECT * FROM Links";
+
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
-            string query = "SELECT * FROM Links WHERE Id = @Id";
-
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var result = connection.QueryFirstOrDefault<Links>(query, new { Id = id });
-                return result;
-            }
+            connection.Open();
+            var result = connection.Query<Links>(query).ToList();
+            return result;
         }
+    }
 
-        public void UpdateLinks(Links uploadlink)
+    public Links GetLink(int id)
+    {
+        string query = "SELECT * FROM Links WHERE Id = @Id";
+
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
-            string query = "UPDATE Links SET Url = @Url WHERE Id = @Id";
-
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                connection.Execute(query, uploadlink);
-            }
+            connection.Open();
+            var result = connection.QueryFirstOrDefault<Links>(query, new { Id = id });
+            return result;
         }
+    }
 
-        public void DeleteLink(int linkId)
+    public void UpdateLinks(Links uploadlink)
+    {
+        string query = "UPDATE Links SET Url = @Url WHERE Id = @Id";
+
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
-            string query = "DELETE FROM Links WHERE Id = @Id";
+            connection.Open();
+            connection.Execute(query, uploadlink);
+        }
+    }
 
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                connection.Execute(query, new { Id = linkId });
-            }
+    public void DeleteLink(int linkId)
+    {
+        string query = "DELETE FROM Links WHERE Id = @Id";
+
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        {
+            connection.Open();
+            connection.Execute(query, new { Id = linkId });
         }
     }
 }

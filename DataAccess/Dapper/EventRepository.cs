@@ -1,82 +1,76 @@
 ﻿using Dapper;
 using DataAccess.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 
-namespace DataAccess.Dapper
+namespace DataAccess.Dapper;
+
+public class EventRepository
 {
-    public class EventRepository
+    public bool SaveEvent(Models.Events _event)
     {
-        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+         string query = "INSERT INTO Events (Name, Date, DanceCategory, UserId, LocationId) " +
+                        "VALUES (@Name.Name, @Date, @DanceCategory @UserId, @LocationId)";
 
-        public bool SaveEvent(Models.Events _event)     
-        {
-             string query = "INSERT INTO Events (Name, Date, DanceCategory, UserId, LocationId) " +
-                            "VALUES (@Name.Name, @Date, @DanceCategory @UserId, @LocationId)";
-
-             using (var connection = new SqlConnection(_connectionString))
+         using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+         {
+             connection.Open();
+             try
              {
-                 connection.Open();
-                 try
-                 {
-                     connection.Execute(query, new { Name = _event.Name, Date = _event.Date, DanceCategoryId = _event.DanceCategoryId, UserId = _event.UserId, LocationId = _event.LocationId });
-                 }
-                 catch (Exception ex)
-                 {
-                     Console.WriteLine(ex.Message);
-                     return false;
-                 }
+                 connection.Execute(query, new { Name = _event.Name, Date = _event.Date, DanceCategoryId = _event.DanceCategoryId, UserId = _event.UserId, LocationId = _event.LocationId });
              }
-             return true;
-            
-        }
+             catch (Exception ex)
+             {
+                 Console.WriteLine(ex.Message);
+                 return false;
+             }
+         }
+         return true;
+        
+    }
 
-        public Events GetEvent(int id)
+    public Events GetEvent(int id)
+    {
+        string query = "SELECT * FROM Events WHERE Id = @Id";
+
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
-            string query = "SELECT * FROM Events WHERE Id = @Id";
-
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var result = connection.QueryFirstOrDefault<Events>(query, new { Id = id });
-                return result;
-            }
+            connection.Open();
+            var result = connection.QueryFirstOrDefault<Events>(query, new { Id = id });
+            return result;
         }
+    }
 
-        public List<Events> GetEvents()
+    public List<Events> GetEvents()
+    {
+        string query = "SELECT * FROM Events";
+
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
-            string query = "SELECT * FROM Events";
-
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var result = connection.Query<Events>(query).ToList();
-                return result;
-            }
+            connection.Open();
+            var result = connection.Query<Events>(query).ToList();
+            return result;
         }
+    }
 
-        public void UpdateEvent(Events uploadEvent)
+    public void UpdateEvent(Events uploadEvent)
+    {
+        string query = "UPDATE Events SET Name = @Name, Date = @Date WHERE Id = @Id";
+
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
-            string query = "UPDATE Events SET Name = @Name, Date = @Date WHERE Id = @Id";
-
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                connection.Execute(query, uploadEvent);
-            }
+            connection.Open();
+            connection.Execute(query, uploadEvent);
         }
+    }
 
-        public void DeleteEvent(int id)
+    public void DeleteEvent(int id)
+    {
+        string query = "DELETE FROM Events WHERE Id = @Id";
+
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
-            string query = "DELETE FROM Events WHERE Id = @Id";
-
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                connection.Execute(query, new { Id = id });
-            }
+            connection.Open();
+            connection.Execute(query, new { Id = id });
         }
     }
 }
