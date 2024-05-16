@@ -11,25 +11,26 @@ namespace DataAccess.Dapper
     {
         private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
-        public bool CreateEvent(string eventName, string date, int locationID, int danceCategoryId)     
+        public bool SaveEvent(Models.Events _event)     
         {
-            string query = "INSERT INTO Events (Name, Date, DanceCategory, UserId, LocationId) " +
-                           "VALUES (@Name, @Date, @DanceCategory @UserId, @LocationId)";
+             string query = "INSERT INTO Events (Name, Date, DanceCategory, UserId, LocationId) " +
+                            "VALUES (@Name.Name, @Date, @DanceCategory @UserId, @LocationId)";
 
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                try
-                {
-                    connection.Execute(query, new { Name = eventName, Date = date, DanceCategoryId = danceCategoryId, LocationId = locationID });
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return false;
-                }
-            }
-            return true;
+             using (var connection = new SqlConnection(_connectionString))
+             {
+                 connection.Open();
+                 try
+                 {
+                     connection.Execute(query, new { Name = _event.Name, Date = _event.Date, DanceCategoryId = _event.DanceCategoryId, UserId = _event.UserId, LocationId = _event.LocationId });
+                 }
+                 catch (Exception ex)
+                 {
+                     Console.WriteLine(ex.Message);
+                     return false;
+                 }
+             }
+             return true;
+            
         }
 
         public Events GetEvent(int id)

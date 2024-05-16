@@ -10,7 +10,7 @@ using System;
 namespace Presentation;
 
 public partial class ManagerWindow : Window
-{   
+{
     private readonly DanceCategoryRepository _danceCategoryRepository;
     private readonly DanceCategory _danceCategory;
     private readonly Locations _locations;
@@ -23,7 +23,6 @@ public partial class ManagerWindow : Window
     private readonly SaveAttendance _saveAttendance;
     private readonly EventRepository _uploadEventRepository;
     private readonly Events _uploadEvents;
-    private string _connectionString;
     public ManagerWindow(LoginWindow loginWindow)
     {
         InitializeComponent();
@@ -37,7 +36,7 @@ public partial class ManagerWindow : Window
         _userRepository = new UserRepository();
         _registerStudent = new RegisterStudent();
         _danceCategoryRepository = new DanceCategoryRepository();
-
+        _locationRepository = new LocationRepository();
 
         DansFilmLinksList.ItemsSource = _uploadlinksRepository.GetLinks(); 
         CursistenList.ItemsSource = _userRepository.GetUsers();
@@ -70,21 +69,19 @@ public partial class ManagerWindow : Window
     }
     private void AddEvent_Click(object sender, RoutedEventArgs e)
     {
+        var selectedLocation = cbx_locatie.SelectedItem as Locations;
+        var selectedCategory = cbx_categoriename.SelectedItem as DanceCategory;
+        
+        Events _event = new Events();
+        _event.Name = tbx_EvenementenToevoegenBox.Text;
+        _event.Date = tbx_EvenementDatum.Text;
+        _event.DanceCategoryId = selectedCategory.Id;
+        _event.LocationId = selectedLocation.Id;
+        _event.UserId = 3; //TODO
 
-        if (_uploadEventRepository != null)
-        {
-            string eventName = tbx_EvenementenToevoegenBox.Text;
-            string eventDate = tbx_EvenementDatum.Text;
-            int eventLocatie = Convert.ToInt32(cbx_locatie.Text);
-            int categorieName = Convert.ToInt32((cbx_categorie.Text));
+        _uploadEventRepository.SaveEvent(_event);
 
-            Events selectedEvent = EvenementenLinks.SelectedItem as Events;
-
-            //var userId = AssignedStudentsOnEvent.ItemsSource = selectedEvent.UserEvents.Where();    
-
-            _uploadEventRepository.CreateEvent(eventName, eventDate, eventLocatie, categorieName);
-
-        }
+        
     }
     private void UpdateEvent_Click(object sender, RoutedEventArgs e)
     {

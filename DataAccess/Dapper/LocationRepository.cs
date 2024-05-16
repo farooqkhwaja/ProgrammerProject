@@ -9,7 +9,7 @@ namespace DataAccess.Dapper
 {
     public class LocationRepository
     {
-        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Encrypt=False";
 
         public Locations CreateLocation(Locations location)
         {
@@ -29,7 +29,7 @@ namespace DataAccess.Dapper
 
         public List<Locations> GetLocations()
         {
-            string query = "SELECT * FROM Locations" ;
+            string query = "SELECT * FROM Locations";
 
             using (var connection = new SqlConnection(_connectionString))
             {

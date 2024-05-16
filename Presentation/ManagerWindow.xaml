@@ -78,14 +78,13 @@
                             BorderThickness="0"/>
 
 
-                    <ListView Grid.Row="1" Grid.Column="4" Grid.RowSpan="8" Margin="5" x:Name="CursistenList"  
-                          Grid.ColumnSpan="5" Background="#CCCCCC">
+                    <ListView Grid.Row="1" Grid.Column="4" Grid.RowSpan="8" Margin="5" ItemsSource="{Binding usersList}" x:Name="CursistenList" Grid.ColumnSpan="5" Background="#CCCCCC">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Firstname" Width="100" DisplayMemberBinding="{Binding FirstName}" />
-                                <GridViewColumn Header="Lastname" Width="100" DisplayMemberBinding="{Binding LastName}" />
-                                <GridViewColumn Header="Geslacht" Width="100" DisplayMemberBinding="{Binding Geslacht}" />
-                                <GridViewColumn Header="Categorie" Width="100" DisplayMemberBinding="{Binding CategorieName}" />
+                                <GridViewColumn Header="Firstname" Width="100" DisplayMemberBinding="{Binding Path=Firstname}" />
+                                <GridViewColumn Header="Lastname" Width="100" DisplayMemberBinding="{Binding Path=LastName}" />
+                                <GridViewColumn Header="Geslacht" Width="100" DisplayMemberBinding="{Binding Path=Geslacht}" />
+                                <GridViewColumn Header="Categorie" Width="100" DisplayMemberBinding="{Binding Path=CategorieName}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -137,7 +136,7 @@
 
 
                     <ComboBox x:Name="cbx_locatie" Grid.Row="3" Grid.Column="4" Height="33" Background="#CCCCCC"
-                    FontSize="16" MaxWidth="140" ItemsSource="{Binding Locaties}" DisplayMemberPath="CategoryName" SelectedItem="{Binding StreetName}" />
+                    FontSize="16" MaxWidth="140" ItemsSource="{Binding Source = Locations}" DisplayMemberPath="StreetName" SelectedItem="{Binding StreetName}" />
 
                    
 

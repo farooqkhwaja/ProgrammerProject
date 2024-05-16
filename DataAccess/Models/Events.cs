@@ -13,8 +13,8 @@ namespace DataAccess.Models
         public string Date { get; set; }
         [Required]
         public int DanceCategoryId {  get; set; }
-        //[Required]
-        //public int UserId { get; set; }
+        [Required]
+        public int UserId { get; set; }
         [Required]
         public int LocationId {  get; set; }
         public ICollection<UserEvent> UserEvents { get; set; }
