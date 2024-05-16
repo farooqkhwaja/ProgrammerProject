@@ -4,6 +4,8 @@ using DataAccess.Models;
 using DataAccess;
 using DataAccess.Dapper;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Security.Policy;
+using System;
 
 namespace Presentation;
 
@@ -11,6 +13,8 @@ public partial class ManagerWindow : Window
 {   
     private readonly DanceCategoryRepository _danceCategoryRepository;
     private readonly DanceCategory _danceCategory;
+    private readonly Locations _locations;
+    private readonly LocationRepository _locationRepository;
     private readonly LinksRepository _uploadlinksRepository;
     private readonly Links _uploadlinks;
     private readonly UserRepository _userRepository;
@@ -39,6 +43,8 @@ public partial class ManagerWindow : Window
         CursistenList.ItemsSource = _userRepository.GetUsers();
         EvenementenLinks.ItemsSource = _uploadEventRepository.GetEvents();
         cbx_categorie.ItemsSource = _danceCategoryRepository.GetdanceCategories();
+        cbx_categoriename.ItemsSource = _danceCategoryRepository.GetdanceCategories();
+        cbx_locatie.ItemsSource = _locationRepository.GetLocations();
     }
 
     private void inschrijven_cursist_Click(object sender, RoutedEventArgs e)
@@ -66,12 +72,17 @@ public partial class ManagerWindow : Window
     {
 
         if (_uploadEventRepository != null)
-        {     
+        {
             string eventName = tbx_EvenementenToevoegenBox.Text;
             string eventDate = tbx_EvenementDatum.Text;
             int eventLocatie = Convert.ToInt32(cbx_locatie.Text);
+            int categorieName = Convert.ToInt32((cbx_categorie.Text));
 
-            _uploadEventRepository.CreateEvent(eventName, eventDate, eventLocatie);
+            Events selectedEvent = EvenementenLinks.SelectedItem as Events;
+
+            //var userId = AssignedStudentsOnEvent.ItemsSource = selectedEvent.UserEvents.Where();    
+
+            _uploadEventRepository.CreateEvent(eventName, eventDate, eventLocatie, categorieName);
 
         }
     }
@@ -94,15 +105,17 @@ public partial class ManagerWindow : Window
     private void AddDanceFilmLinks_Click(object sender, RoutedEventArgs e)
     {
         string figureName = tbx_AddDanceName.Text;
-        string linkadres = tbx_AddDanceLink.Text;
-        string gemaaktDoor =  tbx_AddGemaaktDoor.Text;
+        string linkadres = tbx_AddDanceUrl.Text;
+        int gemaaktDoor = Convert.ToInt32( cbx_gemaaktdoor.Text);
+
 
         if (!string.IsNullOrWhiteSpace(figureName))
         {
             Links newLink = new Links
             {
-                LinkAdres = linkadres,
-                GemaaktDoor = gemaaktDoor
+                Name = figureName,
+                url = linkadres,
+                CreatedBy = gemaaktDoor
             };
 
             _uploadlinksRepository.CreateLink(newLink);

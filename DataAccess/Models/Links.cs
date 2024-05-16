@@ -10,7 +10,7 @@ namespace DataAccess.Models
         public string Name { get; set; }
         [Required] 
         
-        public Uri Url {  get; set; }
+        public string url {  get; set; }
 
         [Required]
         public int CreatedBy { get; set; }

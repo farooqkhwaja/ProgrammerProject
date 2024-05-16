@@ -7,14 +7,9 @@ using System.Linq;
 
 namespace DataAccess.Dapper
 {
-    public class LocatiesRepository
+    public class LocationRepository
     {
-        private string _connectionString;
-
-        public LocatiesRepository(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
         public Locations CreateLocation(Locations location)
         {
@@ -32,16 +27,16 @@ namespace DataAccess.Dapper
             return location;
         }
 
-        public Locations ReadLocation(int id)
+        public List<Locations> GetLocations()
         {
-            string query = "SELECT * FROM Locations WHERE Id = @Id";
+            string query = "SELECT * FROM Locations" ;
 
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var result = connection.QueryFirstOrDefault<Locations>(query, new { Id = id });
-                return result;
-                }
+                var result = connection.Query<Locations>(query);
+                return result.ToList();
+            }
         }
 
         public void UpdateLocation(Locations location)
