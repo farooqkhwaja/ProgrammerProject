@@ -29,7 +29,7 @@ namespace DataAccess.Dapper
 
         public List<Locations> GetLocations()
         {
-            string query = "SELECT * FROM Locations";
+            string query = "SELECT * FROM Location";
 
             using (var connection = new SqlConnection(_connectionString))
             {

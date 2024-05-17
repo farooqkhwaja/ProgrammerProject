@@ -77,14 +77,42 @@
                         Height="20" Content="Cursist Inschrijven" Click="SubscribeUser_Click" Margin="5" 
                             BorderThickness="0"/>
 
-
-                    <ListView Grid.Row="1" Grid.Column="4" Grid.RowSpan="8" Margin="5" ItemsSource="{Binding usersList}" x:Name="CursistenList" Grid.ColumnSpan="5" Background="#CCCCCC">
+                    <ListView Grid.Row="1" Grid.Column="4" Grid.RowSpan="8" Margin="5" ItemsSource="{Binding User}" x:Name="CursistenList" Grid.ColumnSpan="5" Background="#CCCCCC">
+                        <ListView.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Firstname" Width="100" DisplayMemberBinding="{Binding Path=Firstname}" />
-                                <GridViewColumn Header="Lastname" Width="100" DisplayMemberBinding="{Binding Path=LastName}" />
-                                <GridViewColumn Header="Geslacht" Width="100" DisplayMemberBinding="{Binding Path=Geslacht}" />
-                                <GridViewColumn Header="Categorie" Width="100" DisplayMemberBinding="{Binding Path=CategorieName}" />
+                                <GridViewColumn Header="Firstname" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Firstname}" FontSize="16"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Lastname" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Lastname}" FontSize="16"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Geslacht" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Sex}" FontSize="16"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Categorie" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding CategoryName}" FontSize="16"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

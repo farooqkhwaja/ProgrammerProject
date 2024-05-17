@@ -47,35 +47,30 @@ public partial class LoginWindow : Window
     private void BtnLogin_Click(object sender, RoutedEventArgs e)
     {
 
-        _managerWindow = new ManagerWindow(this);
-        _managerWindow.Show();
-        /* if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
-         {
-             MessageBox.Show("Username or/and password can not be empty!");
-         }*/
-        //_managerWindow = new ManagerWindow(this);
-        //_managerWindow.Show();
-        /*   UserRepository access = new UserRepository();
-           var user = access.GetUserByUsernamePassword(txtUserName.Text, txtPassword.Password);
+        if (string.IsNullOrEmpty(txtUserName.Text) || string.IsNullOrEmpty(txtPassword.Password))
+        {
+            MessageBox.Show("Username or/and password can not be empty!");
+        }
+
+        UserRepository access = new UserRepository();
+        var user = access.GetUserByUsernamePassword(txtUserName.Text, txtPassword.Password);
 
 
-           if (user != null  &&  user.IsManager == true)
-           {   
-               _managerWindow = new ManagerWindow(this);
-               _managerWindow.Show();
-           }
+        if (user != null && user.IsManager == true)
+        {
+            _managerWindow = new ManagerWindow(this);
+            _managerWindow.Show();
+        }
 
-           if (user != null && user.IsManager == false)
-           {
-               _userWindow = new UserWindow(this);
-               _userWindow.Show();
-           }
+        if (user != null && user.IsManager == false)
+        {
+            _userWindow = new UserWindow(this);
+            _userWindow.Show();
+        }
 
-           if(user == null)
-           {
-               MessageBox.Show("Username or / and password Incorrect!");
-           }*//*
-           _userWindow = new UserWindow(this);
-           _userWindow.Show();*/
+        if (user == null)
+        {
+            MessageBox.Show("Username or / and password Incorrect!");
+        }
     }
 }

@@ -8,8 +8,8 @@ public class EventRepository
 {
     public bool SaveEvent(Models.Events _event)
     {
-         string query = "INSERT INTO Events (Name, Date, DanceCategory, UserId, LocationId) " +
-                        "VALUES (@Name.Name, @Date, @DanceCategory @UserId, @LocationId)";
+         string query = "INSERT INTO Events (Name, Date, DanceCategoryId, UserId, LocationId) " +
+                        "VALUES (@Name, @Date, @DanceCategoryId, @UserId, @LocationId)";
 
          using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
          {
@@ -25,7 +25,6 @@ public class EventRepository
              }
          }
          return true;
-        
     }
 
     public Events GetEvent(int id)

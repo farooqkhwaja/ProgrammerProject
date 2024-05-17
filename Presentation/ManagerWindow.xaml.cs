@@ -11,27 +11,27 @@ public partial class ManagerWindow : Window
     private readonly DanceCategory _danceCategory;
     private readonly Locations _locations;
     private readonly LocationRepository _locationRepository;
-    private readonly LinksRepository _uploadlinksRepository;
+    private readonly LinksRepository _linksRepository;
     private readonly UserRepository _userRepository;
     private readonly RegisterStudent _registerStudent;
     private readonly LoginWindow _loginWindow;
-    private readonly EventRepository _uploadEventRepository;
+    private readonly EventRepository _eventRepository;
     
     public ManagerWindow(LoginWindow loginWindow)
     {
         InitializeComponent();
         _loginWindow = loginWindow;
         _loginWindow.Visibility = Visibility.Collapsed;
-        _uploadlinksRepository = new LinksRepository();
-        _uploadEventRepository = new EventRepository();
+        _linksRepository = new LinksRepository();
+        _eventRepository = new EventRepository();
         _userRepository = new UserRepository();
         _registerStudent = new RegisterStudent();
         _danceCategoryRepository = new DanceCategoryRepository();
         _locationRepository = new LocationRepository();
 
-        DansFilmLinksList.ItemsSource = _uploadlinksRepository.GetLinks(); 
+        DansFilmLinksList.ItemsSource = _linksRepository.GetLinks(); 
         CursistenList.ItemsSource = _userRepository.GetUsers();
-        EvenementenLinks.ItemsSource = _uploadEventRepository.GetEvents();
+        EvenementenLinks.ItemsSource = _eventRepository.GetEvents();
         cbx_categorie.ItemsSource = _danceCategoryRepository.GetdanceCategories();
         cbx_categoriename.ItemsSource = _danceCategoryRepository.GetdanceCategories();
         cbx_locatie.ItemsSource = _locationRepository.GetLocations();
@@ -61,7 +61,7 @@ public partial class ManagerWindow : Window
     }
     
     private void AddEvent_Click(object sender, RoutedEventArgs e)
-    {
+    {    
         var selectedLocation = cbx_locatie.SelectedItem as Locations;
         var selectedCategory = cbx_categoriename.SelectedItem as DanceCategory;
         
@@ -70,24 +70,23 @@ public partial class ManagerWindow : Window
         _event.Date = tbx_EvenementDatum.Text;
         _event.DanceCategoryId = selectedCategory.Id;
         _event.LocationId = selectedLocation.Id;
+
         _event.UserId = 3; //TODO
 
-        _uploadEventRepository.SaveEvent(_event);
-
-        
+        _eventRepository.SaveEvent(_event);
     }
     
     private void UpdateEvent_Click(object sender, RoutedEventArgs e)
     {
-        EvenementenLinks.ItemsSource = _uploadEventRepository.GetEvents();
+        EvenementenLinks.ItemsSource = _eventRepository.GetEvents();
     }
     
     private void DeleteEvent_Click(object sender, RoutedEventArgs e)
     {
-        if (_uploadEventRepository != null)
+        if (_eventRepository != null)
         {
             var selectedItem = EvenementenLinks.SelectedItem as Events;
-            _uploadEventRepository.DeleteEvent(selectedItem.Id);
+            _eventRepository.DeleteEvent(selectedItem.Id);
         }
         else
         {
@@ -99,19 +98,23 @@ public partial class ManagerWindow : Window
     {
         string figureName = tbx_AddDanceName.Text;
         string linkadres = tbx_AddDanceUrl.Text;
-        int gemaaktDoor = Convert.ToInt32( cbx_gemaaktdoor.Text);
 
+        //int gemaaktDoor = Convert.ToInt32( cbx_gemaaktdoor.Text);
+
+        var selectedCategory = cbx_categories.SelectedItem as DanceCategory; // Foriegn keys moet je casten en wij hebben altijd de id van foriegn key table nodig
 
         if (!string.IsNullOrWhiteSpace(figureName))
         {
+
             Links newLink = new Links
             {
                 Name = figureName,
-                url = new Uri(linkadres),
-                CreatedBy = gemaaktDoor
+                url = linkadres,
+                CreatedBy = selectedCategory.Id,
             };
-
-            _uploadlinksRepository.CreateLink(newLink);
+            
+          
+            _linksRepository.CreateLink(newLink);
         }
     }
     
@@ -120,7 +123,7 @@ public partial class ManagerWindow : Window
         if (DansFilmLinksList.SelectedItem is Links)
         {
             var selectedItem = DansFilmLinksList.SelectedItem as Links;
-            _uploadlinksRepository.DeleteLink(selectedItem.Id);
+            _linksRepository.DeleteLink(selectedItem.Id);
         }
         else
         {
@@ -130,7 +133,7 @@ public partial class ManagerWindow : Window
     
     private void UpdateDanceLink_Click(object sender, RoutedEventArgs e)
     {
-        DansFilmLinksList.ItemsSource = _uploadlinksRepository.GetLinks();
+        DansFilmLinksList.ItemsSource = _linksRepository.GetLinks();
     }
     
     private void SearchByName_Click(object sender, RoutedEventArgs e)

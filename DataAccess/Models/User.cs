@@ -26,6 +26,7 @@ public class User
     public string Email { get; set; }
     [Required]
     public bool IsManager { get; set; }
+
     public ICollection<UserEvent> UserEvents { get; set; }
     public ICollection<UserAttendance> UserAttendances { get; set; }
 }

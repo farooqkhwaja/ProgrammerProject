@@ -23,7 +23,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" 
                             HorizontalAlignment="Center" Margin="0,4">
-                    <Button Name="btnLogin" IsEnabled="True" VerticalAlignment="Center"
+                    <Button Name="btnLogin" IsEnabled="False" VerticalAlignment="Center"
                             Width="180" Height="24"
                             IsDefault="True" Click="BtnLogin_Click">Login</Button>
                     

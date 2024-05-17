@@ -12,7 +12,7 @@ public class Links
     public string Name { get; set; }
         
     [Required] 
-    public Uri url {  get; set; }
+    public string url {  get; set; }
 
     [Required]
     public int CreatedBy { get; set; }
