@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Models
 {
@@ -12,11 +13,22 @@ namespace DataAccess.Models
         [Required]
         public string Date { get; set; }
         [Required]
+        [ForeignKey("DanceCategoryId")]
         public int DanceCategoryId {  get; set; }
+        public string CategoryName { get; set; }
         [Required]
+        [ForeignKey("UserId")]
         public int UserId { get; set; }
+        public string FirstName {  get; set; }
         [Required]
+        [ForeignKey("LocationId")]
         public int LocationId {  get; set; }
-        public ICollection<UserEvent> UserEvents { get; set; }
+        public string StreetName { get; set; }
+        public string Fulllocation {  get; set; }
+
+
+
+        //public ICollection<UserEvent> UserEvents { get; set; }
+
     }
 }

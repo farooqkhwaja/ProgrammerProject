@@ -13,9 +13,9 @@ namespace DataAccess.Dapper
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT FirstName FROM [User]";
+                string query = "SELECT Firstname FROM [User]";
                 connection.Open();
-                var users = connection.Query<User>(query).AsList();
+                var users = connection.Query<User>(query).ToList();
                 return users;
             }
         }
@@ -24,15 +24,35 @@ namespace DataAccess.Dapper
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var result = connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE FirstName = @FirstName", new { FirstName = firstname });
+                var result = connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE Firstname = @Firstname", new { Firstname = firstname });
                 return result;
+            }
+        }
+        public List<User> GetUsersByFirstName(string firstname)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var result = connection.Query<User>("SELECT * FROM [User] WHERE FirstName = @FirstName", new { FirstName = firstname });
+                return result.ToList();
+            }
+        }
+        public List<User> GetUsersWithForeignKeys()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                string query = @"SELECT [User].*, DanceCategory.CategoryName FROM [User]
+                                JOIN DanceCategory ON [User].CategoryId = DanceCategory.Id;";
+                connection.Open();
+                var result = connection.Query<User>(query);
+                return result.ToList();
             }
         }
         public List<User> GetUsers()
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM [User]";
+                string query = "SELECT * FROM [User];";
                 connection.Open();
                 var result = connection.Query<User>(query);
                 return result.ToList();
@@ -49,8 +69,8 @@ namespace DataAccess.Dapper
         }
         public bool CreateUser(User user)
         {
-            string query = "INSERT INTO [User] (Username, Password, FirstName, LastName, Sex, Email, IsManager) " +
-                           "VALUES (@Username, @Password, @FirstName, @LastName, @Sex, @Email, @IsManager)";
+            string query = "INSERT INTO [User] (Username, Password, FirstName, LastName, Sex, Email, IsManager, CategoryId) " +
+                           "VALUES (@Username, @Password, @FirstName, @LastName, @Sex, @Email, @IsManager,@CategoryId)";
 
             using (var connection = new SqlConnection(_connectionString))
             {

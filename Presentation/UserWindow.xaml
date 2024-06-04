@@ -4,9 +4,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"      
         mc:Ignorable="d"
-        Title="Salsa Dance school [User UI]" Height="480" Width="600" >
+        Title="Salsa Dance school [User UI]" Closed="Window_Closed" Height="480" Width="600" >
     <Grid>
-        <TabControl Name="TabControl" Visibility="Visible">
+        <TabControl Name="TabControl" Visibility="Visible" >
+            <TabItem Header="Genereer een partner">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <ListView x:Name="CursistenLijstenView"  Grid.Row="0" Grid.Column="0" Margin="15"
+                              Grid.ColumnSpan="4"
+                        Grid.RowSpan="3" Background="#cccccc">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Voornaam" Width="110" DisplayMemberBinding="{Binding Firstname}"/>
+                                <GridViewColumn Header="Achternaam" Width="110" DisplayMemberBinding="{Binding Lastname}"/>
+                                <GridViewColumn Header="Geslacht" Width="80" DisplayMemberBinding="{Binding Sex}"/>
+                                <GridViewColumn Header="Email" Width="250" DisplayMemberBinding="{Binding Email}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Button x:Name="genereepartner" Content="Genereer Partner"
+              Grid.Row="3" Grid.Column="1"  Margin="142,55,10,25" Click="GeneratePartner_Click" BorderThickness="0" Grid.ColumnSpan="2" />
+
+                    <Label Content="Partner Naam" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="3" FontSize="14" Margin="10,10,0,66" />
+
+                    <TextBox x:Name="tbx_PartnerNaam"   Grid.Column="3" Grid.Row="3" Background="#cccccc" Margin="10,56,20,25"/>
+
+
+                </Grid>
+            </TabItem>
             <TabItem Header="Evenementen">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -21,44 +59,24 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition />
+                        <RowDefinition/>
                         <RowDefinition Height="40"/>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
 
-                    <ListView x:Name="EvenementenLinks" Background="#CCCCCC" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="5">
+                    <ListView x:Name="EvenementenLinks" Background="#CCCCCC" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="2" Margin="10">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Naam" Width="80" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Date" Width="130" DisplayMemberBinding="{Binding Date}"/>
-                                <GridViewColumn Header="Categorie" Width="80" DisplayMemberBinding="{Binding Categorie}"/>
-                                <GridViewColumn Header="Locatie" Width="145" DisplayMemberBinding="{Binding Locatie}"/>
-                                <GridViewColumn Header="Studenten" Width="100" DisplayMemberBinding="{Binding StudentAssigned}"/>
+                                <GridViewColumn Header="Naam" Width="130" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Date" Width="75" DisplayMemberBinding="{Binding Date}"/>
+                                <GridViewColumn Header="Categorie" Width="100" DisplayMemberBinding="{Binding CategoryName}"/>
+                                <GridViewColumn Header="Locatie" Width="210" DisplayMemberBinding="{Binding Fulllocation}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Name="tbx_aansluitenBijEvent" Grid.Column="3" Grid.Row="2" Margin="5" Click="tbx_aansluitenBijEvent_Click" Content="Aansluiten" BorderThickness="0"/>
-                    <TextBox Name="tbx_Student" Grid.Column="4" Grid.Row="2" Margin="5" Background="#cccccc"  />
-
-                    <ListView x:Name="CursistenLijstenView"  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
-                              Grid.RowSpan="2" Background="#cccccc">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Name" Width="130" DisplayMemberBinding="{Binding FirstName}"/>
-                                <GridViewColumn Header="Geslacht" Width="130" DisplayMemberBinding="{Binding Geslacht}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-
-                    <Button x:Name="genereepartner" Content="genereer partner"
-                            Grid.Row="4" Grid.Column="4"  Margin="2,70,2,10" Click="GeneratePartner_Click" BorderThickness="0" />
-
-                    <Label Content="Partner Naam" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="5" FontSize="14" Margin="0,15,0,61" />
-
-                    <TextBox x:Name="tbx_PartnerNaam"  Grid.Column="4" Grid.Row="5" Background="#cccccc" Margin="0,56,0,25"/>
-
+                    <Button Name="tbx_aansluitenBijEvent" Grid.Column="3" Grid.Row="3" Margin="5" Click="tbx_aansluitenBijEvent_Click" Content="Aansluiten" BorderThickness="0"/>
+                    <ComboBox x:Name="comboBoxUsers" Grid.Column="4" Grid.Row="3" Margin="5" Background="#cccccc"
+                              ItemsSource="{Binding User}" DisplayMemberPath="Firstname" SelectedItem="{Binding Firstname}"  />
                 </Grid>
             </TabItem>
             <TabItem Header="Dance Figuren">
@@ -82,11 +100,11 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Dance Figuren" Width="180" DisplayMemberBinding="{Binding FigureName}"/>
-                                <GridViewColumn Header="Categorieen" Width="180" DisplayMemberBinding="{Binding Category}"/>
+                                <GridViewColumn Header="Categorieen" Width="180" DisplayMemberBinding="{Binding CategoryName}"/>
                                 <GridViewColumn Header="Progress" Width="180">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <CheckBox IsChecked="{Binding Progress, Mode=TwoWay}" Content="Completed"/>
+                                            <CheckBox Name="progressCheckBox"  IsChecked="{Binding Progress, Mode=TwoWay}" Content="Completed" Checked="progressCheckBox_Checked" Unchecked="progressCheckBox_Unchecked"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

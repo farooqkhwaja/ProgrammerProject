@@ -10,10 +10,15 @@ public class DanceFiguresRepository
     {
         using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
-            var sql = "SELECT * FROM DanceFigures";
-            var danceFigures = connection.QuerySingle<DanceFigures>(sql);
-            var result = new List<DanceFigures>();
-            return result;
+            string sql = @" SELECT df.Id, df.FigureName, df.Progress, dc.CategoryName, dc.Id AS CategoryId
+                            FROM DanceFigures df
+                            INNER JOIN (
+                                SELECT Id, CategoryName
+                                FROM DanceCategory
+                            ) dc ON df.CategoryId = dc.Id;"
+;
+            var danceFigures = connection.Query<DanceFigures>(sql).ToList();
+            return danceFigures;
         }
     }
     public IEnumerable<DanceFigures> GetFigures()
@@ -38,8 +43,16 @@ public class DanceFiguresRepository
         using(var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
             connection.Open();
-            connection.Execute("Update DanceFigures SET FigureName = @Value1, Progress = @Value2, CategoryId= @Value3 ",figures);
-            connection.Close();
+            connection.Execute("Update DanceFigures SET FigureName = @Value1, CategoryId= @Value2 ",figures);
+        }
+    }
+    public bool UpdateProgress(bool progress)
+    {
+        using(SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        {
+            con.Open();
+            con.Execute("UPDATE DanceFigures SET Progress = @Progress", new { Progress = progress });
+            return progress;
         }
     }
    

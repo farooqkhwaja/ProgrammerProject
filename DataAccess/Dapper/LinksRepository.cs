@@ -10,7 +10,7 @@ public class LinksRepository
     {
         int affectedRows = 0;
         
-        string query = "INSERT INTO Links (Url, CreatedBy) VALUES (@Url, @CreatedBy)";
+        string query = "INSERT INTO Links (Name, Url, CreatedBy,DanceCategoryId) VALUES (@Name,@Url, @CreatedBy,@DanceCategoryId)";
 
         using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {
@@ -29,7 +29,12 @@ public class LinksRepository
 
     public List<Links> GetLinks()
     {
-        string query = "SELECT * FROM Links";
+        string query = @"SELECT l.Id, l.Name, l.url, l.CreatedBy, l.DanceCategoryId, 
+                       u.Firstname , 
+                       dc.CategoryName 
+                    FROM Links l
+                    INNER JOIN[User] u ON l.CreatedBy = u.Id
+                    INNER JOIN DanceCategory dc ON l.DanceCategoryId = dc.Id;";
 
         using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {

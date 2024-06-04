@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Models;
 
@@ -15,8 +16,12 @@ public class Links
     public string url {  get; set; }
 
     [Required]
+    [ForeignKey("CreatedBy")]
     public int CreatedBy { get; set; }
+    public string Firstname {  get; set; }
         
     [Required]
+    [ForeignKey("DanceCategoryId")]
     public int DanceCategoryId { get; set; }
+    public string CategoryName {  get; set; }  
 }

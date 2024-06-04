@@ -12,7 +12,7 @@ public partial class LoginWindow : Window
 {
     private ManagerWindow _managerWindow;
     private UserWindow _userWindow;
-    
+    private LoginWindow _loginWindow;
  
     public LoginWindow()
     {
@@ -60,6 +60,7 @@ public partial class LoginWindow : Window
         {
             _managerWindow = new ManagerWindow(this);
             _managerWindow.Show();
+            
         }
 
         if (user != null && user.IsManager == false)

@@ -1,5 +1,8 @@
 ﻿using Dapper;
 using DataAccess.Models;
+using Microsoft.SqlServer.Server;
+using Microsoft.VisualBasic;
+using System;
 using System.Data.SqlClient;
 
 namespace DataAccess.Dapper;
@@ -38,10 +41,45 @@ public class EventRepository
             return result;
         }
     }
+    public void UpdateUserEvent(int eventId, int currentUserId, int newUserId)
+    {
+        string query = @"
+                UPDATE UserEvent 
+                SET UserId = @NewUserId 
+                WHERE EventId = @EventId AND UserId = @CurrentUserId;";
+
+        using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        {
+            con.Open();
+            con.Execute(query, new { NewUserId = newUserId, EventId = eventId, CurrentUserId = currentUserId });
+        }
+    }
+
+
+    public List<Events> GetEventsAndStudents(int eventId)
+    {
+        string query = @"
+            SELECT e.Name AS EventName, e.Date AS EventDate, u.Firstname AS FirstName 
+             FROM Events e 
+             JOIN [User] u ON e.UserId = u.Id 
+             WHERE e.Id = @eventId AND u.IsManager = 0;";
+
+        using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        {
+            con.Open();
+            var result = con.Query<Events>(query, new { EventId = eventId }).ToList();
+            return result;
+        }
+    }
 
     public List<Events> GetEvents()
     {
-        string query = "SELECT * FROM Events";
+        string query = @"SELECT e.Id, e.Name, e.Date, e.DanceCategoryId, dc.CategoryName, 
+                e.UserId, u.Firstname, e.LocationId, l.StreetName
+                FROM Events e
+                JOIN DanceCategory dc ON e.DanceCategoryId = dc.Id
+                JOIN [User] u ON e.UserId = u.Id
+                JOIN Location l ON e.LocationId = l.Id";
 
         using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
         {

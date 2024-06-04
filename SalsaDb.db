@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/faroo/Desktop/SalsaDb.sqlite" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="4020"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,14:mainUserAttendance"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Attendance" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="61"/><column index="2" value="195"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="DanceCategory" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="61"/><column index="2" value="161"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="User" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="61"/><column index="2" value="114"/><column index="3" value="109"/><column index="4" value="113"/><column index="5" value="109"/><column index="6" value="72"/><column index="7" value="258"/><column index="8" value="121"/><column index="9" value="126"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="UserAttendance" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="61"/><column index="2" value="81"/><column index="3" value="151"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="UserEvents" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="61"/><column index="2" value="81"/><column index="3" value="102"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">
+-- Insert data into DanceCategory
+INSERT INTO DanceCategory (CategoryName) VALUES 
+('Beginner'), 
+('Semi1'), 
+('Semi2'), 
+('Pro');
+
+-- Insert data into DanceFigures
+INSERT INTO DanceFigures (FigureName, Progress, CategoryId) VALUES 
+('Basic Step', 0, 1), 
+('Cross Body Lead', 0, 1), 
+('Right Turn', 0, 1), 
+('Left Turn', 0, 2), 
+('Copa', 0, 2), 
+('Hammerlock', 0, 2), 
+('Shadow Position', 0, 3), 
+('Titanic', 0, 3), 
+('Multiple Spins', 0, 3), 
+('Advanced Dip', 0, 4);
+
+-- Insert data into Location
+INSERT INTO Location (StreetName, City) VALUES 
+('Main St', 'New York'), 
+('Broadway', 'New York'), 
+('Elm St', 'Los Angeles'), 
+('Sunset Blvd', 'Los Angeles'), 
+('Market St', 'San Francisco'), 
+('Ocean Ave', 'San Francisco'), 
+('Michigan Ave', 'Chicago'), 
+('State St', 'Chicago'), 
+('Bourbon St', 'New Orleans'), 
+('Canal St', 'New Orleans');
+
+-- Insert data into User
+INSERT INTO [User] (Username, Password, Firstname, Lastname, Sex, Email, IsManager, CategoryId) VALUES 
+('user1', 'pass1', 'John', 'Doe', 'Male', 'john.doe@example.com', 0, 1),
+('user2', 'pass2', 'Jane', 'Doe', 'Female', 'jane.doe@example.com', 0, 1),
+('user3', 'pass3', 'Jim', 'Beam', 'Male', 'jim.beam@example.com', 0, 2),
+('user4', 'pass4', 'Jack', 'Daniels', 'Male', 'jack.daniels@example.com', 0, 2),
+('user5', 'pass5', 'Josie', 'Wales', 'Female', 'josie.wales@example.com', 0, 3),
+('user6', 'pass6', 'Jessica', 'Jones', 'Female', 'jessica.jones@example.com', 0, 3),
+('user7', 'pass7', 'James', 'Bond', 'Male', 'james.bond@example.com', 0, 4),
+('user8', 'pass8', 'Bruce', 'Wayne', 'Male', 'bruce.wayne@example.com', 0, 4),
+('user9', 'pass9', 'Clark', 'Kent', 'Male', 'clark.kent@example.com', 0, 1),
+('user10', 'pass10', 'Diana', 'Prince', 'Female', 'diana.prince@example.com', 0, 1);
+
+-- Insert data into Attendance
+INSERT INTO Attendance (Date) VALUES 
+('2024-01-01 18:00:00'), 
+('2024-01-02 18:00:00'), 
+('2024-01-03 18:00:00'), 
+('2024-01-04 18:00:00'), 
+('2024-01-05 18:00:00'), 
+('2024-01-06 18:00:00'), 
+('2024-01-07 18:00:00'), 
+('2024-01-08 18:00:00'), 
+('2024-01-09 18:00:00'), 
+('2024-01-10 18:00:00');
+
+-- Insert data into Events
+INSERT INTO Events (Name, Date, DanceCategoryId, UserId, LocationId) VALUES 
+('Salsa Night', '2024-01-01 20:00:00', 1, 1, 1), 
+('Bachata Workshop', '2024-01-02 20:00:00', 2, 2, 2), 
+('Kizomba Social', '2024-01-03 20:00:00', 3, 3, 3), 
+('Zouk Marathon', '2024-01-04 20:00:00', 4, 4, 4), 
+('Salsa Night', '2024-01-05 20:00:00', 1, 5, 5), 
+('Bachata Workshop', '2024-01-06 20:00:00', 2, 6, 6), 
+('Kizomba Social', '2024-01-07 20:00:00', 3, 7, 7), 
+('Zouk Marathon', '2024-01-08 20:00:00', 4, 8, 8), 
+('Salsa Night', '2024-01-09 20:00:00', 1, 9, 9), 
+('Bachata Workshop', '2024-01-10 20:00:00', 2, 10, 10);
+
+-- Insert data into Links
+INSERT INTO Links (Name, Url, CreatedBy, DanceCategoryId) VALUES 
+('Salsa Moves', 'http://salsa.com/moves', 1, 1), 
+('Bachata Basics', 'http://bachata.com/basics', 2, 2), 
+('Kizomba Guide', 'http://kizomba.com/guide', 3, 3), 
+('Zouk Tips', 'http://zouk.com/tips', 4, 4), 
+('Advanced Salsa', 'http://salsa.com/advanced', 5, 1), 
+('Intermediate Bachata', 'http://bachata.com/intermediate', 6, 2), 
+('Kizomba Variations', 'http://kizomba.com/variations', 7, 3), 
+('Zouk Tricks', 'http://zouk.com/tricks', 8, 4), 
+('Salsa for Pros', 'http://salsa.com/pros', 9, 1), 
+('Bachata Mastery', 'http://bachata.com/mastery', 10, 2);
+
+-- Insert data into UserAttendance
+INSERT INTO UserAttendance (UserId, AttendanceId) VALUES 
+(1, 1), 
+(2, 2), 
+(3, 3), 
+(4, 4), 
+(5, 5), 
+(6, 6), 
+(7, 7), 
+(8, 8), 
+(9, 9), 
+(10, 10);
+
+-- Insert data into UserEvents
+INSERT INTO UserEvents (UserId, EventsId) VALUES 
+(1, 1), 
+(2, 2), 
+(3, 3), 
+(4, 4), 
+(5, 5), 
+(6, 6), 
+(7, 7), 
+(8, 8), 
+(9, 9), 
+(10, 10);
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

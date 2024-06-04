@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Models;
 
@@ -27,6 +28,14 @@ public class User
     [Required]
     public bool IsManager { get; set; }
 
-    public ICollection<UserEvent> UserEvents { get; set; }
-    public ICollection<UserAttendance> UserAttendances { get; set; }
+    public IEnumerable<UserEvent> UserEvents { get; set; }
+    public IEnumerable<UserAttendance>? UserAttendances { get; set; }
+
+    [ForeignKey("CategoryId")]
+    public int? CategoryId {  get; set; }
+
+    public string CategoryName { get; set; }
+    public string Fullname =>  $"{Firstname} {Lastname}";
+
+
 }

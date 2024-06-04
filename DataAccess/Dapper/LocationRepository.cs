@@ -11,9 +11,9 @@ namespace DataAccess.Dapper
     {
         private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Encrypt=False";
 
-        public Locations CreateLocation(Locations location)
+        public Location CreateLocation(Location location)
         {
-            string query = "INSERT INTO Locations (StreetName, City) " +
+            string query = "INSERT INTO Location (StreetName, City) " +
                            "VALUES (@StreetName, @City); " +
                            "SELECT SCOPE_IDENTITY();";
 
@@ -27,21 +27,21 @@ namespace DataAccess.Dapper
             return location;
         }
 
-        public List<Locations> GetLocations()
+        public List<Location> GetLocations()
         {
             string query = "SELECT * FROM Location";
 
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var result = connection.Query<Locations>(query);
+                var result = connection.Query<Location>(query);
                 return result.ToList();
             }
         }
 
-        public void UpdateLocation(Locations location)
+        public void UpdateLocation(Location location)
         {
-            string query = "UPDATE Locations SET StreetName = @StreetName, City = @City  WHERE Id = @Id";
+            string query = "UPDATE Location SET StreetName = @StreetName, City = @City  WHERE Id = @Id";
 
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -52,7 +52,7 @@ namespace DataAccess.Dapper
 
         public void DeleteLocation(int id)
         {
-            string query = "DELETE FROM Locations WHERE Id = @Id";
+            string query = "DELETE FROM Location WHERE Id = @Id";
 
             using (var connection = new SqlConnection(_connectionString))
             {
