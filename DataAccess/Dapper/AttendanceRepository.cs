@@ -10,7 +10,7 @@ namespace DataAccess.Dapper
         {
             using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
             {
-                connection.Execute("INSERT INTO Attendance (Date) VALUES (@Date)", new { Date = selectedAttendance.Date });
+                connection.Execute("INSERT INTO Attendance (Date,UserId) VALUES (@Date,@UserId)", new { Date = selectedAttendance.Date , UserId = selectedAttendance.UserId});
             }
         }
         public IEnumerable<Attendance> GetAttendanceByUserId(int Id)
@@ -22,7 +22,6 @@ namespace DataAccess.Dapper
                 return result;
             }
         }
-
         public List<Attendance> GetAttendanceList()
         {
             using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))

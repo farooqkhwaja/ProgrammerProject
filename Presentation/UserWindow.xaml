@@ -70,7 +70,7 @@
                                 <GridViewColumn Header="Naam" Width="130" DisplayMemberBinding="{Binding Name}" />
                                 <GridViewColumn Header="Date" Width="75" DisplayMemberBinding="{Binding Date}"/>
                                 <GridViewColumn Header="Categorie" Width="100" DisplayMemberBinding="{Binding CategoryName}"/>
-                                <GridViewColumn Header="Locatie" Width="210" DisplayMemberBinding="{Binding Fulllocation}"/>
+                                <GridViewColumn Header="Locatie" Width="210" DisplayMemberBinding="{Binding StreetName}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

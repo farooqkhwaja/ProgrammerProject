@@ -29,7 +29,7 @@ public partial class UserWindow : Window
         EvenementenLinks.ItemsSource = _eventRepository.GetEvents();
         CursistenLijstenView.ItemsSource = _userRepository.GetUsers();
         FigurenLijst.ItemsSource = _danceFiguresRepository.GetDanceFigures();
-        comboBoxUsers.ItemsSource = _userRepository.GetFirstnames();
+        comboBoxUsers.ItemsSource = _userRepository.GetUsers();
     }
 
     private void GeneratePartner_Click(object sender, RoutedEventArgs e)
@@ -42,13 +42,14 @@ public partial class UserWindow : Window
     private void tbx_aansluitenBijEvent_Click(object sender, RoutedEventArgs e)
     {
         var events = EvenementenLinks.SelectedItem as Events;
-        var result = comboBoxUsers.SelectedItem as User;
-        if (string.IsNullOrEmpty(result.Firstname))
+        var user = comboBoxUsers.SelectedItem as User;
+
+        if (string.IsNullOrEmpty(user.Firstname))
         {
             MessageBox.Show("Cannot add yourself to the event, it's already full");
             return;
         }
-        _eventRepository.UpdateUserEvent(events.Id, events.UserId, result.Id);
+        _userRepository.UpdateUserEventId(user.Id, events.Id);
         MessageBox.Show("You got succesfully added to the Event.");
 
     }

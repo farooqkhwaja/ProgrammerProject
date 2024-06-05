@@ -5,13 +5,12 @@ using System;
 namespace DataAccess;
 
 internal static class DbConfigurations
-{
-    string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-    string relativePath = @"Database\SalsaDb.db";
-    string absolutePath = Path.Combine(baseDirectory, relativePath);
+{/*
+    static string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+    static string relativePath = @"Database\SalsaDb.db";
+    static string absolutePath = Path.Combine(baseDirectory, relativePath);*/
 
-    // Create the SQLite connection string
-    string sqliteConnectionString = $"Data Source={absolutePath};Version=3;";
+    //internal static string SalsaManagement2ConnectionString = $"Data Source={absolutePath};";
 
     internal static string SalsaManagement2ConnectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 }

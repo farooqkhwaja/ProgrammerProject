@@ -9,6 +9,7 @@ namespace DataAccess.Dapper
     {
         private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
 
+      
         public List<User> GetFirstnames()
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -41,8 +42,10 @@ namespace DataAccess.Dapper
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                string query = @"SELECT [User].*, DanceCategory.CategoryName FROM [User]
-                                JOIN DanceCategory ON [User].CategoryId = DanceCategory.Id;";
+                string query = @"SELECT u.*, dc.CategoryName 
+                                FROM [User] u
+                                JOIN DanceCategory dc ON u.CategoryId = dc.Id;
+                                ";
                 connection.Open();
                 var result = connection.Query<User>(query);
                 return result.ToList();
@@ -55,6 +58,22 @@ namespace DataAccess.Dapper
                 string query = "SELECT * FROM [User];";
                 connection.Open();
                 var result = connection.Query<User>(query);
+                return result.ToList();
+            }
+        }
+        public List<User> GetUserWithEvents(int eventId)
+        {
+            using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+            {
+                string query = @"
+                       SELECT [User].FirstName
+                        FROM [User]
+                        JOIN Events ON [User].EventId = Events.Id
+                        WHERE Events.Id = @EventId;
+                                            ";
+
+                con.Open();
+                var result = con.Query<User>(query, new { EventId = eventId });
                 return result.ToList();
             }
         }
@@ -106,6 +125,20 @@ namespace DataAccess.Dapper
             {
                 connection.Open();
                 connection.Execute(query, user);
+            }
+        }
+        public void UpdateUserEventId(int userId, int eventId)
+        {
+            using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+            {
+                string query = @"
+                            UPDATE [User]
+                            SET EventId = @EventId
+                            WHERE Id = @UserId;
+                        ";
+
+                con.Open();
+                con.Execute(query, new { UserId = userId, EventId = eventId });
             }
         }
         public void DeleteUser(int userId)

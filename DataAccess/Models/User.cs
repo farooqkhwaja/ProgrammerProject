@@ -28,13 +28,12 @@ public class User
     [Required]
     public bool IsManager { get; set; }
 
-    public IEnumerable<UserEvent> UserEvents { get; set; }
-    public IEnumerable<UserAttendance>? UserAttendances { get; set; }
-
     [ForeignKey("CategoryId")]
     public int? CategoryId {  get; set; }
-
     public string CategoryName { get; set; }
+
+    [ForeignKey("EventId")]
+    public int EventId {  get; set; }
     public string Fullname =>  $"{Firstname} {Lastname}";
 
 

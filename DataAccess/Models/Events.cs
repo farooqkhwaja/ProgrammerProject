@@ -17,18 +17,12 @@ namespace DataAccess.Models
         public int DanceCategoryId {  get; set; }
         public string CategoryName { get; set; }
         [Required]
-        [ForeignKey("UserId")]
-        public int UserId { get; set; }
-        public string FirstName {  get; set; }
-        [Required]
         [ForeignKey("LocationId")]
         public int LocationId {  get; set; }
         public string StreetName { get; set; }
         public string Fulllocation {  get; set; }
 
 
-
-        //public ICollection<UserEvent> UserEvents { get; set; }
 
     }
 }
