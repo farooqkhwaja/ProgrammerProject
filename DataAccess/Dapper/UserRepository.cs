@@ -7,12 +7,9 @@ namespace DataAccess.Dapper
 {
     public class UserRepository
     {
-        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
-
-      
         public List<User> GetFirstnames()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 string query = "SELECT Firstname FROM [User]";
                 connection.Open();
@@ -22,7 +19,7 @@ namespace DataAccess.Dapper
         }
         public User GetUserByFirstName(string firstname)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 var result = connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE Firstname = @Firstname", new { Firstname = firstname });
@@ -31,7 +28,7 @@ namespace DataAccess.Dapper
         }
         public List<User> GetUsersByFirstName(string firstname)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 var result = connection.Query<User>("SELECT * FROM [User] WHERE FirstName = @FirstName", new { FirstName = firstname });
@@ -40,7 +37,7 @@ namespace DataAccess.Dapper
         }
         public List<User> GetUsersWithForeignKeys()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 string query = @"SELECT u.*, dc.CategoryName 
                                 FROM [User] u
@@ -53,7 +50,7 @@ namespace DataAccess.Dapper
         }
         public List<User> GetUsers()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 string query = "SELECT * FROM [User];";
                 connection.Open();
@@ -63,7 +60,7 @@ namespace DataAccess.Dapper
         }
         public List<User> GetUserWithEvents(int eventId)
         {
-            using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+            using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 string query = @"
                        SELECT [User].FirstName
@@ -79,7 +76,7 @@ namespace DataAccess.Dapper
         }
         public User GetUserByUsernamePassword(string username, string password)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 var result = connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE Username = @Username AND Password = @Password", new { Username = username, Password = password });
@@ -91,7 +88,7 @@ namespace DataAccess.Dapper
             string query = "INSERT INTO [User] (Username, Password, FirstName, LastName, Sex, Email, IsManager, CategoryId) " +
                            "VALUES (@Username, @Password, @FirstName, @LastName, @Sex, @Email, @IsManager,@CategoryId)";
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 int rowsAffected = connection.Execute(query, user);
@@ -101,7 +98,7 @@ namespace DataAccess.Dapper
         }
         public bool GetUserByUsername(string username)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 var result = connection.QueryFirstOrDefault<bool>("SELECT 1 FROM [User] WHERE Username = @Username", new { Username = username }) != default(bool);
@@ -110,7 +107,7 @@ namespace DataAccess.Dapper
         }
         public User GetUser(int userId)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 var result = connection.QueryFirstOrDefault<User>("SELECT * FROM [User] WHERE Id = @Id", new { Id = userId });
@@ -121,7 +118,7 @@ namespace DataAccess.Dapper
         {
             string query = "UPDATE [User] SET Username = @Username, Password = @Password WHERE FirstName = @FirstName";
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 connection.Execute(query, user);
@@ -129,7 +126,7 @@ namespace DataAccess.Dapper
         }
         public void UpdateUserEventId(int userId, int eventId)
         {
-            using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+            using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 string query = @"
                             UPDATE [User]
@@ -145,7 +142,7 @@ namespace DataAccess.Dapper
         {
             string query = "DELETE FROM [User] WHERE Id = @Id";
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 connection.Execute(query, new { Id = userId });

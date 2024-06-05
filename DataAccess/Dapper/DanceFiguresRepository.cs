@@ -8,7 +8,7 @@ public class DanceFiguresRepository
 {
     public List<DanceFigures> GetDanceFigures()
     {
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             string sql = @" SELECT df.Id, df.FigureName, df.Progress, dc.CategoryName, dc.Id AS CategoryId
                             FROM DanceFigures df
@@ -23,7 +23,7 @@ public class DanceFiguresRepository
     }
     public IEnumerable<DanceFigures> GetFigures()
     {
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             var result = connection.Query<DanceFigures>("SELECT * FROM DanceFigures");
@@ -32,7 +32,7 @@ public class DanceFiguresRepository
     }
     public void AddDanceFigures(DanceFigures figures)
     {
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             connection.Execute("insert into DanceFigures (FigureName, Progress, CategoryId)Values (@FigureName, @Progress, @CategoryId) ", figures);
@@ -40,7 +40,7 @@ public class DanceFiguresRepository
     }
     public void UpdateDanceFigures(DanceFigures figures)
     {
-        using(var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using(var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             connection.Execute("Update DanceFigures SET FigureName = @Value1, CategoryId= @Value2 ",figures);
@@ -48,7 +48,7 @@ public class DanceFiguresRepository
     }
     public bool UpdateProgress(bool progress)
     {
-        using(SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using(SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             con.Open();
             con.Execute("UPDATE DanceFigures SET Progress = @Progress", new { Progress = progress });

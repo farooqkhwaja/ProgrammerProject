@@ -1,16 +1,6 @@
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System;
-
 namespace DataAccess;
 
 internal static class DbConfigurations
-{/*
-    static string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-    static string relativePath = @"Database\SalsaDb.db";
-    static string absolutePath = Path.Combine(baseDirectory, relativePath);*/
-
-    //internal static string SalsaManagement2ConnectionString = $"Data Source={absolutePath};";
-
-    internal static string SalsaManagement2ConnectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+{
+    internal static readonly string SalsaManagementConnectionString = "Server=tcp:duraware.database.windows.net,1433;Initial Catalog=webshop;Persist Security Info=False;User ID=Dura;Password=Intel!1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 }

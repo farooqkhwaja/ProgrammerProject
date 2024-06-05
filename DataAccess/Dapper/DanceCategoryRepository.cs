@@ -8,7 +8,7 @@ public class DanceCategoryRepository
 {
     public List<DanceCategory> GetdanceCategories()
     {
-        using(var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using(var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             string query = "SELECT * FROM DanceCategory";
             connection.Open();

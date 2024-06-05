@@ -8,14 +8,14 @@ namespace DataAccess.Dapper
     {
         public void AddAttendance(Attendance selectedAttendance)
         {
-            using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Execute("INSERT INTO Attendance (Date,UserId) VALUES (@Date,@UserId)", new { Date = selectedAttendance.Date , UserId = selectedAttendance.UserId});
             }
         }
         public IEnumerable<Attendance> GetAttendanceByUserId(int Id)
         {
-            using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 var query = $"SELECT Attendance.* FROM Attendance JOIN [User] ON Attendance.UserId = [User].Id WHERE [User].Id = {Id}";
                 var result = connection.Query<Attendance>(query);
@@ -24,7 +24,7 @@ namespace DataAccess.Dapper
         }
         public List<Attendance> GetAttendanceList()
         {
-            using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 var query = "SELECT * FROM Attendance";
                 var result = connection.Query<Attendance>(query);
@@ -34,7 +34,7 @@ namespace DataAccess.Dapper
         }
         public List<(Attendance, string)> GetAttendanceWithCategoryList()
         {
-            using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 var query = @"
             SELECT A.*, DC.CategoryName

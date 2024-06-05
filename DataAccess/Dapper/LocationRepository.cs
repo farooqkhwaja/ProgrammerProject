@@ -9,15 +9,13 @@ namespace DataAccess.Dapper
 {
     public class LocationRepository
     {
-        private string _connectionString = "Data Source=.;Initial Catalog=SalsaManagment2;Integrated Security=True;Encrypt=False";
-
         public Location CreateLocation(Location location)
         {
             string query = "INSERT INTO Location (StreetName, City) " +
                            "VALUES (@StreetName, @City); " +
                            "SELECT SCOPE_IDENTITY();";
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 int newId = connection.QuerySingle<int>(query, location);
@@ -31,7 +29,7 @@ namespace DataAccess.Dapper
         {
             string query = "SELECT * FROM Location";
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 var result = connection.Query<Location>(query);
@@ -43,7 +41,7 @@ namespace DataAccess.Dapper
         {
             string query = "UPDATE Location SET StreetName = @StreetName, City = @City  WHERE Id = @Id";
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 connection.Execute(query, location);
@@ -54,7 +52,7 @@ namespace DataAccess.Dapper
         {
             string query = "DELETE FROM Location WHERE Id = @Id";
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
             {
                 connection.Open();
                 connection.Execute(query, new { Id = id });

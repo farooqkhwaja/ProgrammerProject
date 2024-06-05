@@ -12,7 +12,7 @@ public class LinksRepository
         
         string query = "INSERT INTO Links (Name, Url, CreatedBy,DanceCategoryId) VALUES (@Name,@Url, @CreatedBy,@DanceCategoryId)";
 
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             try
@@ -36,7 +36,7 @@ public class LinksRepository
                     INNER JOIN[User] u ON l.CreatedBy = u.Id
                     INNER JOIN DanceCategory dc ON l.DanceCategoryId = dc.Id;";
 
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             var result = connection.Query<Links>(query).ToList();
@@ -48,7 +48,7 @@ public class LinksRepository
     {
         string query = "SELECT * FROM Links WHERE Id = @Id";
 
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             var result = connection.QueryFirstOrDefault<Links>(query, new { Id = id });
@@ -60,7 +60,7 @@ public class LinksRepository
     {
         string query = "UPDATE Links SET Url = @Url WHERE Id = @Id";
 
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             connection.Execute(query, uploadlink);
@@ -71,7 +71,7 @@ public class LinksRepository
     {
         string query = "DELETE FROM Links WHERE Id = @Id";
 
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             connection.Execute(query, new { Id = linkId });

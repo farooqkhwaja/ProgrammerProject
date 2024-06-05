@@ -15,7 +15,7 @@ public class EventRepository
          string query = "INSERT INTO Events (Name, Date, DanceCategoryId, LocationId) " +
                         "VALUES (@Name, @Date, @DanceCategoryId, @LocationId)";
 
-         using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+         using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
          {
              connection.Open();
              try
@@ -37,7 +37,7 @@ public class EventRepository
             FROM [User] u
             JOIN Events e ON u.EventId = e.Id";
 
-        using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (SqlConnection con = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             con.Open();
             var result = con.Query<User>(query);
@@ -49,7 +49,7 @@ public class EventRepository
     {
         string query = "SELECT * FROM Events WHERE Id = @Id";
 
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             var result = connection.QueryFirstOrDefault<Events>(query, new { Id = id });
@@ -65,7 +65,7 @@ public class EventRepository
                 JOIN DanceCategory dc ON e.DanceCategoryId = dc.Id
                 JOIN Location l ON e.LocationId = l.Id";
 
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             var result = connection.Query<Events>(query).ToList();
@@ -77,7 +77,7 @@ public class EventRepository
     {
         string query = "UPDATE Events SET Name = @Name, Date = @Date WHERE Id = @Id";
 
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             connection.Execute(query, uploadEvent);
@@ -88,7 +88,7 @@ public class EventRepository
     {
         string query = "DELETE FROM Events WHERE Id = @Id";
 
-        using (var connection = new SqlConnection(DbConfigurations.SalsaManagement2ConnectionString))
+        using (var connection = new SqlConnection(DbConfigurations.SalsaManagementConnectionString))
         {
             connection.Open();
             connection.Execute(query, new { Id = id });
