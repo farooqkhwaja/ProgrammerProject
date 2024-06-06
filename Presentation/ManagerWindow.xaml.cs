@@ -54,6 +54,11 @@ public partial class ManagerWindow : Window
     {
         var selectedCategory = cbx_categorie.SelectedItem as DanceCategory;
 
+        if (selectedCategory == null)
+        {
+            MessageBox.Show("Please select a category first.", "No category Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
         var msgResult = _registerStudent.RegisterUser(txtFirstname.Text, txtLastname.Text, txtsex.Text,tbx_password.Text, tbx_Username.Text, tbx_email.Text, selectedCategory.Id);
         
         MessageBox.Show(msgResult);
@@ -83,6 +88,16 @@ public partial class ManagerWindow : Window
         var selectedLocation = cbx_locatie.SelectedItem as Location;
         var selectedCategory = cbx_categoriename.SelectedItem as DanceCategory;
 
+        if (selectedLocation == null)
+        {
+            MessageBox.Show("Please select a location first.", "No location Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        if (selectedCategory == null)
+        {
+            MessageBox.Show("Please select a category first.", "No category Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
         _event.Name = tbx_EvenementenToevoegenBox.Text;
         _event.Date = tbx_EvenementDatum.Text;
         _event.DanceCategoryId = selectedCategory.Id;
@@ -97,6 +112,11 @@ public partial class ManagerWindow : Window
 
         var selectedEvent = EvenementenLinks.SelectedItem as Events;
 
+        if (selectedEvent == null)
+        {
+            MessageBox.Show("Please select an event first.", "No event Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
         var result = _userRepository.GetUserWithEvents(selectedEvent.Id);
 
         AssignedStudentsOnEvent.ItemsSource = result;
@@ -110,8 +130,14 @@ public partial class ManagerWindow : Window
     {
         if (_eventRepository != null)
         {
-            var selectedItem = EvenementenLinks.SelectedItem as Events;
-            _eventRepository.DeleteEvent(selectedItem.Id);
+            var selectedevent = EvenementenLinks.SelectedItem as Events;
+
+            if (selectedevent == null)
+            {
+                MessageBox.Show("Please select an event first.", "No event Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            _eventRepository.DeleteEvent(selectedevent.Id);
         }
         else
         {
@@ -124,13 +150,21 @@ public partial class ManagerWindow : Window
         string figureName = tbx_AddDanceName.Text;
         string linkadres = tbx_AddDanceUrl.Text;
 
-        //int gemaaktDoor = Convert.ToInt32( cbx_gemaaktdoor.Text);
-
         var selectedCategory = cbx_categories.SelectedItem as DanceCategory; // Foriegn keys moet je casten en wij hebben altijd de id van foriegn key table nodig
         var selectedUser = cbx_gemaaktdoor.SelectedItem as User;
+
+        if (selectedCategory == null)
+        {
+            MessageBox.Show("Please select a category first.", "No cateogory Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        if (selectedUser == null)
+        {
+            MessageBox.Show("Please select a user first.", "No user Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
         if (!string.IsNullOrWhiteSpace(figureName))
         {
-
             Links newLink = new Links
             {
                 Name = figureName,
@@ -139,7 +173,6 @@ public partial class ManagerWindow : Window
                 DanceCategoryId = selectedCategory.Id
             };
             
-          
             _linksRepository.CreateLink(newLink);
         }
     }
@@ -148,8 +181,14 @@ public partial class ManagerWindow : Window
     {
         if (DansFilmLinksList.SelectedItem is Links)
         {
-            var selectedItem = DansFilmLinksList.SelectedItem as Links;
-            _linksRepository.DeleteLink(selectedItem.Id);
+            var selecteddance = DansFilmLinksList.SelectedItem as Links;
+
+            if (selecteddance == null)
+            {
+                MessageBox.Show("Please select a dance first.", "No dance Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            _linksRepository.DeleteLink(selecteddance.Id);
         }
         else
         {
@@ -159,14 +198,15 @@ public partial class ManagerWindow : Window
     
     private void UpdateDanceLink_Click(object sender, RoutedEventArgs e)
     {
+
         DansFilmLinksList.ItemsSource = _linksRepository.GetLinks();
+
     }
     
    
     private void aanwezighedenlijst_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
         var selecteduser = aanwezighedenlijst.SelectedItem as User;
-
         var result = _attendanceRepository.GetAttendanceByUserId(selecteduser.Id);
 
         DatumAanwezigheid.ItemsSource = result;
@@ -176,6 +216,16 @@ public partial class ManagerWindow : Window
         var selectedUser = aanwezighedenlijst.SelectedItem as User;
         var selectedAttendanceDate = tbx_SelecteerDatum.SelectedDate;
 
+        if (selectedUser == null)
+        {
+            MessageBox.Show("Please select a user first.", "No user Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        if (selectedAttendanceDate == null)
+        {
+            MessageBox.Show("Please select a date first.", "No date Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
         Attendance attendance = new Attendance()
         {
             Date = selectedAttendanceDate,
@@ -185,8 +235,15 @@ public partial class ManagerWindow : Window
         _attendanceRepository.AddAttendance(attendance);
     }
     private void UpdateAttendance(object sender, RoutedEventArgs e)
+
     {
         var selecteduser = aanwezighedenlijst.SelectedItem as User;
+
+        if (selecteduser == null)
+        {
+            MessageBox.Show("Please select a user first.", "No user Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
 
         var result = _attendanceRepository.GetAttendanceByUserId(selecteduser.Id);
 
@@ -199,7 +256,7 @@ public partial class ManagerWindow : Window
 
         if (string.IsNullOrWhiteSpace(figuurName))
         {
-            MessageBox.Show("Please enter a valid dance figure name.");
+            MessageBox.Show("Please enter a valid dance figure name.", "No valid figure name", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
         DanceFigures _danceFigures = new DanceFigures();
@@ -227,7 +284,6 @@ public partial class ManagerWindow : Window
         {
             string url = selectedLink.url;
 
-            // Copy the URL to the clipboard
             Clipboard.SetText(url);
         }
     }

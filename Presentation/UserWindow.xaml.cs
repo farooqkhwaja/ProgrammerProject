@@ -44,9 +44,14 @@ public partial class UserWindow : Window
         var events = EvenementenLinks.SelectedItem as Events;
         var user = comboBoxUsers.SelectedItem as User;
 
-        if (string.IsNullOrEmpty(user.Firstname))
+        if (events == null)
         {
-            MessageBox.Show("Cannot add yourself to the event, it's already full");
+            MessageBox.Show("Please select an event first.");
+            return;
+        }
+        if (user == null)
+        {
+            MessageBox.Show("please select a user first");
             return;
         }
         _userRepository.UpdateUserEventId(user.Id, events.Id);
